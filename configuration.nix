@@ -48,7 +48,7 @@ in {
     dmenu
     emacs
     expect
-    firefoxWrapper
+    firefox-esr
     gcc
     ghc
     gitAndTools.gitFull
@@ -117,7 +117,7 @@ in {
 
   networking = {
     networkmanager.enable = true;
-    hostName = "nyx";
+    hostName = meta.hostname;
     firewall = {
       allowPing = true;
       allowedTCPPorts = [ 3000 ];
@@ -138,8 +138,8 @@ in {
   services = {
     upower.enable = true;
     openssh.enable = true;
-    openvpn.servers = {
-    };
+    postgresql.enable = true;
+    openvpn.servers = {};
     xserver = {
       enable = true;
       layout = "us";
