@@ -1,104 +1,176 @@
-{ config, pkgs, ... }:
+# Edit this configuration file to define what should be installed on
+# your system.  Help is available in the configuration.nix(5) man page
+# and in the NixOS manual (accessible by running ‘nixos-help’).
 
-let
-  antigen = pkgs.fetchgit {
-    url = "https://github.com/zsh-users/antigen";
-    rev = "1d212d149d039cc8d7fdf90c016be6596b0d2f6b";
-    sha256 = "1c7ipgs8gvxng3638bipcj8c1s1dn3bb97j8c73piv2xgk42aqb9";
-  };
-  meta = import /etc/nixos/meta.nix;
-  isHome = meta.hostname == "nyx";
-  isWork = meta.hostname == "bkolera";
-in {
+{ config, pkgs, ... }:
+let 
+  unstable = import <unstable> {};
+  sni = import ./lib/sni.nix;
+  status-notifier-item = unstable.haskellPackages.callPackage sni {};
+in 
+{
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
-  # Use the GRUB 2 boot loader.
   boot = {
     loader = {
-      systemd-boot = {
-        enable = true;
-      };
+      systemd-boot.enable = true;
       efi = {
         efibootmgr = {
           canTouchEfiVariables = true;
-          efiDisk = if isHome then "/dev/nvme0" else "/dev/sda1";
+          efiDisk = "/dev/nvme0";
         };
       };
     };
+    initrd.luks = {
+      yubikeySupport = true;
+      devices = [
+        {
+          name = "linux";
+          device = "/dev/nvme0n1p3";
+          preLVM = true;
+          allowDiscards = true;
+          yubikey = {
+            storage = {
+              device = "/dev/nvme0n1p2";
+              fsType = "ext4";
+              path   = "/linuxsalt";
+            };
+          };
+        }
+      ];
+    };
   };
 
-  nixpkgs.config.allowUnfree = true;
+  nix.binaryCaches = [
+    "https://cache.nixos.org/"
+    "https://nixcache.reflex-frp.org"
+    "http://hydra.qfpl.io"
+  ];
+  nix.binaryCachePublicKeys = [
+    "ryantrinkle.com-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI="
+    "qfpl.io:xME0cdnyFcOlMD1nwmn6VrkkGgDNLLpMXoMYl58bz5g="
+  ];
 
-  environment.variables.XCURSOR_PATH = "$HOME/.icons";
-  environment.profileRelativeEnvVars.XCURSOR_PATH = [ "/share/icons" ];
+
+  hardware.pulseaudio.enable = true;
+
+  networking = {
+    hostName = "bkolera";
+    networkmanager.enable = true;
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [9987];
+    };
+  };
+  nixpkgs.config = {
+    allowUnfree = true;
+    virtualbox.enableExtensionPack = true;
+    chromium = {
+     #enablePepperFlash = true;
+     enablePepperPDF = true;
+    };
+  };
+
+  fonts = {
+    enableFontDir = true;
+     fonts = with pkgs; [
+       emojione
+       source-code-pro
+     ];
+    fontconfig.dpi = 82;
+  };
+
+
+  i18n = {
+    consoleFont = "Lat2-Terminus16";
+    consoleKeyMap = "us";
+    defaultLocale = "en_US.UTF-8";
+  };
+
+  time.timeZone = "Australia/Brisbane";
+
   environment.systemPackages = with pkgs; [
     arandr
+    arduino
     aspell
     aspellDicts.en
     awscli
     bc
     binutils
+    bind
     cabal2nix
     chromium
-    docker
     dmenu
+    dropbox
     emacs
+    enlightenment.terminology
     expect
-    firefox-esr
-    gcc
+    feh
+    file
+    firefoxWrapper
+    fswatch
+    gimp
+    gcc6
     ghc
     gitAndTools.gitFull
     gitAndTools.gitflow
     gnumake
+    gparted
     ] ++
     ( with haskellPackages; [
       cabal-install
-      dante
-      steeloverseer
-      stylish-haskell
-      taffybar
-      xmobar
-      xmonad
-      xmonad-contrib
-      xmonad-extras
+      ghcid
       yeganesh
     ]) ++ [
+    htop
+    imagemagick
     iptables
     lastpass-cli
+    libreoffice
+    libpqxx
     maim
     manpages
-    nix
-    npm2nix
     ] ++
     ( with nodePackages; [
       bower
       npm
+      tern
     ]) ++ [
     nmap
+    ncdu
     nodejs
-    openvpn
-    psmisc #killall
-    purescript
+    openshot-qt
+    openssl
+    pavucontrol
+    psmisc
+    jetbrains.pycharm-community
     ] ++
     ( with pythonPackages ; [
       ansible
       docker_compose
+      flake8
+      virtualenv
+      virtualenvwrapper
     ]) ++ [
+    p7zip
     rxvt_unicode
     ranger
+    rfkill
     scala
     sbt
     silver-searcher
+    simplescreenrecorder
+    status-notifier-item
     slop
-    stalonetray
     sudo
-    taffybar
+    unstable.taffybar
+    traceroute
     tcpdump
-    trayer
+    tree
     vanilla-dmz
     vim
     vimHugeX
@@ -110,63 +182,41 @@ in {
     xlockmore
     xlsfonts
     xscreensaver
+    xorg.xbacklight
     unzip
+    vagrant
+    yarn
     zip
     zlib
   ];
 
-  networking = {
-    networkmanager.enable = true;
-    hostName = meta.hostname;
-    firewall = {
-      allowPing = true;
-      allowedTCPPorts = [ 3000 ];
-      allowedUDPPorts = [ ];
-    };
-  };
-
-  # Select internationalisation properties.
-  i18n = {
-    consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "us";
-    defaultLocale = "en_AU.UTF-8";
-  };
-
-  # Set your time zone.
-  time.timeZone = "Australia/Brisbane";
-
   services = {
     upower.enable = true;
     openssh.enable = true;
-    postgresql.enable = true;
-    openvpn.servers = {};
+    printing.enable = true;
+    devmon.enable = true;
+    redshift = {
+      enable = true;
+      brightness.day = "1.0";
+      brightness.night = "0.7";
+      longitude  = "153.0251";
+      latitude = "-27.4698";
+    };
     xserver = {
       enable = true;
       layout = "us";
-      displayManager.lightdm.enable = true;
-      desktopManager.default = "none";
-      dpi = 216;
       videoDrivers = [ "nvidia" ];
+      displayManager.lightdm.enable = true;
       windowManager = {
         xmonad = {
           enable = true;
           enableContribAndExtras = true;
           extraPackages = (haskellPkgs: [
-            haskellPkgs.taffybar
           ]);
         };
       };
     };
-  };
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.extraUsers.bkolera = {
-    isNormalUser = true;
-    createHome = true;
-    home = "/home/bkolera/";
-    extraGroups = ["wheel" "networkmanager" "docker"];
-    isSystemUser = false;
-    shell = pkgs.zsh;
-    uid = 1000;
+    teamspeak3.enable = true;
   };
 
   virtualisation.docker = {
@@ -176,42 +226,39 @@ in {
 
   programs = {
     java.enable = true;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
     zsh = {
       enable = true;
       shellAliases = {
       };
       enableCompletion = true;
-      interactiveShellInit = ''
-        source ${antigen}/antigen.zsh
-        HISTFILE=~/.histfile
-        HISTSIZE=5000
-        SAVEHIST=10000
-        setopt appendhistory share_history histignorealldups autocd extendedglob nomatch notify
-
-        unsetopt beep
-        bindkey -v
-
-        zstyle ':completion:*' menu select
-
-        autoload -U url-quote-magic
-        zle -N self-insert url-quote-magic
-
-        autoload -Uz compinit && compinit
-
-        PATH="$HOME/bin:$HOME/.local/bin:$HOME/.npm-packages/bin:$PATH"
-
-        antigen use oh-my-zsh
-
-        antigen theme steeef
-        antigen bundle ssh-agent
-        antigen bundle zsh-users/zsh-syntax-highlighting
-
-        antigen apply
-      '';
+      syntaxHighlighting.enable = true;
+      ohMyZsh = {
+        enable = true;
+        theme = "steeef";
+      };
     };
   };
 
+  virtualisation.virtualbox.host = {
+    enable = true;
+    headless = false;
+  };
+
+  users.extraUsers.bkolera = {
+    isNormalUser = true;
+    createHome = true;
+    home = "/home/bkolera";
+    extraGroups = ["wheel" "networkmanager" "docker" "audio" "dialout"];
+    isSystemUser = false;
+    shell = pkgs.zsh;
+    uid = 1000;
+  };
+
   # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "17.03";
+  system.stateVersion = "18.03";
 
 }
