@@ -12,36 +12,17 @@ in
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./machine.nix
     ];
 
-  # Use the systemd-boot EFI boot loader.
   boot = {
     loader = {
       systemd-boot.enable = true;
       efi = {
         efibootmgr = {
           canTouchEfiVariables = true;
-          efiDisk = "/dev/nvme0";
         };
       };
-    };
-    initrd.luks = {
-      yubikeySupport = true;
-      devices = [
-        {
-          name = "linux";
-          device = "/dev/nvme0n1p3";
-          preLVM = true;
-          allowDiscards = true;
-          yubikey = {
-            storage = {
-              device = "/dev/nvme0n1p2";
-              fsType = "ext4";
-              path   = "/linuxsalt";
-            };
-          };
-        }
-      ];
     };
   };
 
@@ -59,16 +40,14 @@ in
   hardware.pulseaudio.enable = true;
 
   networking = {
-    hostName = "bkolera";
     networkmanager.enable = true;
     firewall = {
       enable = true;
-      allowedTCPPorts = [9987];
+      allowedTCPPorts = [];
     };
   };
   nixpkgs.config = {
     allowUnfree = true;
-    virtualbox.enableExtensionPack = true;
     chromium = {
      #enablePepperFlash = true;
      enablePepperPDF = true;
@@ -81,7 +60,6 @@ in
        emojione
        source-code-pro
      ];
-    fontconfig.dpi = 82;
   };
 
 
@@ -92,6 +70,7 @@ in
   };
 
   time.timeZone = "Australia/Brisbane";
+
 
   environment.systemPackages = with pkgs; [
     arandr
@@ -147,14 +126,10 @@ in
     openssl
     pavucontrol
     psmisc
-    jetbrains.pycharm-community
     ] ++
     ( with pythonPackages ; [
       ansible
       docker_compose
-      flake8
-      virtualenv
-      virtualenvwrapper
     ]) ++ [
     p7zip
     rxvt_unicode
@@ -205,18 +180,18 @@ in
     xserver = {
       enable = true;
       layout = "us";
-      videoDrivers = [ "nvidia" ];
       displayManager.lightdm.enable = true;
+      libinput.enable = true;
       windowManager = {
         xmonad = {
           enable = true;
           enableContribAndExtras = true;
           extraPackages = (haskellPkgs: [
+            haskellPkgs.taffybar
           ]);
         };
       };
     };
-    teamspeak3.enable = true;
   };
 
   virtualisation.docker = {
@@ -226,6 +201,7 @@ in
 
   programs = {
     java.enable = true;
+    mtr.enable = true;
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
