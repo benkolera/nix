@@ -1,6 +1,6 @@
 import Data.Unique (newUnique)
 import Graphics.UI.GIGtkStrut (defaultStrutConfig, StrutSize(ExactSize), strutHeight)
-import System.Taffybar (dyreTaffybar)
+import System.Taffybar (startTaffybar)
 import System.Taffybar.Context (defaultTaffybarConfig, BarConfig(..), getBarConfigsParam)
 import System.Taffybar.Information.Memory (parseMeminfo, memoryUsedRatio)
 import System.Taffybar.Information.CPU (cpuLoad)
@@ -21,7 +21,7 @@ cpuCallback = do
 
 main = do
   u <- newUnique
-  dyreTaffybar $ defaultTaffybarConfig
+  startTaffybar $ defaultTaffybarConfig
     { getBarConfigsParam = pure . pure $ BarConfig
       { strutConfig = defaultStrutConfig { strutHeight = ExactSize 35 }
       , widgetSpacing = 5
@@ -44,6 +44,5 @@ main = do
     pager = workspacesNew $ defaultWorkspacesConfig
     mem = pollingGraphNew memCfg 1 memCallback
     cpu = pollingGraphNew cpuCfg 0.5 cpuCallback
-    --note = notifyAreaNew $ defaultNotificationConfig { notificationMaxTimeout = Nothing }
     tray = sniTrayNew
     bat = textBatteryNew "batt: $percentage$%"

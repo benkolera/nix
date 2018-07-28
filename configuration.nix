@@ -7,6 +7,8 @@ let
   unstable = import <unstable> {};
   sni = import ./lib/sni.nix;
   status-notifier-item = unstable.haskellPackages.callPackage sni {};
+  hieNix = import (fetchTarball { url = "https://github.com/domenkozar/hie-nix/tarball/master"; }) {};
+  cachix = import (fetchTarball { url = "https://github.com/cachix/cachix/tarball/master"; }) {};
 in 
 {
   imports =
@@ -26,18 +28,30 @@ in
     };
   };
 
-  nix.binaryCaches = [
-    "https://cache.nixos.org/"
-    "https://nixcache.reflex-frp.org"
-    "http://hydra.qfpl.io"
-  ];
-  nix.binaryCachePublicKeys = [
-    "ryantrinkle.com-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI="
-    "qfpl.io:xME0cdnyFcOlMD1nwmn6VrkkGgDNLLpMXoMYl58bz5g="
-  ];
+  nix = {
+    binaryCaches = [
+      "https://cache.nixos.org/"
+      "https://cachix.cachix.org"
+      "https://nixcache.reflex-frp.org"
+      "http://hydra.qfpl.io"
+      "https://hie-nix.cachix.org"
+    ];
+    binaryCachePublicKeys = [
+      "ryantrinkle.com-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI="
+      "qfpl.io:xME0cdnyFcOlMD1nwmn6VrkkGgDNLLpMXoMYl58bz5g="
+      "hie-nix.cachix.org-1:EjBSHzF6VmDnzqlldGXbi0RM3HdjfTU3yDRi9Pd0jTY="
+      "cachix.cachix.org-1:eWNHQldwUO7G2VkjpnjDbWwy4KQ/HNxht7H4SSoMckM="
+    ];
+    trustedUsers = [ "root" "bkolera" ];
+  };
 
-
-  hardware.pulseaudio.enable = true;
+  hardware.pulseaudio = {
+    enable = true;
+    daemon.config = {
+      # Allow app volumes to be set independently of master
+      flat-volumes = "no";
+    };
+  };
 
   networking = {
     networkmanager.enable = true;
@@ -82,8 +96,10 @@ in
     binutils
     bind
     cabal2nix
+    cachix
     chromium
     dmenu
+    dunst
     dropbox
     emacs
     enlightenment.terminology
@@ -105,6 +121,7 @@ in
       ghcid
       yeganesh
     ]) ++ [
+    hieNix.hies
     htop
     imagemagick
     iptables
@@ -135,8 +152,7 @@ in
     rxvt_unicode
     ranger
     rfkill
-    scala
-    sbt
+    slack
     silver-searcher
     simplescreenrecorder
     status-notifier-item

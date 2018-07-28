@@ -1,0 +1,6 @@
+[user]
+	email = ben.kolera@gmail.com
+	name = Ben Kolera
+[alias]
+  clone-gh = !"f() { mkdir -p $HOME/src/github/$1 && cd $HOME/src/github/$1/ && git clone git@github.com:$1/$2.git; }; f"
+  clone-gl = !"f() { mkdir -p $HOME/src/gitlab/$1 && cd $HOME/src/gitlab/$1/ && git clone git@gitlab.com:$1/$2.git; }; f"
