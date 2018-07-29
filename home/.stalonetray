@@ -1,0 +1,9 @@
+icon_size 23
+kludges fix_window_pos,force_icons_size
+sticky 1
+window_type dock
+dockapp_mode wmaker
+window_strut auto
+skip_taskbar 1
+icon_gravity NE
+background black

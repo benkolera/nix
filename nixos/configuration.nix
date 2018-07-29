@@ -3,11 +3,11 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-let 
+let
   unstable = import <unstable> {};
   sni = import ./lib/sni.nix;
   status-notifier-item = unstable.haskellPackages.callPackage sni {};
-in 
+in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -103,6 +103,7 @@ in
     ( with haskellPackages; [
       cabal-install
       ghcid
+      xmobar
       yeganesh
     ]) ++ [
     htop
@@ -140,17 +141,20 @@ in
     silver-searcher
     simplescreenrecorder
     status-notifier-item
+    slack
     slop
     sudo
     unstable.taffybar
     traceroute
     tcpdump
+    trayer
     tree
     vanilla-dmz
     vim
     vimHugeX
     vscode
     wireshark
+    workrave
     wget
     xclip
     xfontsel
