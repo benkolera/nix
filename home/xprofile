@@ -1,2 +1,0 @@
-dunst &
-trayer --height 14 --monitor primary --edge top --align right --widthtype request --transparent true
