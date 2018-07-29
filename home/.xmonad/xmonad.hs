@@ -28,7 +28,7 @@ import qualified Data.Map        as M
 --
 myTerminal = "terminology"
 
--- The command to lock the screen or show the screensaver.
+-- The command to eock the screen or show the screensaver.
 myScreensaver = "xlock"
 
 -- The command to take a selective screenshot, where you select
@@ -183,22 +183,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   -- Increase volume.
   , ((modMask .|. controlMask, xK_k),
      spawn "amixer -q set Master 5%+")
-
-  -- Audio previous.
-  , ((0, 0x1008FF16),
-     spawn "")
-
-  -- Play/pause.
-  , ((0, 0x1008FF14),
-     spawn "")
-
-  -- Audio next.
-  , ((0, 0x1008FF17),
-     spawn "")
-
-  -- Eject CD tray.
-  , ((0, 0x1008FF2C),
-     spawn "eject -T")
 
   --------------------------------------------------------------------
   -- "Standard" xmonad key bindings
