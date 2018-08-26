@@ -50,7 +50,7 @@ myXmobarrc = "~/.xmonad/xmobar.hs"
 -- Workspaces
 -- The default number of workspaces (virtual screens) and their names.
 --
-myWorkspaces = ["1:term","2:web","3:code","4:vm","5:media"] ++ map show [6..9]
+myWorkspaces = ["1:ref","2:code","3:term","4","5","6:org","7:email","8:chat","9:web"]
 
 
 ------------------------------------------------------------------------
@@ -132,7 +132,7 @@ myBorderWidth = 1
 -- ("right alt"), which does not conflict with emacs keybindings. The
 -- "windows key" is usually mod4Mask.
 --
-myModMask = mod1Mask
+myModMask = mod4Mask
 
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   ----------------------------------------------------------------------
