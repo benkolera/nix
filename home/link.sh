@@ -15,6 +15,7 @@ files=(
   .zprofile
   .zshenv
   .stalonetray
+  .spacemacs
   .background-image
   .xmonad/xmonad.hs
   .xmonad/xmobar.hs
