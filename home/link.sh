@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+this_dir=$(dirname $(pwd)/$0)
+
 mkdirs=(
   .config/dunst
   .config/taffybar
@@ -19,7 +21,7 @@ files=(
   .config/taffybar/taffybar.hs
   .config/dunst/dunstrc
   .workrave/workrave.ini
-  $(find ./bin/)
+  $(ls $this_dir/bin/ | sed "s|^|bin/|g")
 )
 
 dirs=(
@@ -32,9 +34,9 @@ done
 
 for f in ${files[@]}; do
   echo $f
-  ln -sf $(pwd)/$f $HOME/$f
+  ln -sf $this_dir/$f $HOME/$f
 done;
 
 for d in ${dirs[@]}; do
-  ln -sfn $(pwd)/$d $(dirname $HOME/$d)
+  ln -sfn $this_dir/$d $(dirname $HOME/$d)
 done;
