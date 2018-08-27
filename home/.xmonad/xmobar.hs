@@ -14,9 +14,10 @@ Config {
         Run Network "eth0" ["-t","Net: <rx>, <tx>","-H","200","-L","10","-h","#FFB6B0","-l","#CEFFAC","-n","#FFFFCC"] 10,
         Run Date "%a %b %_d %l:%M" "date" 10,
         Run Com "getMasterVolume" [] "volumelevel" 10,
+        Run Com "batHours" [] "bathours" 10,
         Run StdinReader
     ],
     sepChar = "%",
     alignSep = "}{",
-    template = "%StdinReader% }{ %multicpu%   %memory%   %swap%  %eth0%   Vol: <fc=#b2b2ff>%volumelevel%</fc>   <fc=#FFFFCC>%date%</fc>"
+    template = "%StdinReader% }{ %multicpu%   %memory%   %swap%  %eth0%   Vol: <fc=#b2b2ff>%volumelevel%</fc>   Bat: <fc=#b2b2ff>%bathours%</fc>   <fc=#FFFFCC>%date%</fc>"
 }
