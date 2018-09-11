@@ -1,0 +1,1 @@
+batman | grep "time to empty" | awk '{print $4" "$5}'
