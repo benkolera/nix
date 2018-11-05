@@ -29,7 +29,7 @@ import qualified Data.Map        as M
 myTerminal = "terminology"
 
 -- The command to eock the screen or show the screensaver.
-myScreensaver = "xlock"
+myScreensaver = "xlock -mode blank"
 
 -- The command to take a selective screenshot, where you select
 -- what you'd like to capture on the screen.
