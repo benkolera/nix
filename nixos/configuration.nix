@@ -4,10 +4,6 @@
 
 { config, pkgs, ... }:
 let
-  unstable = import <unstable> {};
-  sni = import ./lib/sni.nix;
-  status-notifier-item = unstable.haskellPackages.callPackage sni {};
-  hieNix = import (fetchTarball { url = "https://github.com/domenkozar/hie-nix/tarball/master"; }) {};
   cachix = import (fetchTarball { url = "https://github.com/cachix/cachix/tarball/master"; }) {};
 in
 {
@@ -66,6 +62,11 @@ in
      #enablePepperFlash = true;
      enablePepperPDF = true;
     };
+    packageOverrides = pkgs: {
+      unstable = import <unstable> {
+        config = config // { allowUnfree = true; };
+      };
+    };
   };
 
   fonts = {
@@ -122,7 +123,6 @@ in
       xmobar
       yeganesh
     ]) ++ [
-    hieNix.hies
     htop
     imagemagick
     iptables
@@ -131,6 +131,7 @@ in
     libpqxx
     maim
     manpages
+    unstable.masterpdfeditor
     ] ++
     ( with nodePackages; [
       bower
@@ -156,11 +157,11 @@ in
     slack
     silver-searcher
     simplescreenrecorder
-    status-notifier-item
     slack
     slop
     sudo
     unstable.taffybar
+    terminator
     traceroute
     tcpdump
     trayer
