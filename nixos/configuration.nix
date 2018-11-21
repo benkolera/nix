@@ -5,6 +5,7 @@
 { config, pkgs, ... }:
 let
   cachix = import (fetchTarball { url = "https://github.com/cachix/cachix/tarball/master"; }) {};
+  obelisk = import (fetchTarball { url = "https://github.com/obsidiansystems/obelisk/archive/master.tar.gz"; }) {};
 in
 {
   imports =
@@ -40,9 +41,17 @@ in
     ];
     trustedUsers = [ "root" "bkolera" ];
   };
+  hardware.bluetooth = {
+    enable = true;
+    extraConfig = "
+      [General]
+      Enable=Source,Sink,Media,Socket
+    ";
+  };
 
   hardware.pulseaudio = {
     enable = true;
+    package = pkgs.pulseaudioFull;
     daemon.config = {
       # Allow app volumes to be set independently of master
       flat-volumes = "no";
@@ -96,6 +105,7 @@ in
     bc
     binutils
     bind
+    blueman
     cabal2nix
     cachix
     chromium
@@ -120,18 +130,21 @@ in
     ( with haskellPackages; [
       cabal-install
       ghcid
+      stylish-haskell
       xmobar
       yeganesh
     ]) ++ [
     htop
     imagemagick
     iptables
+    keepassx
     lastpass-cli
     libreoffice
     libpqxx
     maim
     manpages
     unstable.masterpdfeditor
+    nixops
     ] ++
     ( with nodePackages; [
       bower
@@ -141,6 +154,7 @@ in
     nmap
     ncdu
     nodejs
+    obelisk-qt
     openshot-qt
     openssl
     pavucontrol
@@ -202,7 +216,10 @@ in
       enable = true;
       layout = "us";
       displayManager.lightdm.enable = true;
-      libinput.enable = true;
+      libinput = {
+        enable = true;
+        naturalScrolling = true;
+      };
       windowManager = {
         xmonad = {
           enable = true;
