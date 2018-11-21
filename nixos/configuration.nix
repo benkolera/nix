@@ -154,7 +154,7 @@ in
     nmap
     ncdu
     nodejs
-    obelisk-qt
+    obelisk.command
     openshot-qt
     openssl
     pavucontrol
