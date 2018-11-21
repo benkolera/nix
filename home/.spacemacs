@@ -61,8 +61,7 @@ This function should only modify configuration layer settings."
      clojure
      html
      version-control
-     (syntax-checking :variables syntax-checking-enable-by-default nil)  ;; Disabled by default for performance reasons
-     ;;(haskell :variables haskell-completion-backend 'dante)
+     syntax-checking
      hie-nix
      )
 
@@ -450,9 +449,6 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  (setq-default dotspacemacs-configuration-layers
-                '(auto-completion
-                  (haskell :variables haskell-completion-backend 'intero)))
   )
 
 (defun dotspacemacs/user-load ()
@@ -479,29 +475,6 @@ EXPLICITLY specified that a variable should be set before a package is loaded,
 you should place your code here."
   (global-fci-mode 1)
   (setq create-lockfiles nil)
-  ;; Connect flycheck to dante
-  (add-hook 'dante-mode-hook
-            '(lambda () (flycheck-add-next-checker 'haskell-dante
-                                                   '(warning . haskell-hlint))))
-
-  ;; Configure flycheck to use Nix
-  ;; https://github.com/travisbhartwell/nix-emacs#flycheck
-  ;; Requires `nix-sandbox` package added to dotspacemacs-additional-packages
-  (setq flycheck-command-wrapper-function
-        (lambda (command) (apply 'nix-shell-command (nix-current-sandbox) command)))
-  (setq flycheck-executable-find
-        (lambda (cmd) (nix-executable-find (nix-current-sandbox) cmd)))
-
-  ;; Configure haskell-mode (haskell-cabal) to use Nix
-  (setq haskell-process-wrapper-function
-        (lambda (args) (apply 'nix-shell-command (nix-current-sandbox) args)))
-
-  ;; Configure haskell-mode to use cabal new-style builds
-  (setq haskell-process-type 'cabal-new-repl)
-
-  ;; We have limit flycheck to haskell because the above wrapper configuration is global (!)
-  ;; FIXME: How? Using mode local variables?
-  (setq flycheck-global-modes '(haskell-mode))
   )
 
 (defun dotspacemacs/emacs-custom-settings ()
@@ -519,7 +492,8 @@ This function is called at the very end of Spacemacs initialization."
     (lsp-haskell org-mime nix-sandbox sesman groovy-mode jinja2-mode company-ansible ansible-doc ansible yapfify yaml-mode xterm-color ws-butler winum which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tagedit sql-indent spaceline powerline smeargle slim-mode shell-pop scss-mode sass-mode restart-emacs rainbow-delimiters pyvenv pytest pyenv-mode py-isort pug-mode psci purescript-mode psc-ide popwin pip-requirements phpunit phpcbf php-extras php-auto-yasnippets persp-mode pcre2el paradox orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-plus-contrib org-download org-bullets open-junk-file noflet nix-mode neotree multi-term move-text mmm-mode markdown-toc markdown-mode magit-gitflow macrostep lorem-ipsum livid-mode skewer-mode simple-httpd live-py-mode linum-relative link-hint less-css-mode json-mode json-snatcher json-reformat js2-refactor js2-mode js-doc intero info+ indent-guide hy-mode hungry-delete htmlize hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-nixos-options helm-mode-manager helm-make projectile helm-hoogle helm-gitignore request helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haskell-snippets haml-mode google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck-haskell flycheck flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit ghub let-alist with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eshell-z eshell-prompt-extras esh-help ensime sbt-mode scala-mode emmet-mode elisp-slime-nav dumb-jump drupal-mode php-mode diminish diff-hl define-word cython-mode csv-mode company-web web-completion-data company-tern dash-functional tern company-statistics company-nixos-options nixos-options company-ghci company-ghc ghc haskell-mode company-cabal company-anaconda company column-enforce-mode coffee-mode cmm-mode clojure-snippets clj-refactor hydra inflections edn multiple-cursors paredit peg clean-aindent-mode cider-eval-sexp-fu eval-sexp-fu highlight cider seq spinner queue pkg-info clojure-mode epl bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol auto-dictionary auto-compile packed anaconda-mode pythonic f dash s aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup)))
  '(safe-local-variable-values
    (quote
-    ((spacemacs/lsp-haskell-nix-wrapped nil)
+    ((spacemacs/lsp-haskell-nix-shell-args list "--args" "hie" "true")
+     (spacemacs/lsp-haskell-nix-wrapped nil)
      (dante-target . "tasty")
      (dante-target . "test:tasty")
      (dante-repl-command-line "nix-shell" "--run"
