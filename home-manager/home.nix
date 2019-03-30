@@ -39,9 +39,13 @@
     xorg.xbacklight
   ];
 
-  home.file."bin/git-clone-gh".source = ./bin/git-clone-gh;
-  home.file."bin/git-clone-gl".source = ./bin/git-clone-gl;
-  home.file."bin/git-clone-csiro".source = ./bin/git-clone-csiro;
+  home.file."bin" = { source = ./bin; recursive = true; };
+  home.language.base = "en_au";
+  home.sessionVariables = {
+    EDITOR = "vim";
+    VISUAL = "vim";
+    BROWSER = "firefox";
+  };
 
   programs.home-manager = {
     enable = true;
@@ -194,7 +198,6 @@
     };
   };
 
-  home.file."bin/tray-pad-icon".source = ./bin/tray-pad-icon;
   home.file.".xmonad/xmobar.hs".source = ./dotfiles/xmonad/xmobar.hs;
   xsession = {
     enable = true;
