@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 let
-  obelisk = import (fetchTarball { url = "https://github.com/obsidiansystems/obelisk/archive/master.tar.gz"; }) {};
+  obelisk = import ./obelisk {};
+  spacemacs = import ./spacemacs {};
 in
 {
 
@@ -51,6 +52,10 @@ in
   home.activation.linkEmacsCustom = config.lib.dag.entryAfter [ "writeBoundary" ] ''
     ln -sf "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/emacs/custom.el" $HOME/.spacemacs.d/custom.el;
   '';
+  home.file.".emacs.d" = {
+    source = spacemacs;
+    recursive = true;
+  };
   programs.emacs.enable = true;
 
   programs.htop.enable = true;
@@ -94,7 +99,7 @@ in
   services.screen-locker = {
     enable = true;
     lockCmd = "xlock -mode blank";
-    inactiveInterval = 1;
+    inactiveInterval = 3;
   };
 
   services.compton.enable = true;
