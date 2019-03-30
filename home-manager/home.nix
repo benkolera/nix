@@ -1,9 +1,11 @@
 { config, pkgs, ... }:
-let
-  obelisk = import ./obelisk {};
-  spacemacs = import ./spacemacs {};
-in
 {
+  nixpkgs.overlays = [
+    (import ./home-overlays/lorri)
+    (import ./home-overlays/obelisk)
+    (import ./home-overlays/spacemacs)
+    (import ./home-overlays/direnv)
+  ];
 
   home.packages = with pkgs; [
     awscli
@@ -22,6 +24,7 @@ in
   ]) ++ [
     keepassx
     libreoffice
+    lorri
     obelisk.command
     openshot-qt
     pavucontrol
@@ -50,10 +53,11 @@ in
 
   home.file.".spacemacs".source = ./dotfiles/emacs/spacemacs;
   home.activation.linkEmacsCustom = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+    mkdir -p $HOME/.spacemacs.d;
     ln -sf "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/emacs/custom.el" $HOME/.spacemacs.d/custom.el;
   '';
   home.file.".emacs.d" = {
-    source = spacemacs;
+    source = pkgs.spacemacs;
     recursive = true;
   };
   programs.emacs.enable = true;
@@ -95,7 +99,7 @@ in
     maxCacheTtlSsh = 36000;
     enableSshSupport = true;
   };
-  
+
   home.file."backgrounds" = {
     source = ./backgrounds;
     recursive = true;
@@ -202,41 +206,41 @@ in
   };
 
   xresources.extraConfig = ''
-	! special
-	*.foreground:   #c5c8c6
-	*.background:   #1d1f21
-	*.cursorColor:  #c5c8c6
+  ! special
+  *.foreground:   #c5c8c6
+  *.background:   #1d1f21
+  *.cursorColor:  #c5c8c6
 
-	! black
-	*.color0:       #282a2e
-	*.color8:       #373b41
+  ! black
+  *.color0:       #282a2e
+  *.color8:       #373b41
 
-	! red
-	*.color1:       #a54242
-	*.color9:       #cc6666
+  ! red
+  *.color1:       #a54242
+  *.color9:       #cc6666
 
-	! green
-	*.color2:       #8c9440
-	*.color10:      #b5bd68
+  ! green
+  *.color2:       #8c9440
+  *.color10:      #b5bd68
 
-	! yellow
-	*.color3:       #de935f
-	*.color11:      #f0c674
+  ! yellow
+  *.color3:       #de935f
+  *.color11:      #f0c674
 
-	! blue
-	*.color4:       #5f819d
-	*.color12:      #81a2be
+  ! blue
+  *.color4:       #5f819d
+  *.color12:      #81a2be
 
-	! magenta
-	*.color5:       #85678f
-	*.color13:      #b294bb
+  ! magenta
+  *.color5:       #85678f
+  *.color13:      #b294bb
 
-	! cyan
-	*.color6:       #5e8d87
-	*.color14:      #8abeb7
+  ! cyan
+  *.color6:       #5e8d87
+  *.color14:      #8abeb7
 
-	! white
-	*.color7:       #707880
-	*.color15:      #c5c8c6
+  ! white
+  *.color7:       #707880
+  *.color15:      #c5c8c6
   '';
 }
