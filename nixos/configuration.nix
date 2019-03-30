@@ -3,10 +3,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-let
-  cachix = import (fetchTarball { url = "https://github.com/cachix/cachix/tarball/master"; }) {};
-  obelisk = import (fetchTarball { url = "https://github.com/obsidiansystems/obelisk/archive/master.tar.gz"; }) {};
-in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -98,52 +94,17 @@ in
 
   environment.systemPackages = with pkgs; [
     arandr
-    arduino
-    aspell
-    aspellDicts.en
-    awscli
-    bc
     binutils
     bind
     blueman
-    cabal2nix
-    cachix
-    chromium
-    dmenu
-    dunst
-    dropbox
-    emacs
-    enlightenment.terminology
-    expect
-    feh
     file
-    firefoxWrapper
-    fswatch
-    gimp
     gcc6
-    ghc
-    gitAndTools.gitFull
-    gitAndTools.gitflow
     gnumake
     gparted
-    ] ++
-    ( with haskellPackages; [
-      cabal-install
-      ghcid
-      stylish-haskell
-      xmobar
-      yeganesh
-    ]) ++ [
     htop
-    imagemagick
     iptables
-    keepassx
-    lastpass-cli
-    libreoffice
     libpqxx
-    maim
     manpages
-    unstable.masterpdfeditor
     nixops
     ] ++
     ( with nodePackages; [
@@ -153,49 +114,20 @@ in
     ]) ++ [
     nmap
     ncdu
-    nodejs
-    obelisk.command
-    openshot-qt
     openssl
-    pavucontrol
     psmisc
-    ] ++
-    ( with pythonPackages ; [
-      ansible
-      docker_compose
-    ]) ++ [
-    p7zip
-    rxvt_unicode
-    ranger
-    rfkill
-    slack
-    silver-searcher
-    simplescreenrecorder
-    slack
-    slop
     sudo
-    unstable.taffybar
-    terminator
     traceroute
     tcpdump
-    trayer
     tree
-    vanilla-dmz
     vim
-    vimHugeX
-    vscode
     wireshark
-    workrave
     wget
     xclip
     xfontsel
-    xlockmore
     xlsfonts
-    xscreensaver
     xorg.xbacklight
     unzip
-    vagrant
-    yarn
     zip
     zlib
   ];
@@ -205,13 +137,8 @@ in
     openssh.enable = true;
     printing.enable = true;
     devmon.enable = true;
-    redshift = {
-      enable = true;
-      brightness.day = "1.0";
-      brightness.night = "0.7";
-      longitude  = "153.0251";
-      latitude = "-27.4698";
-    };
+    postgresql.enable = true;
+    dbus.packages = [ pkgs.blueman ];
     xserver = {
       enable = true;
       layout = "us";
@@ -219,15 +146,6 @@ in
       libinput = {
         enable = true;
         naturalScrolling = true;
-      };
-      windowManager = {
-        xmonad = {
-          enable = true;
-          enableContribAndExtras = true;
-          extraPackages = (haskellPkgs: [
-            haskellPkgs.taffybar
-          ]);
-        };
       };
     };
   };
@@ -240,21 +158,6 @@ in
   programs = {
     java.enable = true;
     mtr.enable = true;
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-    };
-    zsh = {
-      enable = true;
-      shellAliases = {
-      };
-      enableCompletion = true;
-      syntaxHighlighting.enable = true;
-      ohMyZsh = {
-        enable = true;
-        theme = "steeef";
-      };
-    };
   };
 
   virtualisation.virtualbox.host = {

@@ -26,7 +26,7 @@ import qualified Data.Map        as M
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
-myTerminal = "terminator"
+myTerminal = "urxvt"
 
 -- The command to eock the screen or show the screensaver.
 myScreensaver = "xlock -mode blank"
@@ -40,7 +40,7 @@ myScreenshot = "screenshot"
 
 -- The command to use as a launcher, to launch commands that don't have
 -- preset keybindings.
-myLauncher = "$(yeganesh -x -- -fn 'monospace-8' -nb '#000000' -nf '#FFFFFF' -sb '#7C7C7C' -sf '#CEFFAC')"
+myLauncher = "$(yeganesh -x -- -fn 'monospace-11' -nb '#000000' -nf '#FFFFFF' -sb '#7C7C7C' -sf '#CEFFAC')"
 
 -- Location of your xmobar.hs / xmobarrc
 myXmobarrc = "~/.xmonad/xmobar.hs"
@@ -339,7 +339,6 @@ main = do
           , ppSep = "   "
       }
       , manageHook = manageDocks <+> myManageHook
---      , startupHook = docksStartupHook <+> setWMName "LG3D"
       , startupHook = setWMName "LG3D"
       , handleEventHook = docksEventHook
   }

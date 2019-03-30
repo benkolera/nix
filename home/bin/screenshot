@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-SCREENSHOT_DIR=$HOME/screenshots
-mkdir -p $SCREENSHOT_DIR
-sleep 0.2; maim "$SCREENSHOT_DIR/$(date +%s).png"
