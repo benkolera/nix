@@ -93,6 +93,8 @@
 
 
   environment.systemPackages = with pkgs; [
+    aspell
+    aspellDicts.en
     arandr
     binutils
     bind
@@ -142,7 +144,10 @@
     xserver = {
       enable = true;
       layout = "us";
-      displayManager.lightdm.enable = true;
+      displayManager.slim = {
+        enable = true;
+        defaultUser = "bkolera";
+      };
       libinput = {
         enable = true;
         naturalScrolling = true;

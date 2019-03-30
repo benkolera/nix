@@ -95,7 +95,15 @@ in
     maxCacheTtlSsh = 36000;
     enableSshSupport = true;
   };
-
+  
+  home.file."backgrounds" = {
+    source = ./backgrounds;
+    recursive = true;
+  };
+  services.random-background = {
+    enable = true;
+    imageDirectory = "%h/backgrounds";
+  };
   services.screen-locker = {
     enable = true;
     lockCmd = "xlock -mode blank";
