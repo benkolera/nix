@@ -40,7 +40,6 @@
   ];
 
   home.file."bin" = { source = ./bin; recursive = true; };
-  home.language.base = "en_au";
   home.sessionVariables = {
     EDITOR = "vim";
     VISUAL = "vim";
@@ -75,6 +74,7 @@
       "Shift-Control-V" = "eval:paste_clipboard";
     };
     transparent = true;
+    shading = 50;
   };
 
   programs.zsh = {
@@ -245,5 +245,7 @@
   ! white
   *.color7:       #707880
   *.color15:      #c5c8c6
+
+  home.language.base = "en_au";
   '';
 }
