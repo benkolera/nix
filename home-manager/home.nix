@@ -134,7 +134,6 @@
     };
   };
   services.pasystray.enable = true;
-  services.taffybar.enable = false;
   services.blueman-applet.enable = true;
   services.flameshot.enable = true;
   services.unclutter.enable = true;
