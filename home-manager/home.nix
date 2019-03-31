@@ -12,8 +12,6 @@
     cabal2nix
     cachix
     dmenu
-    ranger
-    xlockmore
     gitAndTools.gitflow
   ]++
   ( with haskellPackages; [
@@ -27,9 +25,9 @@
     lorri
     obelisk.command
     openshot-qt
+    p7zip
     pavucontrol
     python3
-    p7zip
     ranger
     rfkill
     silver-searcher
