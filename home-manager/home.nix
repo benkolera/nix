@@ -117,24 +117,12 @@
   };
 
   services.compton.enable = true;
+  services.xembed-sni-proxy.enable = true;
 
-  services.stalonetray = {
-    enable = true;
-    config = {
-      icon_size = 22;
-      kludges = "fix_window_pos,force_icons_size";
-      sticky = 1;
-      window_type = "dock";
-      window_strut = "auto";
-      skip_taskbar = 1;
-      icon_gravity = "NE";
-      background = "black";
-      geometry = "5x1-0+0";
-      window_layer = "top";
-    };
-  };
   services.pasystray.enable = true;
-  services.taffybar.enable = false;
+  home.file.".config/taffybar/taffybar.hs".source = ./dotfiles/taffybar/taffybar.hs;
+  services.taffybar.enable = true;
+  services.status-notifier-watcher.enable = true;
   services.blueman-applet.enable = true;
   services.flameshot.enable = true;
   services.unclutter.enable = true;
@@ -196,12 +184,16 @@
     };
   };
 
-  home.file.".xmonad/xmobar.hs".source = ./dotfiles/xmonad/xmobar.hs;
   xsession = {
     enable = true;
+    preferStatusNotifierItems = true;
     windowManager.xmonad = {
       enable = true;
       enableContribAndExtras = true;
+      extraPackages = hpkgs: [
+        hpkgs.xmonad-contrib
+        hpkgs.taffybar
+      ];
       config = ./dotfiles/xmonad/xmonad.hs;
     };
   };
