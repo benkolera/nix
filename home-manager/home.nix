@@ -117,7 +117,6 @@
     inactiveInterval = 3;
   };
 
-  services.compton.enable = false;
   services.xembed-sni-proxy.enable = true;
 
   services.pasystray.enable = true;
@@ -187,7 +186,6 @@
 
   xsession = {
     enable = true;
-    preferStatusNotifierItems = true;
     windowManager.xmonad = {
       enable = true;
       enableContribAndExtras = true;
