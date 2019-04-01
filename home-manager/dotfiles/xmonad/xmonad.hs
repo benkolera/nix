@@ -259,7 +259,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   -- Quit xmonad.
   , ((modMask .|. shiftMask, xK_q),
-     io (exitWith ExitSuccess))
+     spawn "loginctl kill-user $USER")
 
   -- Restart xmonad.
   , ((modMask, xK_q),

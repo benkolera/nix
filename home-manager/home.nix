@@ -5,6 +5,7 @@
     (import ./home-overlays/obelisk)
     (import ./home-overlays/spacemacs)
     (import ./home-overlays/direnv)
+    (import ./home-overlays/taffybar)
   ];
 
   home.packages = with pkgs; [
@@ -116,7 +117,7 @@
     inactiveInterval = 3;
   };
 
-  services.compton.enable = true;
+  services.compton.enable = false;
   services.xembed-sni-proxy.enable = true;
 
   services.pasystray.enable = true;
