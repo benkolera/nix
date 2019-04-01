@@ -1,5 +1,10 @@
 { config, pkgs, ... }:
-{
+let
+  restart-taffybar = ''
+    echo "Restarting taffybar..."
+    $DRY_RUN_CMD systemctl --user restart taffybar.service
+  '';
+in {
   nixpkgs.overlays = [
     (import ./home-overlays/lorri)
     (import ./home-overlays/obelisk)
@@ -120,7 +125,14 @@
   services.xembed-sni-proxy.enable = true;
 
   services.pasystray.enable = true;
-  home.file.".config/taffybar/taffybar.hs".source = ./dotfiles/taffybar/taffybar.hs;
+  home.file.".config/taffybar/taffybar.hs" = {
+    source = ./dotfiles/taffybar/taffybar.hs;
+    onChange = restart-taffybar;
+  };
+  home.file.".config/taffybar/taffybar.css" = {
+    source = ./dotfiles/taffybar/taffybar.css;
+    onChange = restart-taffybar;
+  };
   services.taffybar.enable = true;
   services.status-notifier-watcher.enable = true;
   services.blueman-applet.enable = true;
