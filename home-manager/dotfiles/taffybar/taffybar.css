@@ -24,7 +24,7 @@
 }
 
 .taffy-box {
-	border-radius: 10px;
+	/*border-radius: 10px;*/
 	background-color: rgba(0.0, 0.0, 0.0, 0.3);
 }
 
@@ -49,7 +49,7 @@
 .workspace-label {
 	padding-right: 3px;
 	padding-left: 2px;
-	font-size: 12pt;
+	font-size: 11pt;
 }
 
 .active .contents {

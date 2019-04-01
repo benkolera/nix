@@ -62,7 +62,7 @@ main = do
       cpu = pollingGraphNew cpuCfg 0.5 cpuCallback
       mem = pollingGraphNew memCfg 1 memCallback
       net = networkGraphNew netCfg Nothing
-      clock = textClockNew Nothing "%a %b %_d %r" 1
+      clock = textClockNew Nothing "  %a %b %_d %H:%M:%S" 1
       layout = layoutNew defaultLayoutConfig
       windows = windowsNew defaultWindowsConfig
       tray = sniTrayNew
@@ -74,12 +74,14 @@ main = do
           , cpu
           , mem
           , net
+          , textBatteryNew "Batt: $percentage$% $status$ $time$"
           , tray
           ]
         , barPosition = Top
         , barPadding = 1
         , barHeight = 40 
         , widgetSpacing = 0
+        --, monitorsAction = usePrimaryMonitor -- This doesn't actually pick the right display at Taffybar 3.1.2
         }
   dyreTaffybar $ withBatteryRefresh $ withLogServer $ withToggleServer $
     toTaffyConfig myConfig
