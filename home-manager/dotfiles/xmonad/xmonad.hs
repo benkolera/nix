@@ -4,9 +4,11 @@
 
 import System.IO
 import System.Exit
+import System.Taffybar.Support.PagerHints (pagerHints)
 import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.EwmhDesktops (ewmh)
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.SetWMName
 import XMonad.Layout.Fullscreen
@@ -330,19 +332,9 @@ myStartupHook = return ()
 -- Run xmonad with all the defaults we set up.
 --
 main = do
-  xmproc <- spawnPipe ("xmobar " ++ myXmobarrc)
-  xmonad $ defaults {
-      logHook = dynamicLogWithPP $ xmobarPP {
-            ppOutput = hPutStrLn xmproc
-          , ppTitle = xmobarColor xmobarTitleColor "" . shorten 100
-          , ppCurrent = xmobarColor xmobarCurrentWorkspaceColor ""
-          , ppSep = "   "
-      }
-      , manageHook = manageDocks <+> myManageHook
-      , startupHook = setWMName "LG3D"
-      , handleEventHook = docksEventHook
+  xmonad . docks . ewmh . pagerHints $ defaults {
+    startupHook = setWMName "LG3D"
   }
-
 
 ------------------------------------------------------------------------
 -- Combine it all together

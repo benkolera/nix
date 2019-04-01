@@ -144,10 +144,7 @@
     xserver = {
       enable = true;
       layout = "us";
-      displayManager.slim = {
-        enable = true;
-        defaultUser = "bkolera";
-      };
+      displayManager.lightdm.enable = true;
       libinput = {
         enable = true;
         naturalScrolling = true;
