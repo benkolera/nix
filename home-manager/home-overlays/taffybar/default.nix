@@ -1,8 +1,7 @@
-# This should be temporary: see https://github.com/NixOS/nixpkgs/issues/55692
 self: super:
 {
   haskellPackages = with self.haskell.lib; super.haskellPackages.extend (hself: hsuper: {
-    #gi-gdk = hsuper.gi-gdk.override { inherit gtk3; };
+    # The version of taffybar in nixpkgs is pretty old. Bump it up. 
     taffybar = hself.callCabal2nix "taffybar" (self.fetchFromGitHub {
       owner = "taffybar";
       repo = "taffybar";
