@@ -14,9 +14,7 @@
     loader = {
       systemd-boot.enable = true;
       efi = {
-        efibootmgr = {
-          canTouchEfiVariables = true;
-        };
+        canTouchEfiVariables = true;
       };
     };
   };

@@ -91,11 +91,17 @@ in {
   };
   programs.vscode.enable = true;
 
+  home.file.".gitmessage".source = ./dotfiles/git/gitmessage;
   programs.git = {
     enable = true;
     userName = "Ben Kolera";
     userEmail = "ben.kolera@gmail.com";
     ignores = [];
+    extraConfig = {
+      commit = {
+        template = "${config.home.homeDirectory}/.gitmessage";
+      };
+    };
   };
 
   programs.zathura.enable = true;
@@ -120,7 +126,7 @@ in {
   services.screen-locker = {
     enable = true;
     lockCmd = "xlock -mode blank";
-    inactiveInterval = 3;
+    inactiveInterval = 10;
   };
 
   services.xembed-sni-proxy.enable = true;
