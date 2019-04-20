@@ -33,35 +33,39 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(typescript
-     python
-     groovy
+   '(
      ansible
+     bkolera-org
+     clojure
      csv
-     php
-     yaml
-     sql
-     javascript
+     groovy
      emacs-lisp
-     multiple-cursors
      git
+     haskell
+     helm
+     html
+     javascript
      markdown
+     multiple-cursors
+     nixos
      (org :variables
           org-enable-reveal-js-support t
-          org-enable-github-support t)
-     helm
+          org-enable-github-support t
+          org-enable-bootstrap-support t
+          )
+     php
+     python
+     purescript
      (shell :variables
              shell-default-height 30
              shell-default-position 'bottom)
+     sql
      spell-checking
      scala
-     purescript
      treemacs
-     nixos
-     clojure
-     html
+     typescript
      version-control
-     haskell
+     yaml
      )
 
    ;; List of additional packages that will be installed without being
@@ -82,7 +86,7 @@ This function should only modify configuration layer settings."
    ;; installs only the used packages but won't delete unused ones. `all'
    ;; installs *all* packages supported by Spacemacs and never uninstalls them.
    ;; (default is `used-only')
-   dotspacemacs-install-packages 'used-only))
+   dotspacemacs-install-packages 'used-but-keep-unused))
 
 (defun dotspacemacs/init ()
   "Initialization:
@@ -475,6 +479,8 @@ you should place your code here."
   (global-fci-mode 1)
   (setq create-lockfiles nil)
   (setq fci-rule-column 110)
+  (setq org-display-inline-images t)
+  (setq org-directory "~/org")
   (when (file-exists-p custom-file)
     (load-file custom-file))
 

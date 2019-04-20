@@ -7,10 +7,10 @@ let
   '';
 in {
   nixpkgs.overlays = [
+    (import ./home-overlays/direnv)
     (import ./home-overlays/lorri)
     (import ./home-overlays/obelisk)
     (import ./home-overlays/spacemacs)
-    (import ./home-overlays/direnv)
     (import ./home-overlays/taffybar)
   ];
 
@@ -20,6 +20,7 @@ in {
     cachix
     dmenu
     gitAndTools.gitflow
+    ghostscript
   ]++
   ( with haskellPackages; [
     ghcid
@@ -41,6 +42,7 @@ in {
     simplescreenrecorder
     slack
     xlockmore
+    xpdf
     xorg.xbacklight
   ];
 
@@ -64,11 +66,25 @@ in {
     mkdir -p $HOME/.spacemacs.d;
     ln -sf "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/emacs/custom.el" $HOME/.spacemacs.d/custom.el;
   '';
+  home.activation.checkoutOrg = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+    FOLDER="$HOME/org";
+    if [ ! -d "$FOLDER" ] ; then
+      git clone "git@github.com:benkolera/org" "$FOLDER"
+    fi
+  '';
   home.file.".emacs.d" = {
     source = pkgs.spacemacs;
     recursive = true;
   };
-  programs.emacs.enable = true;
+  home.file.".emacs.d/private/bkolera-org" = {
+    source = ./dotfiles/emacs/layers/bkolera-org;
+    recursive = true;
+  };
+  programs.emacs = {
+    enable  = true;
+    package = pkgs.emacs.override { inherit (pkgs) imagemagick; };
+    extraPackages = epkgs: with epkgs; [pdf-tools];
+  };
 
   programs.htop.enable = true;
   programs.urxvt = {
