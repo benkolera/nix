@@ -15,11 +15,14 @@
   '(org
     org-noter
     org-cliplink
+    org-super-agenda
     ;; This comes from nix
     (pdf-tools :location built-in)
     ))
 
 (defun bkolera-org/init-org-cliplink () (use-package org-cliplink :defer t))
+(defun bkolera-org/init-org-super-agenda ()
+  (use-package org-super-agenda :defer t :hook (org-agenda-mode . org-super-agenda-mode)))
 (defun bkolera-org/init-org-noter () (use-package org-noter :defer t))
 
 (defun bkolera-org/init-pdf-tools ()
@@ -36,29 +39,51 @@
     :defer t
     :config
     (progn
-      (setq org-default-notes-file (concat org-directory "/inbox.org"))
+      (add-hook 'org-mode-hook 'turn-on-auto-fill)
       (spacemacs/set-leader-keys-for-major-mode 'org-mode "iL" 'org-cliplink)
-      (setq org-todo-keywords '((sequence "MAYBE(m) SOON(s)" "NEXT(n)" "TODAY(t)" "INPROGRESS(i)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
+      (setq spacemacs-theme-org-agenda-height nil
+            org-agenda-skip-scheduled-if-done t
+            org-agenda-skip-deadline-if-done t
+            org-agenda-include-deadlines t
+            org-agenda-include-diary t
+            org-agenda-block-separator nil
+            org-agenda-compact-blocks t
+            org-agenda-start-with-log-mode t
+            org-todo-keywords '((sequence "MAYBE(m) SOON(s)" "NEXT(n)" "TODAY(t)" "INPROGRESS(i)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))
+            org-default-notes-file (concat org-directory "/inbox.org")
+            )
+
       (setq org-agenda-custom-commands
             '(("m" todo "MAYBE")
-              ("d" "Today" ((agenda "" ((org-agenda-span 'day)))
-                            (alltodo "" ((org-agenda-overriding-header "")
-                                         (org-super-agenda-groups
-                                          '((:name "Today" :todo "TODAY")
-                                            (:name "In Progress" :todo "DOING")
-                                            (:todo "WAITING")
-                                           ))))))
-              ("w" "Week's agenda and all TODOs"
+              ("t" "Today"
+               ((agenda "" ((org-agenda-span 'day)
+                            (org-super-agenda-groups
+                             '((:name "Today"
+                                      :time-grid t
+                                      :date today
+                                      :todo "TODAY"
+                                      :scheduled today
+                                      :order 1)))))
+                (alltodo "" ((org-agenda-overriding-header "")
+                             (org-super-agenda-groups
+                              '((:name "Today"
+                                       :todo "TODAY"
+                                       :order 1)
+                                (:discard (:anything t))))))))
+              ("w" "This Week"
                ((agenda "" ((org-agenda-span 'week)))
                 (alltodo "" ((org-agenda-overriding-header "")
                              (org-super-agenda-groups
-                              '(
-                                (:name "Soon" :todo "SOON")
-                                (:name "Next" :todo "NEXT")
-                                (:name "Today" :todo "TODAY")
-                                (:name "In Progress" :todo "DOING")
-                                (:todo "WAITING")
-                                ))))))))
+                              '((:name "Today"
+                                       :todo "TODAY"
+                                       :order 1)
+                                (:name "Next"
+                                       :todo "NEXT"
+                                       :order 2)
+                                (:name "Soon"
+                                       :todo "SOON"
+                                       :order 3)
+                                (:discard (:anything t))))))))))
       (setq org-capture-templates
             '(("t" "Todo [inbox]" entry (file "")
                "* TODO %i%? \n  SCHEDULED:  %t\n" :empty-lines 1)
