@@ -49,7 +49,7 @@
             org-agenda-block-separator nil
             org-agenda-compact-blocks t
             org-agenda-start-with-log-mode t
-            org-todo-keywords '((sequence "MAYBE(m) SOON(s)" "NEXT(n)" "TODAY(t)" "INPROGRESS(i)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))
+            org-todo-keywords '((sequence "MAYBE(m)" "SOON(s)" "NEXT(n)" "TODAY(t)" "INPROGRESS(i)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))
             org-default-notes-file (concat org-directory "/inbox.org")
             )
 
