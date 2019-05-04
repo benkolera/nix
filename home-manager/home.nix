@@ -61,6 +61,8 @@ in {
   programs.chromium.enable = true;
   programs.firefox.enable = true;
 
+  home.file.".config/stylish-haskell/config.yaml".source = ./dotfiles/stylish-haskell/config.yaml;
+
   home.file.".spacemacs".source = ./dotfiles/emacs/spacemacs;
   home.activation.linkEmacsCustom = config.lib.dag.entryAfter [ "writeBoundary" ] ''
     mkdir -p $HOME/.spacemacs.d;

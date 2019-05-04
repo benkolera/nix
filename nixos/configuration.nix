@@ -139,6 +139,23 @@
     devmon.enable = true;
     postgresql.enable = true;
     dbus.packages = [ pkgs.blueman ];
+    smokeping = {
+      enable = true;
+      targetConfig = ''
+          probe = FPing
+          menu = Top
+          title = Network Latency Grapher
+          remark = Welcome to the SmokePing website of xxx Company. \
+                   Here you will learn all about the latency of our network.
+          + FPing
+          menu = FPing
+          title = FPing
+          ++ Google
+          menu = Google
+          title = Google
+          host = google.com
+      '';
+    };
     xserver = {
       enable = true;
       layout = "us";
