@@ -66,11 +66,6 @@ in {
      #enablePepperFlash = true;
      enablePepperPDF = true;
     };
-    packageOverrides = pkgs: {
-      unstable = import <unstable> {
-        config = config // { allowUnfree = true; };
-      };
-    };
   };
 
   fonts = {

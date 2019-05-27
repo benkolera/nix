@@ -14,6 +14,8 @@ in {
     (import ./home-overlays/taffybar)
   ];
 
+  nixpkgs.config.allowUnfree = true;
+
   home.packages = with pkgs; [
     awscli
     cabal2nix
