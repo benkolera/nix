@@ -67,6 +67,12 @@ With this setup, a nixos-rebuild switch fully manages my home directory and glob
 
 You may decide to just git checkout to /etc/nixos instead of my fetchgit setup, but I like this way because I can't forget to commit my changes this way. :)
 
-## Debugging 
+## Known Problems & Debugging 
+
+### Debugging home manager issues
 
 The nixos module crams the actual activation (the thing that mutates your home directory to symlink to the built configs) into a systemd one shot, so you've got to go digging when things go wrong. Do a `journalctl -u home-manager-bkolera` to get logs if you get a systemd error from the home-manager-bkolera service on nixos switch.
+
+### Smokeping
+
+Smokeping can't get reinstalled because it writes the fast cgi script as non writable and then tries to write to it again. A `sudo chmod 755 /var/lib/smokeping/smokeping.fcgi` is an OK bandaid.
