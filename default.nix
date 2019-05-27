@@ -1,10 +1,11 @@
 machineName:
 { config, pkgs, ... }:
+let thisPath = ./;
 {
   imports =
     [ # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
-      "./machine.${machineName}.nix"
+      "${thisPath}/machine.${machineName}.nix"
     ];
 
   boot = {
