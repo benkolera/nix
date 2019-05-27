@@ -183,6 +183,7 @@ in {
     headless = false;
   };
 
+  home-manager.users.bkolera = import ./home-manager;
   users.extraUsers.bkolera = {
     isNormalUser = true;
     createHome = true;
