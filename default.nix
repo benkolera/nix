@@ -1,6 +1,6 @@
 machineName:
 { config, pkgs, ... }:
-let thisPath = ./;
+let thisPath = ./.;
 {
   imports =
     [ # Include the results of the hardware scan.
