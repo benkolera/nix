@@ -77,6 +77,10 @@ You may decide to just git checkout to /etc/nixos instead of my fetchgit setup. 
 
 The nixos module crams the actual activation (the thing that mutates your home directory to symlink to the built configs) into a systemd one shot, so you've got to go digging when things go wrong. Do a `journalctl -u home-manager-bkolera` to get logs if you get a systemd error from the home-manager-bkolera service on nixos switch.
 
+### Disparity between home-manager and nixos channel
+
+This forces you to use nixos-unstable as it currently stands because home-manager is tracking master. It also forces you to keep your nixos channel version consistent across all your machines, since everything is sharing the same nixos config and home manager version + config. If you update your nixos to be really new and forget to update home manager, things could break. Or if you update home manager and forget to update your nixos channel, thing could also break. Be careful with this. I tend to stay on the bleeding edge of nixos unstable on all my machines (updating weekly), so this is not an issue for me unless I'm dodging a bug. 
+
 ### Smokeping
 
 Smokeping can't get reinstalled because it writes the fast cgi script as non writable and then tries to write to it again. A `sudo chmod 755 /var/lib/smokeping/smokeping.fcgi` is an OK bandaid.
