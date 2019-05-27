@@ -179,7 +179,7 @@ in {
   };
 
   home-manager.users.bkolera = import ./home-manager;
-  users.extraUsers.bkolera = {
+  users.users.bkolera = {
     isNormalUser = true;
     createHome = true;
     home = "/home/bkolera";
