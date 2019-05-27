@@ -67,9 +67,9 @@ $ cat /etc/nixos/hardware-configuration.nix
 }
 ```
 
-With this setup, a nixos-rebuild switch fully manages my home directory and global nixos! 
+With this setup, a nixos-rebuild switch fully manages my home directory and global nixos from the git revision described in thunk.json. To update the config to a latest revision, I can run update.sh from this directory to make a new thunk.json.  
 
-You may decide to just git checkout to /etc/nixos instead of my fetchgit setup, but I like this way because I can't forget to commit my changes this way. :)
+You may decide to just git checkout to /etc/nixos instead of my fetchgit setup. There are folklore reasons that importing nix code from a derivation (IFD; which is what we are doing here in the configuration.nix.example) is a bad idea because it can cause nix bugs, but this seems to work for me. I like this way because I can't forget to commit my changes this way as it doesn't get deployed if it is not in git. :)
 
 ## Known Problems & Debugging 
 
