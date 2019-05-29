@@ -75,8 +75,9 @@
   fonts = {
     enableFontDir = true;
      fonts = with pkgs; [
+       noto-fonts-emoji
+       nerdfonts
        emojione
-       source-code-pro
      ];
   };
 

@@ -60,6 +60,7 @@ in {
   programs.direnv.enable = true;
   programs.chromium.enable = true;
   programs.firefox.enable = true;
+  programs.alacritty.enable = true;
 
   home.file.".config/stylish-haskell/config.yaml".source = ./dotfiles/stylish-haskell/config.yaml;
 
