@@ -1,13 +1,14 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
+machineName:
 { config, pkgs, ... }:
-{
+let 
+  thisPath = ./.;
+  home-manager-src = import "${thisPath}/deps/home-manager";
+in {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./machine.nix
+      /etc/nixos/hardware-configuration.nix
+      "${thisPath}/machine.${machineName}.nix"
+      "${home-manager-src}/nixos"
     ];
 
   boot = {
@@ -64,11 +65,6 @@
     chromium = {
      #enablePepperFlash = true;
      enablePepperPDF = true;
-    };
-    packageOverrides = pkgs: {
-      unstable = import <unstable> {
-        config = config // { allowUnfree = true; };
-      };
     };
   };
 
@@ -183,7 +179,8 @@
     headless = false;
   };
 
-  users.extraUsers.bkolera = {
+  home-manager.users.bkolera = import ./home-manager;
+  users.users.bkolera = {
     isNormalUser = true;
     createHome = true;
     home = "/home/bkolera";
