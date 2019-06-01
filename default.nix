@@ -100,18 +100,11 @@ in {
     gparted
     htop
     iptables
-    libpqxx
     manpages
-    nixops
-    ] ++
-    ( with nodePackages; [
-      bower
-      npm
-      tern
-    ]) ++ [
     nmap
     ncdu
     openssl
+    parted
     psmisc
     sudo
     traceroute

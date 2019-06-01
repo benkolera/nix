@@ -22,24 +22,31 @@ in {
     cachix
     dmenu
     gitAndTools.gitflow
+    gimp
     ghostscript
   ]++
   ( with haskellPackages; [
+    Agda
     ghcid
     stylish-haskell
     xmobar
     yeganesh
   ]) ++ [
+    inkscape
     keepassx
     libreoffice
     lorri
+    libpqxx
+    nixops
     obelisk.command
     openshot-qt
     p7zip
+    pandoc
     pavucontrol
     python3
     ranger
     rfkill
+    signal-desktop
     silver-searcher
     simplescreenrecorder
     slack
