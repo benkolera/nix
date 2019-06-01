@@ -14,13 +14,11 @@
 (defconst bkolera-org-packages
   '(org
     org-noter
-    org-cliplink
     org-super-agenda
     ;; This comes from nix
     (pdf-tools :location built-in)
     ))
 
-(defun bkolera-org/init-org-cliplink () (use-package org-cliplink :defer t))
 (defun bkolera-org/init-org-super-agenda ()
   (use-package org-super-agenda :defer t :hook (org-agenda-mode . org-super-agenda-mode)))
 (defun bkolera-org/init-org-noter () (use-package org-noter :defer t))
