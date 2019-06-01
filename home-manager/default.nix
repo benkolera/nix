@@ -74,10 +74,6 @@ in {
   home.file.".config/stylish-haskell/config.yaml".source = ./dotfiles/stylish-haskell/config.yaml;
 
   home.file.".spacemacs".source = ./dotfiles/emacs/spacemacs;
-  home.activation.linkEmacsCustom = config.lib.dag.entryAfter [ "writeBoundary" ] ''
-    mkdir -p $HOME/.spacemacs.d;
-    ln -sf "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/emacs/custom.el" $HOME/.spacemacs.d/custom.el;
-  '';
   home.activation.checkoutOrg = config.lib.dag.entryAfter [ "writeBoundary" ] ''
     FOLDER="$HOME/org";
     if [ ! -d "$FOLDER" ] ; then
