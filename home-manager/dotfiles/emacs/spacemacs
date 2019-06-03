@@ -34,7 +34,6 @@ This function should only modify configuration layer settings."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     auto-completion
      ansible
      bkolera-org
      clojure
@@ -65,7 +64,6 @@ This function should only modify configuration layer settings."
      sql
      spell-checking
      scala
-     syntax-checking
      treemacs
      typescript
      version-control
@@ -486,6 +484,7 @@ you should place your code here."
   (setq org-display-inline-images t)
   (setq org-directory "~/org")
   (direnv-mode)
+  (add-hook 'haskell-mode-hook #'lsp)
   (when (file-exists-p custom-file)
     (load-file custom-file))
 
