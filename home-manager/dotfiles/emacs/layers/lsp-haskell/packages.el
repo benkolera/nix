@@ -15,7 +15,7 @@
   '((lsp-haskell :requires haskell-mode :location (recipe :fetcher github :repo "emacs-lsp/lsp-haskell"))
     ))
 
-(defun hie-nix/init-lsp-haskell ()
+(defun lsp-haskell/init-lsp-haskell ()
   (use-package lsp-haskell
     :init
     (progn
