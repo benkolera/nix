@@ -34,6 +34,7 @@ This function should only modify configuration layer settings."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     auto-completion
      ansible
      bkolera-org
      clojure
@@ -64,6 +65,7 @@ This function should only modify configuration layer settings."
      sql
      spell-checking
      scala
+     syntax-checking
      treemacs
      typescript
      version-control
