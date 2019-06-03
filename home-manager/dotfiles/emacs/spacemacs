@@ -42,9 +42,11 @@ This function should only modify configuration layer settings."
      groovy
      emacs-lisp
      git
+     (haskell :variables haskell-completion-backend 'lsp)
      helm
      html
      javascript
+     lsp
      markdown
      multiple-cursors
      nixos
@@ -56,7 +58,6 @@ This function should only modify configuration layer settings."
      php
      python
      purescript
-     lsp-haskell
      (shell :variables
              shell-default-height 30
              shell-default-position 'bottom)
