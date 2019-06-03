@@ -89,6 +89,10 @@ in {
     source = ./dotfiles/emacs/layers/bkolera-org;
     recursive = true;
   };
+  home.file.".emacs.d/private/lsp-haskell" = {
+    source = ./dotfiles/emacs/layers/lsp-haskell;
+    recursive = true;
+  };
   programs.emacs = {
     enable  = true;
     package = pkgs.emacs.override { inherit (pkgs) imagemagick; };
