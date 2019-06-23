@@ -3,7 +3,8 @@ let
   restart-taffybar = ''
     echo "Restarting taffybar..."
     $DRY_RUN_CMD rm -fr $HOME/.cache/taffybar/
-    $DRY_RUN_CMD systemctl --user restart taffybar.service
+    $DRY_RUN_CMD systemctl --user restart taffybar.service && true
+    echo "Taffybar restart done"
   '';
 in {
   nixpkgs.overlays = [

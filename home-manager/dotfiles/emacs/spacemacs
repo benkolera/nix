@@ -34,7 +34,6 @@ This function should only modify configuration layer settings."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     agda
      ansible
      bkolera-org
      clojure
@@ -44,10 +43,11 @@ This function should only modify configuration layer settings."
      elm
      emacs-lisp
      git
-     haskell
+     (haskell :variables haskell-completion-backend 'lsp)
      helm
      html
      javascript
+     lsp
      markdown
      multiple-cursors
      nixos
@@ -75,7 +75,7 @@ This function should only modify configuration layer settings."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(nix-sandbox)
+   dotspacemacs-additional-packages '(nix-sandbox direnv)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
@@ -484,6 +484,8 @@ you should place your code here."
   (setq fci-rule-column 110)
   (setq org-display-inline-images t)
   (setq org-directory "~/org")
+  (direnv-mode)
+  (add-hook 'haskell-mode-hook #'lsp)
   (when (file-exists-p custom-file)
     (load-file custom-file))
 
