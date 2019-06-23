@@ -41,6 +41,7 @@ This function should only modify configuration layer settings."
      csv
      graphviz
      groovy
+     elm
      emacs-lisp
      git
      haskell
