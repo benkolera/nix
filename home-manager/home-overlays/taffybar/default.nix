@@ -1,4 +1,5 @@
 self: super:
+# See https://github.com/NixOS/nixpkgs/issues/63500
 # Taffybar's default.nix has a nixpkgs pin and overlays that it maintains
 # lets ignore messing with our haskell pkgs and just use it as the toplevel.
 # This is pretty gross and will likely break later, ofc
