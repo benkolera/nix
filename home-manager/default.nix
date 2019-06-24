@@ -117,7 +117,10 @@ in {
   programs.vscode = {
     enable = true;
     userSettings = {
-      editor.formatOnSave = true;
+      editor = {
+        formatOnSave = true;
+        rulers = [120];
+      };
     };
   };
   home.file.".gitmessage".source = ./dotfiles/git/gitmessage;
