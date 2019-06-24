@@ -114,8 +114,12 @@ in {
       theme = "steeef";
     };
   };
-  programs.vscode.enable = true;
-
+  programs.vscode = {
+    enable = true;
+    userSettings = {
+      editor.formatOnSave = true;
+    };
+  };
   home.file.".gitmessage".source = ./dotfiles/git/gitmessage;
   programs.git = {
     enable = true;
