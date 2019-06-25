@@ -16,6 +16,7 @@ in {
   ];
 
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowBroken = true;
 
   home.packages = with pkgs; [
     awscli
