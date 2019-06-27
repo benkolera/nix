@@ -123,6 +123,7 @@ in {
         rulers = [120];
         minimap.enabled = false;
       };
+      window.menuBarVisibility = "toggle";
     };
   };
   home.file.".gitmessage".source = ./dotfiles/git/gitmessage;
