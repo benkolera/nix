@@ -121,6 +121,7 @@ in {
       editor = {
         formatOnSave = true;
         rulers = [120];
+        minimap.enabled = false;
       };
     };
   };
