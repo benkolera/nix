@@ -122,8 +122,13 @@ in {
         formatOnSave = true;
         rulers = [120];
         minimap.enabled = false;
+        tabSize = 2;
+        insertSpaces = true;
       };
-      window.menuBarVisibility = "toggle";
+      window = {
+        menuBarVisibility = "toggle";
+        zoomLevel = -1;
+      };
     };
   };
   home.file.".gitmessage".source = ./dotfiles/git/gitmessage;
