@@ -25,6 +25,7 @@ in {
       "https://cache.nixos.org/"
       "https://cachix.cachix.org"
       "https://nixcache.reflex-frp.org"
+      "https://hydra.iohk.io"
       "http://hydra.qfpl.io"
       "https://hie-nix.cachix.org"
     ];
@@ -33,6 +34,7 @@ in {
       "qfpl.io:xME0cdnyFcOlMD1nwmn6VrkkGgDNLLpMXoMYl58bz5g="
       "hie-nix.cachix.org-1:EjBSHzF6VmDnzqlldGXbi0RM3HdjfTU3yDRi9Pd0jTY="
       "cachix.cachix.org-1:eWNHQldwUO7G2VkjpnjDbWwy4KQ/HNxht7H4SSoMckM="
+      "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
     ];
     trustedUsers = [ "root" "bkolera" ];
   };
