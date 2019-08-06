@@ -131,6 +131,14 @@ in {
       };
     };
   };
+  programs.kakoune = {
+    enable = true; 
+    config = {
+      colorScheme = "lucius";
+      tabStop = 4;
+      indentWidth = 2;
+    };
+  };
   home.file.".gitmessage".source = ./dotfiles/git/gitmessage;
   programs.git = {
     enable = true;
