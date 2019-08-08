@@ -61,6 +61,7 @@ in {
     simplescreenrecorder
     slack
     xlockmore
+    xsel
     xpdf
     xorg.xbacklight
   ];
@@ -162,6 +163,12 @@ in {
       hook global WinSetOption filetype=elm %{
         set window formatcmd 'elm-format --stdin'
       }
+      
+      hook global NormalKey y|d|c %{ nop %sh{
+        printf %s "$kak_main_reg_dquote" | xsel --input --clipboard
+      }}
+      map global user P '!xsel --output --clipboard<ret>'
+      map global user p '<a-!>xsel --output --clipboard<ret>'
     '';
   };
   programs.tmux = {
