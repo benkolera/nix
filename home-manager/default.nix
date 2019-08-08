@@ -13,6 +13,8 @@ in {
     (import ./home-overlays/lorri)
     (import ./home-overlays/obelisk)
     (import ./home-overlays/spacemacs)
+    (import ./home-overlays/tmux-themepack)
+    (import ./home-overlays/kak-fzf)
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -26,6 +28,12 @@ in {
     gitAndTools.gitflow
     gimp
     ghostscript
+    gocode
+    goimports
+    gogetdoc
+    elmPackages.elm
+    elmPackages.elm-format
+    jq
   ]++
   ( with haskellPackages; [
     Agda
@@ -59,8 +67,8 @@ in {
 
   home.file."bin" = { source = ./bin; recursive = true; };
   home.sessionVariables = {
-    EDITOR = "vim";
-    VISUAL = "vim";
+    EDITOR = "kak";
+    VISUAL = "kak";
     BROWSER = "firefox";
   };
 
@@ -138,6 +146,32 @@ in {
       tabStop = 4;
       indentWidth = 2;
     };
+    extraConfig = ''
+
+      source "${pkgs.kak-fzf}/rc/fzf.kak"
+      map global normal <c-p> ': fzf-mode<ret>'
+
+      hook global WinSetOption filetype=elm %{
+        set window formatcmd 'elm-format --stdin'
+      }
+    '';
+  };
+  programs.tmux = {
+    enable = true;
+    clock24 = true;
+    historyLimit = 10000;
+    terminal = "screen-256color";
+    aggressiveResize = true;
+    shortcut = "a";
+    extraConfig = ''
+      unbind '"'
+      unbind %
+      bind | split-window -h -c "#{pane_current_path}"
+      bind - split-window -v -c "#{pane_current_path}"
+      set -gq status-utf8 on
+      set-option -g default-shell /bin/zsh
+      source-file "${pkgs.tmux-themepack}/powerline/default/blue.tmuxtheme"
+    '';
   };
   home.file.".gitmessage".source = ./dotfiles/git/gitmessage;
   programs.git = {
