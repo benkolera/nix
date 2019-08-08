@@ -28,6 +28,7 @@ in {
     gitAndTools.gitflow
     gimp
     ghostscript
+    grip
     gocode
     goimports
     gogetdoc
