@@ -28,7 +28,6 @@ in {
     gitAndTools.gitflow
     gimp
     ghostscript
-    grip
     gocode
     goimports
     gogetdoc
@@ -57,6 +56,7 @@ in {
     pandoc
     pavucontrol
     python3
+    python3.7-grip
     ranger
     rfkill
     signal-desktop
