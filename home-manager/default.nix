@@ -33,6 +33,7 @@ in {
     gogetdoc
     elmPackages.elm
     elmPackages.elm-format
+    fzf
     jq
   ]++
   ( with haskellPackages; [
