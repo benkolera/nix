@@ -72,6 +72,7 @@ in {
        noto-fonts-emoji
        nerdfonts
        emojione
+       source-code-pro
      ];
   };
 
