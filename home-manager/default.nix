@@ -33,7 +33,6 @@ in {
     gogetdoc
     elmPackages.elm
     elmPackages.elm-format
-    fzf
     jq
   ]++
   ( with haskellPackages; [
@@ -103,6 +102,9 @@ in {
     enable  = true;
     package = pkgs.emacs.override { inherit (pkgs) imagemagick; };
     extraPackages = epkgs: with epkgs; [pdf-tools];
+  };
+  programs.fzf = {
+    enable = true;
   };
 
   programs.htop.enable = true;
