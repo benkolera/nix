@@ -79,7 +79,6 @@ in {
   programs.direnv.enable = true;
   programs.chromium.enable = true;
   programs.firefox.enable = true;
-  programs.alacritty.enable = true;
 
   home.file.".config/stylish-haskell/config.yaml".source = ./dotfiles/stylish-haskell/config.yaml;
 
@@ -178,6 +177,7 @@ in {
       bind | split-window -h -c "#{pane_current_path}"
       bind - split-window -v -c "#{pane_current_path}"
       set -gq status-utf8 on
+      setw -g mouse on
       source-file "${pkgs.tmux-themepack}/powerline/default/blue.tmuxtheme"
     '';
   };
