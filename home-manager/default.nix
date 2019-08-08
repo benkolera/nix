@@ -152,6 +152,12 @@ in {
     extraConfig = ''
 
       source "${pkgs.kak-fzf}/rc/fzf.kak"
+      source "${pkgs.kak-fzf}/rc/modules/fzf-file.kak"   # fzf file chooser
+      source "${pkgs.kak-fzf}/rc/modules/fzf-buffer.kak" # switching buffers with fzf
+      source "${pkgs.kak-fzf}/rc/modules/fzf-search.kak" # search within file contents
+      source "${pkgs.kak-fzf}/rc/modules/fzf-cd.kak"     # change server's working directory
+      source "${pkgs.kak-fzf}/rc/modules/fzf-ctags.kak"  # search for tag in your project ctags file
+      source "${pkgs.kak-fzf}/rc/modules/VCS/fzf-git.kak" # Git support module
       map global normal <c-p> ': fzf-mode<ret>'
 
       hook global WinSetOption filetype=elm %{
