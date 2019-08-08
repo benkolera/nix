@@ -33,7 +33,6 @@ in {
     gogetdoc
     elmPackages.elm
     elmPackages.elm-format
-    jq
   ]++
   ( with haskellPackages; [
     Agda
@@ -43,11 +42,14 @@ in {
     yeganesh
   ]) ++ [
     inkscape
+    jq
     keepassx
     libreoffice
     lorri
     libpqxx
     nixops
+    nodejs
+    nodePackages.npm
     obelisk.command
     openshot-qt
     p7zip
@@ -169,7 +171,11 @@ in {
       }}
       map global user P '!xsel --output --clipboard<ret>'
       map global user p '<a-!>xsel --output --clipboard<ret>'
-    '';
+      
+      # space is my leader
+      map global normal <space> , -docstring 'leader'
+      map global normal <backspace> <space> -docstring 'remove all sels except main'
+      map global normal <a-backspace> <a-space> -docstring 'remove main sel'    '';
   };
   programs.tmux = {
     enable = true;
