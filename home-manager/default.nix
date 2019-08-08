@@ -56,7 +56,7 @@ in {
     pandoc
     pavucontrol
     python3
-    python3.7-grip
+    python3Packages.grip
     ranger
     rfkill
     signal-desktop
