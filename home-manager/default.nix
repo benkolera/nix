@@ -178,7 +178,6 @@ in {
       bind | split-window -h -c "#{pane_current_path}"
       bind - split-window -v -c "#{pane_current_path}"
       set -gq status-utf8 on
-      set-option -g default-shell /bin/zsh
       source-file "${pkgs.tmux-themepack}/powerline/default/blue.tmuxtheme"
     '';
   };
