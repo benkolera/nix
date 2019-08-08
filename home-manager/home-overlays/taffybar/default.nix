@@ -13,4 +13,4 @@ let
       });
     });
   };
-in super.lib.composeExtensions taffybar-overlay (import "${taffybar-src}/environment.nix") self super
+in taffybar-overlay self super
