@@ -169,8 +169,8 @@ in {
       hook global NormalKey y|d|c %{ nop %sh{
         printf %s "$kak_main_reg_dquote" | xsel --input --clipboard
       }}
-      map global user P '!xsel --output --clipboard<ret>'
-      map global user p '<a-!>xsel --output --clipboard<ret>'
+      map global user P '!xsel --output --clipboard<ret>' -docstring 'Paste after cursor'
+      map global user p '<a-!>xsel --output --clipboard<ret>' -docstring 'Paste before cursor'
       
       # space is my leader
       map global normal <space> , -docstring 'leader'
