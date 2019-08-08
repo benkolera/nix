@@ -158,7 +158,7 @@ in {
 
   virtualisation.docker = {
     enable = true;
-    enableOnBoot = true;
+    enableOnBoot = false;
   };
 
   programs = {
