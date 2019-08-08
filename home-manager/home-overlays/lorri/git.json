@@ -1,7 +1,7 @@
 {
   "url": "https://github.com/target/lorri.git",
-  "rev": "094a903d19eb652a79ad6e7db6ad1ee9ad78d26c",
-  "date": "2019-03-28T11:21:01-04:00",
-  "sha256": "0y9y7r16ki74fn0xavjva129vwdhqi3djnqbqjwjkn045i4z78c8",
+  "rev": "d3e452ebc2b24ab86aec18af44c8217b2e469b2a",
+  "date": "2019-07-01T18:53:11-04:00",
+  "sha256": "07yf3gl9sixh7acxayq4q8h7z4q8a66412z0r49sr69yxb7b4q89",
   "fetchSubmodules": false
 }

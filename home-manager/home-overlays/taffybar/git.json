@@ -1,7 +1,7 @@
 {
   "url": "https://github.com/taffybar/taffybar.git",
-  "rev": "104a1c12f722f362ccb60794119de95f96f18ea8",
-  "date": "2019-06-24T18:55:40-07:00",
-  "sha256": "0hyq2l1w6xbwgzbllcfhdbip056wqc1l83va6a0p3czjy43b4g70",
+  "rev": "d54d2fa8b379549d38e2648bfbcad90f4155de3e",
+  "date": "2019-07-23T23:53:36-07:00",
+  "sha256": "1b4b0f3s2h8lpkx46fpa4c8dbrj1k0557fvarkwl4zm1vfjvgix5",
   "fetchSubmodules": false
 }
