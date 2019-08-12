@@ -31,6 +31,7 @@ in {
     gocode
     goimports
     gogetdoc
+    epiphany
     elmPackages.elm
     elmPackages.elm-format
   ]++
