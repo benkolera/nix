@@ -59,6 +59,7 @@ in {
     python3Packages.grip
     ranger
     rfkill
+    sbt
     signal-desktop
     silver-searcher
     simplescreenrecorder

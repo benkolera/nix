@@ -1,0 +1,4 @@
+#!/usr/bin/env bash 
+echo "Using kak instead!"
+sleep 2
+kak $@
