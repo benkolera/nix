@@ -28,17 +28,17 @@ import qualified Data.Map        as M
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
-myTerminal = "alacritty"
+myTerminal = "urxvt"
 
 -- The command to eock the screen or show the screensaver.
 myScreensaver = "xlock -mode blank"
 
 -- The command to take a selective screenshot, where you select
 -- what you'd like to capture on the screen.
-mySelectScreenshot = "screenshot-select"
+mySelectScreenshot = "flameshot gui"
 
 -- The command to take a fullscreen screenshot.
-myScreenshot = "screenshot"
+myScreenshot = "flameshot full"
 
 -- The command to use as a launcher, to launch commands that don't have
 -- preset keybindings.
