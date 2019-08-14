@@ -1,5 +1,4 @@
 set-option global grepcmd 'ag --column'
-set-option global ui_options ncurses_status_on_top=true     
 add-highlighter global/ show-matching
 
 hook global WinCreate ^[^*]+$ %{ add-highlighter window/ number-lines -hlcursor }
@@ -20,12 +19,10 @@ hook global NormalIdle .* %{
 
 add-highlighter global/ dynregex '%opt{curword}' 0:CurWord
 
-map global normal = ':prompt math: %{exec "a%val{text}<lt>esc>|bc<lt>ret>"}<ret>'
-
-map global user -docstring 'paste (after) from clipboard' p '!%s<ret>'\n" "xclip -o"
-map global user -docstring 'paste (before) from clipboard' P '<a-!>%s<ret>'\n" "xclip -o"
-map global user -docstring 'yank to clipboard' y '<a-|>%s<ret>:echo -markup %%{{Information}copied selection to X11 clipboard}<ret>'\n" "xclip -i"
-map global user -docstring 'replace from clipboard' R '|%s<ret>'\n" "xclip -o"
+map global user -docstring 'paste (after) from clipboard' p '!%s<ret>' 'xclip -o'
+map global user -docstring 'paste (before) from clipboard' P '<a-!>%s<ret>' 'xclip -o'
+map global user -docstring 'yank to clipboard' y '<a-|>%s<ret>:echo -markup %%{{Information}copied selection to X11 clipboard}<ret>' 'xclip -i'
+map global user -docstring 'replace from clipboard' R '|%s<ret>' 'xclip -o'
 
 define-command mkdir %{ nop %sh{ mkdir -p $(dirname $kak_buffile) } }
 
