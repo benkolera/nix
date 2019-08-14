@@ -156,29 +156,67 @@ in {
     };
     extraConfig = ''
 
-      source "${pkgs.kak-fzf}/rc/fzf.kak"
-      source "${pkgs.kak-fzf}/rc/modules/fzf-file.kak"   # fzf file chooser
-      source "${pkgs.kak-fzf}/rc/modules/fzf-buffer.kak" # switching buffers with fzf
-      source "${pkgs.kak-fzf}/rc/modules/fzf-search.kak" # search within file contents
-      source "${pkgs.kak-fzf}/rc/modules/fzf-cd.kak"     # change server's working directory
-      source "${pkgs.kak-fzf}/rc/modules/fzf-ctags.kak"  # search for tag in your project ctags file
-      source "${pkgs.kak-fzf}/rc/modules/VCS/fzf-git.kak" # Git support module
-      map global normal <c-p> ': fzf-mode<ret>'
+     source "${pkgs.kak-fzf}/rc/fzf.kak"
+     source "${pkgs.kak-fzf}/rc/modules/fzf-file.kak"   
+     source "${pkgs.kak-fzf}/rc/modules/fzf-buffer.kak" 
+     source "${pkgs.kak-fzf}/rc/modules/fzf-search.kak" 
+     source "${pkgs.kak-fzf}/rc/modules/fzf-cd.kak"     
+     source "${pkgs.kak-fzf}/rc/modules/fzf-ctags.kak"  
+     source "${pkgs.kak-fzf}/rc/modules/fzf-yank-ring.kak"  
+     source "${pkgs.kak-fzf}/rc/modules/fzf-project.kak"  
+     source "${pkgs.kak-fzf}/rc/modules/VCS/fzf-git.kak" 
 
-      hook global WinSetOption filetype=elm %{
-        set window formatcmd 'elm-format --stdin'
-      }
-      
-      hook global NormalKey y|d|c %{ nop %sh{
-        printf %s "$kak_main_reg_dquote" | xsel --input --clipboard
-      }}
-      map global user P '!xsel --output --clipboard<ret>' -docstring 'Paste after cursor'
-      map global user p '<a-!>xsel --output --clipboard<ret>' -docstring 'Paste before cursor'
-      
-      # space is my leader
-      map global normal <space> , -docstring 'leader'
-      map global normal <backspace> <space> -docstring 'remove all sels except main'
-      map global normal <a-backspace> <a-space> -docstring 'remove main sel'    '';
+     set-option global grepcmd 'ag --column'
+     set-option global ui_options ncurses_status_on_top=true     
+     add-highlighter global/ show-matching     
+     hook global WinCreate ^[^*]+$ %{ add-highlighter window/ number-lines -hlcursor }
+
+     map global normal <c-p> ': fzf-mode<ret>'
+     declare-option -hidden regex curword
+     set-face global CurWord default,rgb:4a4a4a
+
+     hook global NormalIdle .* %{
+         eval -draft %{ try %{
+             exec <space><a-i>w <a-k>\A\w+\z<ret>
+             set-option buffer curword "\b\Q%val{selection}\E\b"
+         } catch %{
+             set-option buffer curword ''
+         } }
+     }
+     add-highlighter global/ dynregex '%opt{curword}' 0:CurWord
+
+     # Custom mappings
+     # ───────────────
+     map global normal = ':prompt math: %{exec "a%val{text}<lt>esc>|bc<lt>ret>"}<ret>'
+
+     # System clipboard handling
+     # ─────────────────────────
+
+     evaluate-commands %sh{
+         case $(uname) in
+             Linux) copy="xclip -i"; paste="xclip -o" ;;
+             Darwin)  copy="pbcopy"; paste="pbpaste" ;;
+         esac
+
+         printf "map global user -docstring 'paste (after) from clipboard' p '!%s<ret>'\n" "$paste"
+         printf "map global user -docstring 'paste (before) from clipboard' P '<a-!>%s<ret>'\n" "$paste"
+         printf "map global user -docstring 'yank to clipboard' y '<a-|>%s<ret>:echo -markup %%{{Information}copied selection to X11 clipboard}<ret>'\n" "$copy"
+         printf "map global user -docstring 'replace from clipboard' R '|%s<ret>'\n" "$paste"
+     }
+
+     define-command mkdir %{ nop %sh{ mkdir -p $(dirname $kak_buffile) } }
+
+     hook global WinSetOption filetype=elm %{
+       set window formatcmd 'elm-format --stdin'
+     }
+    
+     # space is my leader
+     map global normal <space> , -docstring 'leader'
+     map global normal <backspace> <space> -docstring 'remove all sels except main'
+     map global normal <a-backspace> <a-space> -docstring 'remove main sel'    
+
+     map global normal '#' :comment-line<ret>      
+     '';
   };
   programs.tmux = {
     enable = true;
