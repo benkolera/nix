@@ -6,6 +6,7 @@ let
     $DRY_RUN_CMD systemctl --user restart taffybar.service && true
     echo "Taffybar restart done"
   '';
+  kakrc = builtins.readFile ./dotfiles/kakoune/kakrc;
 in {
   nixpkgs.overlays = [
     (import ./home-overlays/taffybar)
@@ -166,56 +167,7 @@ in {
      source "${pkgs.kak-fzf}/rc/modules/fzf-project.kak"  
      source "${pkgs.kak-fzf}/rc/modules/VCS/fzf-git.kak" 
 
-     set-option global grepcmd 'ag --column'
-     set-option global ui_options ncurses_status_on_top=true     
-     add-highlighter global/ show-matching     
-     hook global WinCreate ^[^*]+$ %{ add-highlighter window/ number-lines -hlcursor }
-
-     map global normal <c-p> ': fzf-mode<ret>'
-     declare-option -hidden regex curword
-     set-face global CurWord default,rgb:4a4a4a
-
-     hook global NormalIdle .* %{
-         eval -draft %{ try %{
-             exec <space><a-i>w <a-k>\A\w+\z<ret>
-             set-option buffer curword "\b\Q%val{selection}\E\b"
-         } catch %{
-             set-option buffer curword ''
-         } }
-     }
-     add-highlighter global/ dynregex '%opt{curword}' 0:CurWord
-
-     # Custom mappings
-     # ───────────────
-     map global normal = ':prompt math: %{exec "a%val{text}<lt>esc>|bc<lt>ret>"}<ret>'
-
-     # System clipboard handling
-     # ─────────────────────────
-
-     evaluate-commands %sh{
-         case $(uname) in
-             Linux) copy="xclip -i"; paste="xclip -o" ;;
-             Darwin)  copy="pbcopy"; paste="pbpaste" ;;
-         esac
-
-         printf "map global user -docstring 'paste (after) from clipboard' p '!%s<ret>'\n" "$paste"
-         printf "map global user -docstring 'paste (before) from clipboard' P '<a-!>%s<ret>'\n" "$paste"
-         printf "map global user -docstring 'yank to clipboard' y '<a-|>%s<ret>:echo -markup %%{{Information}copied selection to X11 clipboard}<ret>'\n" "$copy"
-         printf "map global user -docstring 'replace from clipboard' R '|%s<ret>'\n" "$paste"
-     }
-
-     define-command mkdir %{ nop %sh{ mkdir -p $(dirname $kak_buffile) } }
-
-     hook global WinSetOption filetype=elm %{
-       set window formatcmd 'elm-format --stdin'
-     }
-    
-     # space is my leader
-     map global normal <space> , -docstring 'leader'
-     map global normal <backspace> <space> -docstring 'remove all sels except main'
-     map global normal <a-backspace> <a-space> -docstring 'remove main sel'    
-
-     map global normal '#' :comment-line<ret>      
+     ${kakrc}
      '';
   };
   programs.tmux = {
