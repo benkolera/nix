@@ -161,11 +161,17 @@ in {
       numberLines.enable = true;
       showWhitespace.enable = true;
       keyMappings = [
-        { mode = "normal"; key = "<c-p>"; effect = ":fzf-mode<ret>"; }
-        { mode = "normal"; key = "#"; effect = ":comment-line<ret>"; }
-        { mode = "normal"; key = "<space>"; effect = ","; docstring = "leader"; }
-        { mode = "normal"; key = "<backspace>"; effect = "<space>"; docstring = "remove all sels except main"; }
-        { mode = "normal"; key = "<a-backspace>"; effect = "<a-space>"; docstring = "remove main sel"; }
+        { mode = "normal"; key = "'#'"; effect = ":comment-line<ret>"; }
+        { mode = "normal"; key = "'<c-p>'"; effect = ":fzf-mode<ret>"; }
+        { mode = "normal"; key = "'<space>'"; effect = ","; docstring = "leader"; }
+        { mode = "normal"; key = "'<backspace>'"; effect = "<space>"; docstring = "remove all sels except main"; }
+        { mode = "normal"; key = "'<a-backspace>'"; effect = "<a-space>"; docstring = "remove main sel"; }
+        { mode = "user"; key = "'p'"; effect = "!xclip -o<ret>"; docstring = "paste (after) from clipboard"; }
+        { mode = "user"; key = "'P'"; effect = "<a-!>xclip -o<ret>"; docstring = "paste (before) from clipboard"; }
+        { mode = "user"; key = "'y'"; effect = "<a-|>xclip -i -selection clipboard<ret>:echo copied selection to x11 clipboard<ret>"; docstring = "Yank to clipboard"; }
+        { mode = "user"; key = "'R'"; effect = "|xclip -o<ret>"; docstring = "Replace from clipboard"; }
+        { mode = "normal"; key = "'x'"; effect = ":extend-line-down %val{count}<ret>"; }
+        { mode = "normal"; key = "'X'"; effect = ":extend-line-up %val{count}<ret>"; }
       ];
       hooks = [
         { name = "WinSetOption"; option = "filetype=elm"; 
