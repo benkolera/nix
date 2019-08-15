@@ -154,6 +154,30 @@ in {
       colorScheme = "lucius";
       tabStop = 4;
       indentWidth = 2;
+      ui = {
+        enableMouse = true;
+        setTitle = false;
+      };
+      numberLines.enable = true;
+      showWhitespace.enable = true;
+      keyMappings = [
+        { mode = 'normal'; key = '<c-p>'; effect = ':fzf-mode<ret>'; }
+        { mode = 'normal'; key = '#'; effect = ':comment-line<ret>'; }
+        { mode = 'normal'; key = '<space>'; effect = ','; docstring = 'leader'; }
+        { mode = 'normal'; key = '<backspace>'; effect = '<space>'; docstring = 'remove all sels except main'; }
+        { mode = 'normal'; key = '<a-backspace>'; effect = '<a-space>'; docstring = 'remove main sel'; }
+        { mode = 'user'; key = 'p'; effect = '!xclip -o<ret>'; docstring = 'paste (after) from clipboard'; }
+        { mode = 'user'; key = 'P'; effect = '<a-!>xclip -o<ret>'; docstring = 'paste (before) from clipboard'; }
+        { mode = 'user'; key = 'y'; effect = '<a-|>xclip -i<ret>:echo --markup %%{{Information} copied selection to x11 clipboard}<ret>'; docstring = 'Yank to clipboard'; }
+        { mode = 'user'; key = 'R'; effect = '|xclip -o<ret>'; docstring = 'Replace from clipboard'; }
+        { mode = 'normal'; key = 'x'; effect = ':extend-line-down %val{count}<ret>'; }
+        { mode = 'normal'; key = 'X'; effect = ':extend-line-up %val{count}<ret>'; }
+      ];
+      hooks = [
+        { name = 'WinSetOption'; option = 'filetype=elm'; commands = [
+          "set window formatcmd 'elm-format --stdin'"
+        ];}  
+      ];
     };
     extraConfig = ''
 
@@ -167,9 +191,29 @@ in {
      source "${pkgs.kak-fzf}/rc/modules/fzf-project.kak"  
      source "${pkgs.kak-fzf}/rc/modules/VCS/fzf-git.kak" 
 
-     ${kakrc}
+     define-command mkdir %{ nop %sh{ mkdir -p $(dirname $kak_buffile) } }
+     set-option global grepcmd 'ag --column'
+     add-highlighter global/ show-matching
+
+     declare-option -hidden regex curword
+     set-face global CurWord default,rgb:4a4a4a
+
+     add-highlighter global/ dynregex '%opt{curword}' 0:CurWord
+     def -params 1 extend-line-down %{
+       exec "<a-:>%arg{1}X"
+     }
+     def -params 1 extend-line-up %{
+       exec "<a-:><a-;>%arg{1}K<a-;>"
+       try %{
+         exec -draft ';<a-K>\n<ret>'
+         exec X
+       }
+       exec '<a-;><a-X>'
+     }
+
      '';
   };
+
   programs.tmux = {
     enable = true;
     clock24 = true;
