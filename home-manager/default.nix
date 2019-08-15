@@ -160,6 +160,13 @@ in {
       };
       numberLines.enable = true;
       showWhitespace.enable = true;
+      keyMappings = [
+        { mode = "normal"; key = "<c-p>"; effect = ":fzf-mode<ret>"; }
+        { mode = "normal"; key = "#"; effect = ":comment-line<ret>"; }
+        { mode = "normal"; key = "<space>"; effect = ","; docstring = "leader"; }
+        { mode = "normal"; key = "<backspace>"; effect = "<space>"; docstring = "remove all sels except main"; }
+        { mode = "normal"; key = "<a-backspace>"; effect = "<a-space>"; docstring = "remove main sel"; }
+      ];
       hooks = [
         { name = "WinSetOption"; option = "filetype=elm"; 
           commands = "set window formatcmd 'elm-format --stdin'";
