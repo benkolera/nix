@@ -174,9 +174,9 @@ in {
         { mode = "normal"; key = "X"; effect = ":extend-line-up %val{count}<ret>"; }
       ];
       hooks = [
-        { name = "WinSetOption"; option = "filetype=elm"; commands = [
-          "set window formatcmd 'elm-format --stdin'"
-        ];}  
+        { name = "WinSetOption"; option = "filetype=elm"; 
+          commands = "set window formatcmd 'elm-format --stdin'";
+        }  
       ];
     };
     extraConfig = ''
