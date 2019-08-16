@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
   restart-taffybar = ''
     echo "Restarting taffybar..."
@@ -6,7 +6,19 @@ let
     $DRY_RUN_CMD systemctl --user restart taffybar.service && true
     echo "Taffybar restart done"
   '';
-  kakrc = builtins.readFile ./dotfiles/kakoune/kakrc;
+  kakFile = (parents: subpath: type: 
+    let path = "${parents}/${subpath}";
+    in 
+      if type == "directory" then allKakFiles path
+      else if type == "regular" && lib.hasSuffix ".kak" subpath then [path]
+      else [] 
+  );
+  allKakFiles = (dir: 
+    let files = builtins.readDir dir;
+    in lib.flatten (lib.mapAttrsToList (kakFile dir) files)
+  );
+  kakImport = name: ''source "${name}"'';
+  allKakImports = dir: builtins.concatStringsSep "\n" (map kakImport (allKakFiles dir));
 in {
   nixpkgs.overlays = [
     (import ./home-overlays/taffybar)
@@ -16,6 +28,7 @@ in {
     (import ./home-overlays/spacemacs)
     (import ./home-overlays/tmux-themepack)
     (import ./home-overlays/kak-fzf)
+    (import ./home-overlays/kak-powerline)
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -166,10 +179,10 @@ in {
         { mode = "normal"; key = "'<space>'"; effect = ","; docstring = "leader"; }
         { mode = "normal"; key = "'<backspace>'"; effect = "<space>"; docstring = "remove all sels except main"; }
         { mode = "normal"; key = "'<a-backspace>'"; effect = "<a-space>"; docstring = "remove main sel"; }
-        { mode = "user"; key = "'p'"; effect = "!xclip -o<ret>"; docstring = "paste (after) from clipboard"; }
-        { mode = "user"; key = "'P'"; effect = "<a-!>xclip -o<ret>"; docstring = "paste (before) from clipboard"; }
+        { mode = "user"; key = "'p'"; effect = "!xclip -o -selection<ret>"; docstring = "paste (after) from clipboard"; }
+        { mode = "user"; key = "'P'"; effect = "<a-!>xclip -o -selection<ret>"; docstring = "paste (before) from clipboard"; }
         { mode = "user"; key = "'y'"; effect = "<a-|>xclip -i -selection clipboard<ret>:echo copied selection to x11 clipboard<ret>"; docstring = "Yank to clipboard"; }
-        { mode = "user"; key = "'R'"; effect = "|xclip -o<ret>"; docstring = "Replace from clipboard"; }
+        { mode = "user"; key = "'R'"; effect = "|xclip -o -selection<ret>"; docstring = "Replace from clipboard"; }
         { mode = "normal"; key = "'x'"; effect = ":extend-line-down %val{count}<ret>"; }
         { mode = "normal"; key = "'X'"; effect = ":extend-line-up %val{count}<ret>"; }
       ];
@@ -180,16 +193,9 @@ in {
       ];
     };
     extraConfig = ''
-
-     source "${pkgs.kak-fzf}/rc/fzf.kak"
-     source "${pkgs.kak-fzf}/rc/modules/fzf-file.kak"   
-     source "${pkgs.kak-fzf}/rc/modules/fzf-buffer.kak" 
-     source "${pkgs.kak-fzf}/rc/modules/fzf-search.kak" 
-     source "${pkgs.kak-fzf}/rc/modules/fzf-cd.kak"     
-     source "${pkgs.kak-fzf}/rc/modules/fzf-ctags.kak"  
-     source "${pkgs.kak-fzf}/rc/modules/fzf-yank-ring.kak"  
-     source "${pkgs.kak-fzf}/rc/modules/fzf-project.kak"  
-     source "${pkgs.kak-fzf}/rc/modules/VCS/fzf-git.kak" 
+     
+     ${allKakImports pkgs.kak-fzf}
+     ${allKakImports pkgs.kak-powerline}
 
      define-command mkdir %{ nop %sh{ mkdir -p $(dirname $kak_buffile) } }
      set-option global grepcmd 'ag --column'
