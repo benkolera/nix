@@ -80,6 +80,7 @@ in {
     simplescreenrecorder
     slack
     xlockmore
+    tmate
     xsel
     xpdf
     xorg.xbacklight
