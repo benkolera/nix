@@ -165,7 +165,7 @@ in {
   programs.kakoune = {
     enable = true; 
     config = {
-      colorScheme = "lucius";
+      colorScheme = "zenburn";
       tabStop = 4;
       indentWidth = 2;
       ui = {
