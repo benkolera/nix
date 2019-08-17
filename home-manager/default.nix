@@ -189,7 +189,13 @@ in {
       hooks = [
         { name = "WinSetOption"; option = "filetype=elm"; 
           commands = "set window formatcmd 'elm-format --stdin'";
-        }  
+        }
+        { name = "KakBegin"; option = ".*";
+          commands = ''
+            echo "butts"
+            powerline-theme zenburn
+          '';
+        }
       ];
     };
     extraConfig = ''
