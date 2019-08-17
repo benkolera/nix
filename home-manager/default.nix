@@ -6,16 +6,15 @@ let
     $DRY_RUN_CMD systemctl --user restart taffybar.service && true
     echo "Taffybar restart done"
   '';
-  kakFile = (parents: subpath: type: 
-    let path = "${parents}/${subpath}";
-    in 
-      if type == "directory" then allKakFiles path
-      else if type == "regular" && lib.hasSuffix ".kak" subpath then [path]
-      else [] 
-  );
+  isKakFile = name: type: type == "regular" && lib.hasSuffix ".kak" name;
+  isDir     = name: type: type == "directory";
   allKakFiles = (dir: 
-    let files = builtins.readDir dir;
-    in lib.flatten (lib.mapAttrsToList (kakFile dir) files)
+    let fullPath = p: "${dir}/${p}";
+        files = builtins.readDir dir;
+        subdirs  = lib.concatMap (p: allKakFiles (fullPath p)) (lib.attrNames (lib.filterAttrs isDir files));
+        subfiles = builtins.map fullPath (lib.attrNames (lib.filterAttrs isKakFile files));
+    # This makes sure the most shallow files are loaded first
+    in (subfiles ++ subdirs)
   );
   kakImport = name: ''source "${name}"'';
   allKakImports = dir: builtins.concatStringsSep "\n" (map kakImport (allKakFiles dir));
