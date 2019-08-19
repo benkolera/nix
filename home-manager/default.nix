@@ -164,7 +164,7 @@ in {
   programs.kakoune = {
     enable = true; 
     config = {
-      colorScheme = "zenburn";
+      colorScheme = "lucius";
       tabStop = 4;
       indentWidth = 2;
       ui = {
@@ -190,10 +190,9 @@ in {
         { name = "WinSetOption"; option = "filetype=elm"; 
           commands = "set window formatcmd 'elm-format --stdin'";
         }
-        { name = "KakBegin"; option = ".*";
+        { name = "BufCreate"; option = ".*";
           commands = ''
-            echo "butts"
-            powerline-theme zenburn
+            powerline-theme github
           '';
         }
       ];
