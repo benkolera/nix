@@ -78,11 +78,13 @@ in {
     silver-searcher
     simplescreenrecorder
     slack
+    thunderbird
     xlockmore
     tmate
     xsel
     xpdf
     xorg.xbacklight
+    zoom-us
   ];
 
   home.file."bin" = { source = ./bin; recursive = true; };
