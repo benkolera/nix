@@ -192,11 +192,6 @@ in {
         { name = "WinSetOption"; option = "filetype=elm"; 
           commands = "set window formatcmd 'elm-format --stdin'";
         }
-        { name = "BufCreate"; option = ".*";
-          commands = ''
-            powerline-theme github
-          '';
-        }
       ];
     };
     extraConfig = ''
