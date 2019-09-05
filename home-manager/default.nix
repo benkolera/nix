@@ -190,7 +190,10 @@ in {
       ];
       hooks = [
         { name = "WinSetOption"; option = "filetype=elm"; 
-          commands = "set window formatcmd 'elm-format --stdin'";
+          commands = ''
+            set window formatcmd 'elm-format --stdin'
+            hook buffer BufWritePre .* %{format}
+          '';
         }
       ];
     };
