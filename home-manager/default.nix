@@ -249,6 +249,9 @@ in {
     userName = "Ben Kolera";
     userEmail = "ben.kolera@gmail.com";
     ignores = [];
+    signing = {
+      key = "B1E028581508635A";
+    };
     extraConfig = {
       commit = {
         template = "${config.home.homeDirectory}/.gitmessage";
