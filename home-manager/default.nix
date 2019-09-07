@@ -37,6 +37,7 @@ in {
     awscli
     cabal2nix
     cachix
+    brave
     dmenu
     gitAndTools.gitflow
     gimp
@@ -258,7 +259,7 @@ in {
   };
 
   programs.zathura.enable = true;
-
+  programs.gpg.enable = true;
   services.gpg-agent = {
     enable = true;
     defaultCacheTtl = 36000;
