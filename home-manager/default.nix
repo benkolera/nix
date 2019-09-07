@@ -191,11 +191,9 @@ in {
       ];
       hooks = [
         { name = "WinSetOption"; option = "filetype=elm"; 
-          commands = "set window formatcmd 'elm-format --stdin'";
-        }
-        { name = "BufCreate"; option = ".*";
           commands = ''
-            powerline-theme github
+            set window formatcmd 'elm-format --stdin'
+            hook buffer BufWritePre .* %{format}
           '';
         }
       ];
