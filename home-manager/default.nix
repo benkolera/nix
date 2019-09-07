@@ -251,6 +251,7 @@ in {
     ignores = [];
     signing = {
       key = "B1E028581508635A";
+      signByDefault = true;
     };
     extraConfig = {
       commit = {
