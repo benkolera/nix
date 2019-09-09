@@ -1,6 +1,10 @@
 { config, lib, pkgs, ... }:
 
 {
+  # This depends on something presetup and checked out! 
+  imports = [
+    /etc/nixos/obsidian  
+  ];
   boot.initrd.luks = {
     yubikeySupport = true;
     devices = [
