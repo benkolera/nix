@@ -35,9 +35,10 @@ in {
 
   home.packages = with pkgs; [
     awscli
+    brave
     cabal2nix
     cachix
-    brave
+    charles
     dmenu
     gitAndTools.gitflow
     gimp
