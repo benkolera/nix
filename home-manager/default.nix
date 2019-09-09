@@ -38,7 +38,6 @@ in {
     brave
     cabal2nix
     cachix
-    charles
     dmenu
     gitAndTools.gitflow
     gimp
