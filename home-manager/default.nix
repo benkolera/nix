@@ -136,7 +136,7 @@ in {
     keybindings = {
     };
     transparent = true;
-    shading = 80;
+    shading = 90;
   };
 
   programs.zsh = {
@@ -374,7 +374,7 @@ in {
   xresources.extraConfig = ''
   ! special
   *.foreground:   #c5c8c6
-  *.background:   #1d1f21
+  *.background:   #000
   *.cursorColor:  #c5c8c6
 
   ! black
