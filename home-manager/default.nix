@@ -165,7 +165,7 @@ in {
   programs.kakoune = {
     enable = true; 
     config = {
-      colorScheme = "lucius";
+      colorScheme = "zenburn";
       tabStop = 4;
       indentWidth = 2;
       ui = {
@@ -238,8 +238,10 @@ in {
       bind - split-window -v -c "#{pane_current_path}"
       set -gq status-utf8 on
       setw -g mouse on
+      set-option -s set-clipboard off
+      bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "xclip -se c -i" 
       set -sg escape-time 0
-      source-file "${pkgs.tmux-themepack}/powerline/default/blue.tmuxtheme"
+      source-file "${pkgs.tmux-themepack}/powerline/default/orange.tmuxtheme"
     '';
   };
   home.file.".gitmessage".source = ./dotfiles/git/gitmessage;
@@ -303,7 +305,7 @@ in {
   services.network-manager-applet.enable = true;
 
   services.redshift = {
-    enable = true;
+    enable = false;
     brightness.day = "1.0";
     brightness.night = "0.7";
     longitude  = "153.0251";
