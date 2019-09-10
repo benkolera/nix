@@ -134,11 +134,9 @@ in {
     enable = true;
     fonts = ["xft:Source Code Pro:size=11"];
     keybindings = {
-      "Shift-Control-C" = "eval:selection_to_clipboard";
-      "Shift-Control-V" = "eval:paste_clipboard";
     };
     transparent = true;
-    shading = 50;
+    shading = 80;
   };
 
   programs.zsh = {
@@ -240,6 +238,7 @@ in {
       bind - split-window -v -c "#{pane_current_path}"
       set -gq status-utf8 on
       setw -g mouse on
+      set -sg escape-time 0
       source-file "${pkgs.tmux-themepack}/powerline/default/blue.tmuxtheme"
     '';
   };
