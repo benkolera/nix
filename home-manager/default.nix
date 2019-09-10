@@ -135,7 +135,7 @@ in {
     fonts = ["xft:Source Code Pro:size=11"];
     keybindings = {
     };
-    transparent = true;
+    transparent = false;
     shading = 90;
   };
 
