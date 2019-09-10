@@ -374,7 +374,7 @@ in {
   xresources.extraConfig = ''
   ! special
   *.foreground:   #c5c8c6
-  *.background:   #000
+  *.background:   #000000
   *.cursorColor:  #c5c8c6
 
   ! black
