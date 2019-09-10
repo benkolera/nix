@@ -180,8 +180,8 @@ in {
         { mode = "normal"; key = "'<space>'"; effect = ","; docstring = "leader"; }
         { mode = "normal"; key = "'<backspace>'"; effect = "<space>"; docstring = "remove all sels except main"; }
         { mode = "normal"; key = "'<a-backspace>'"; effect = "<a-space>"; docstring = "remove main sel"; }
-        { mode = "user"; key = "'p'"; effect = "!xclip -o -selection<ret>"; docstring = "paste (after) from clipboard"; }
-        { mode = "user"; key = "'P'"; effect = "<a-!>xclip -o -selection<ret>"; docstring = "paste (before) from clipboard"; }
+        { mode = "user"; key = "'p'"; effect = "!xclip -o -selection clipboard<ret>"; docstring = "paste (after) from clipboard"; }
+        { mode = "user"; key = "'P'"; effect = "<a-!>xclip -o -selection clipboard<ret>"; docstring = "paste (before) from clipboard"; }
         { mode = "user"; key = "'y'"; effect = "<a-|>xclip -i -selection clipboard<ret>:echo copied selection to x11 clipboard<ret>"; docstring = "Yank to clipboard"; }
         { mode = "user"; key = "'R'"; effect = "|xclip -o -selection<ret>"; docstring = "Replace from clipboard"; }
         { mode = "normal"; key = "'x'"; effect = ":extend-line-down %val{count}<ret>"; }
