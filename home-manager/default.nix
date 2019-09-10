@@ -270,7 +270,6 @@ in {
     enableSshSupport = true;
   };
 
-  home.language.base = "en_au";
   home.file."backgrounds" = {
     source = ./backgrounds;
     recursive = true;
