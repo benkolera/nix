@@ -37,7 +37,7 @@ in {
     awscli
     brave
     cabal2nix
-    cachix
+    #cachix Cachix is busted for now
     dmenu
     gitAndTools.gitflow
     gimp
