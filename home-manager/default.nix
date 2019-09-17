@@ -93,7 +93,7 @@ in {
   home.sessionVariables = {
     EDITOR = "kak";
     VISUAL = "kak";
-    BROWSER = "firefox";
+    BROWSER = "brave";
   };
 
   programs.home-manager = {
