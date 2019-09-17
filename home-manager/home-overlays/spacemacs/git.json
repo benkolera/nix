@@ -1,7 +1,7 @@
 {
   "url": "https://github.com/syl20bnr/spacemacs.git",
-  "rev": "fba9447cfef900e4d955f45a424e0df27c40b2f7",
-  "date": "2019-08-06T23:38:53+02:00",
-  "sha256": "16p94i4s61492jkympsb0cjh8nqyg92dizns2hfxb87yjwzx8cz3",
+  "rev": "f42b2db568446131ba5a52a6c33bd0dabd40f478",
+  "date": "2019-09-16T22:30:43+02:00",
+  "sha256": "16nllcni0gzz1bf4c9mpwnhms0ndgxywyjmhnma0jv0hy56apn3s",
   "fetchSubmodules": false
 }
