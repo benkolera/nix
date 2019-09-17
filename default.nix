@@ -186,7 +186,7 @@ in {
   };
 
   virtualisation.virtualbox.host = {
-    enable = true;
+    enable = false;
     headless = false;
   };
 
