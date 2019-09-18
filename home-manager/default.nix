@@ -240,7 +240,8 @@ in {
       set -gq status-utf8 on
       setw -g mouse on
       set-option -s set-clipboard off
-      bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "xclip -se c -i" 
+      bind-key -T copy-mode MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "xclip -selection -i" 
+      bind-key -T copy-mode Enter send-keys -X copy-pipe-and-cancel "xclip -i" 
       set -sg escape-time 0
       source-file "${pkgs.tmux-themepack}/powerline/default/orange.tmuxtheme"
     '';
