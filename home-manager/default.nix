@@ -301,7 +301,7 @@ in {
   };
   services.taffybar.enable = true;
   services.status-notifier-watcher.enable = true;
-  services.blueman-applet.enable = true;
+  services.blueman-applet.enable = false;
   services.flameshot.enable = true;
   services.unclutter.enable = true;
   services.network-manager-applet.enable = true;
