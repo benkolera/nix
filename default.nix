@@ -170,8 +170,7 @@ in {
     xserver = {
       enable = true;
       layout = "us";
-      displayManager.lightdm.enable = false;
-      displayManager.slim.enable = false;
+      displayManager.slim.enable = true;
       libinput = {
         enable = true;
         naturalScrolling = true;
