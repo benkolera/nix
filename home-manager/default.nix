@@ -240,7 +240,7 @@ in {
                   break
                   ;;
               Linux)
-                  automate_cmd="sleep 0.2; ${pkgs.xdotool}/bin/xdotool type '$cli_cmd'; xdotool key Return"
+                  automate_cmd="sleep 0.2; ${pkgs.xdotool}/bin/xdotool type '$cli_cmd'; ${pkgs.xdotool}/bin/xdotool key Return"
                   kill_cmd="${pkgs.coreutils}/bin/kill"
                   break
                   ;;
