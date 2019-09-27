@@ -199,30 +199,47 @@ in {
     };
     extraConfig = ''
      
-     ${allKakImports pkgs.kak-fzf}
-     ${allKakImports pkgs.kak-powerline}
+      ${allKakImports pkgs.kak-fzf}
+      ${allKakImports pkgs.kak-powerline}
+ 
+      define-command mkdir %{ nop %sh{ mkdir -p $(dirname $kak_buffile) } }
+      set-option global grepcmd 'ag --column'
+      add-highlighter global/ show-matching
+ 
+      declare-option -hidden regex curword
+      set-face global CurWord default,rgb:4a4a4a
+ 
+      add-highlighter global/ dynregex '%opt{curword}' 0:CurWord
+      def -params 1 extend-line-down %{
+        exec "<a-:>%arg{1}X"
+      }
+      def -params 1 extend-line-up %{
+        exec "<a-:><a-;>%arg{1}K<a-;>"
+        try %{
+          exec -draft ';<a-K>\n<ret>'
+          exec X
+        }
+        exec '<a-;><a-X>'
+      }
+      def for-each-line \
+          -docstring "for-each-line <command> <path to file>: run command with the value of each line in the file" \
+          -params 2 \
+          %{ evaluate-commands %sh{
 
-     define-command mkdir %{ nop %sh{ mkdir -p $(dirname $kak_buffile) } }
-     set-option global grepcmd 'ag --column'
-     add-highlighter global/ show-matching
+          while read f; do
+              printf "$1 $f\n"
+          done < "$2"
+      }}
 
-     declare-option -hidden regex curword
-     set-face global CurWord default,rgb:4a4a4a
+      def toggle-ranger %{
+          suspend-and-resume \
+              "ranger --choosefiles=/tmp/ranger-files-%val{client_pid}" \
+              "for-each-line edit /tmp/ranger-files-%val{client_pid}"
+      }
 
-     add-highlighter global/ dynregex '%opt{curword}' 0:CurWord
-     def -params 1 extend-line-down %{
-       exec "<a-:>%arg{1}X"
-     }
-     def -params 1 extend-line-up %{
-       exec "<a-:><a-;>%arg{1}K<a-;>"
-       try %{
-         exec -draft ';<a-K>\n<ret>'
-         exec X
-       }
-       exec '<a-;><a-X>'
-     }
+      map global user r ': toggle-ranger<ret>' -docstring 'select files in ranger'
 
-     '';
+    '';
   };
 
   programs.tmux = {
