@@ -241,7 +241,7 @@ in {
                   ;;
               Linux)
                   automate_cmd="sleep 0.2; xdotool type '$cli_cmd'; xdotool key Return"
-                  kill_cmd="${pkgs.kill}"
+                  kill_cmd="kill"
                   break
                   ;;
           esac
