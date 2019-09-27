@@ -82,6 +82,7 @@ in {
     slack
     thunderbird
     xlockmore
+    tig
     tmate
     xsel
     xpdf
@@ -240,13 +241,13 @@ in {
                   ;;
               Linux)
                   automate_cmd="sleep 0.2; xdotool type '$cli_cmd'; xdotool key Return"
-                  kill_cmd="/usr/bin/kill"
+                  kill_cmd="${pkgs.kill}"
                   break
                   ;;
           esac
 
           # Uses platforms automation to schedule the typing of our cli command
-          nohup sh -c "$automate_cmd"  > /dev/null 2>&1 &
+          ${pkgs.nohup} sh -c "$automate_cmd"  > /dev/null 2>&1 &
           # Send kakoune client to the background
           $kill_cmd -SIGTSTP $kak_client_pid
 
@@ -259,13 +260,13 @@ in {
       }}
       def tig-blame -override -docstring 'Open blame in tig for current file and line' %{
           # Note here we aren't passing any command on resume of kakoune
-          suspend-and-resume "tig blame +%val{cursor_line} %val{buffile}" 
+          suspend-and-resume "${pkgs.tig} blame +%val{cursor_line} %val{buffile}" 
       }
 
       declare-user-mode tig
       map global tig b ': tig-blame<ret>' -docstring 'show blame (with tig)'
-      map global tig s ': suspend-and-resume "tig status"<ret>' -docstring 'show git status (with tig)'
-      map global tig m ': suspend-and-resume "tig"<ret>' -docstring 'show main view (with tig)'
+      map global tig s ': suspend-and-resume "${pkgs.tig} status"<ret>' -docstring 'show git status (with tig)'
+      map global tig m ': suspend-and-resume "${pkgs.tig}"<ret>' -docstring 'show main view (with tig)'
 
       map global user t ': enter-user-mode tig<ret>' -docstring 'tig commands'
 
@@ -281,7 +282,7 @@ in {
 
       def toggle-ranger %{
           suspend-and-resume \
-              "ranger --choosefiles=/tmp/ranger-files-%val{client_pid}" \
+              "${pkgs.ranger} --choosefiles=/tmp/ranger-files-%val{client_pid}" \
               "for-each-line edit /tmp/ranger-files-%val{client_pid}"
       }
 
