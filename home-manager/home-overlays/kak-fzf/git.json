@@ -1,7 +1,7 @@
 {
   "url": "https://github.com/andreyorst/fzf.kak.git",
-  "rev": "b257db0bf83d9e8a48676e2c98960622a21fa375",
-  "date": "2019-09-09T18:20:42+03:00",
-  "sha256": "1f3sgizwl51i9p69pqhbmdglxvb1ndgmv36rm835jw2p9p1sbi50",
+  "rev": "c6e894a033e36a8aee6bfa5eae540b1d28983adf",
+  "date": "2019-10-09T12:53:05+03:00",
+  "sha256": "1svvjv3fcqr8xmlc87r8dhs5kh3c2n4h4232fan5pdb68gr07452",
   "fetchSubmodules": false
 }
