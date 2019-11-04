@@ -212,6 +212,7 @@ in {
       define-command mkdir %{ nop %sh{ mkdir -p $(dirname $kak_buffile) } }
       set-option global grepcmd 'ag --column'
       add-highlighter global/ show-matching
+      add-highlighter global/ show-whitespaces
  
       declare-option -hidden regex curword
       set-face global CurWord default,rgb:4a4a4a
