@@ -196,6 +196,12 @@ in {
             hook buffer BufWritePre .* %{format}
           '';
         }
+        { name = "WinSetOption"; option = "filetype=haskell"; 
+          commands = ''
+            set window formatcmd 'stylish-haskell'
+            hook buffer BufWritePre .* %{format}
+          '';
+        }
       ];
     };
     extraConfig = ''
