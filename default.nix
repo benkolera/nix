@@ -24,6 +24,7 @@ in {
     binaryCaches = [
       "https://cache.nixos.org/"
       "https://cachix.cachix.org"
+      "http://nixcache.kadena.io"
       "https://nixcache.reflex-frp.org"
       "https://hydra.iohk.io"
       "http://hydra.qfpl.io"
@@ -38,6 +39,7 @@ in {
       "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "obsidian-tezos-kiln:WlSLNxlnEAdYvrwzxmNMTMrheSniCg6O4EhqCHsMvvo="
+      "kadena-cache.local-1:8wj8JW8V9tmc5bgNNyPM18DYNA1ws3X/MChXh1AQy/Q="
     ];
     trustedUsers = [ "root" "bkolera" ];
   };
