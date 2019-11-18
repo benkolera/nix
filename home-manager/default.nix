@@ -25,6 +25,7 @@ in {
     (import ./home-overlays/lorri)
     (import ./home-overlays/obelisk)
     (import ./home-overlays/spacemacs)
+    (import ./home-overlays/stylish-haskell)
     (import ./home-overlays/tmux-themepack)
     (import ./home-overlays/kak-fzf)
     (import ./home-overlays/kak-powerline)
@@ -52,7 +53,6 @@ in {
   ( with haskellPackages; [
     Agda
     ghcid
-    stylish-haskell
     xmobar
     yeganesh
   ]) ++ [
@@ -80,6 +80,7 @@ in {
     silver-searcher
     simplescreenrecorder
     slack
+    stylish-haskell
     thunderbird
     xlockmore
     tig
