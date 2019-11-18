@@ -72,3 +72,6 @@ language_extensions:
   - TypeOperators
   - TypeApplications
   - FunctionalDependencies
+  - FlexibleContexts
+  - TypeFamilies
+  - LambdaCase
