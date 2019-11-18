@@ -1,7 +1,7 @@
 self: super:
 let 
-  taffybar-json = builtins.fromJSON (builtins.readFile ./git.json);
-  taffybar-src  = builtins.fetchGit { inherit (taffybar-json) url rev; };
+  stylish-haskell-json = builtins.fromJSON (builtins.readFile ./git.json);
+  stylish-haskell-src  = builtins.fetchGit { inherit (stylish-haskell-json) url rev; };
 in {
-  stylish-haskell = self.haskellPackages.callCabal2nix taffybar-src "stylish-haskell" {};
+  stylish-haskell = self.haskellPackages.callCabal2nix "stylish-haskell" stylish-haskell-src {};
 }
