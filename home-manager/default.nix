@@ -1,11 +1,5 @@
 { config, pkgs, lib, ... }:
 let
-  restart-taffybar = ''
-    echo "Restarting taffybar..."
-    $DRY_RUN_CMD rm -fr $HOME/.cache/taffybar/
-    $DRY_RUN_CMD systemctl --user restart taffybar.service && true
-    echo "Taffybar restart done"
-  '';
   isKakFile = name: type: type == "regular" && lib.hasSuffix ".kak" name;
   isDir     = name: type: type == "directory";
   allKakFiles = (dir: 
@@ -20,7 +14,6 @@ let
   allKakImports = dir: builtins.concatStringsSep "\n" (map kakImport (allKakFiles dir));
 in {
   nixpkgs.overlays = [
-    (import ./home-overlays/taffybar)
     (import ./home-overlays/direnv)
     (import ./home-overlays/lorri)
     (import ./home-overlays/obelisk)
@@ -364,15 +357,6 @@ in {
   services.xembed-sni-proxy.enable = true;
 
   services.pasystray.enable = true;
-  home.file.".config/taffybar/taffybar.hs" = {
-    source = ./dotfiles/taffybar/taffybar.hs;
-    onChange = restart-taffybar;
-  };
-  home.file.".config/taffybar/taffybar.css" = {
-    source = ./dotfiles/taffybar/taffybar.css;
-    onChange = restart-taffybar;
-  };
-  services.taffybar.enable = true;
   services.status-notifier-watcher.enable = true;
   services.blueman-applet.enable = false;
   services.flameshot.enable = true;
