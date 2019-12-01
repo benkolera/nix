@@ -53,7 +53,7 @@ in {
     jq
     keepassx
     libreoffice
-    ledger-live-desktop
+    #ledger-live-desktop
     lorri
     libpqxx
     nixops
