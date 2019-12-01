@@ -1,7 +1,7 @@
 {
   "url": "https://github.com/andreyorst/powerline.kak.git",
-  "rev": "82b01eb6c97c7380b7da253db1fd484a5de13ea4",
-  "date": "2019-07-23T09:03:19+03:00",
-  "sha256": "1480wp2jc7c84z1wqmpf09lzny6kbnbhiiym2ffaddxrd4ns9i6z",
+  "rev": "6f446271df91b00efb121abb519f84c4157849e3",
+  "date": "2019-11-18T09:20:04+03:00",
+  "sha256": "0jwbzn0f935l2zy55nkhwmkh8vqv1vd30yh0d1ci4ms7ri1if3hk",
   "fetchSubmodules": false
 }

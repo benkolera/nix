@@ -1,7 +1,7 @@
 {
   "url": "https://github.com/obsidiansystems/obelisk.git",
-  "rev": "66a78621da05d6ded1cd849466de7623d94ee2ca",
-  "date": "2019-10-28T10:36:21-04:00",
-  "sha256": "0zfmq5yaqricxxs0cccr193dslh1jak5azyh8yd3axqhpz2wi792",
+  "rev": "81c31de7c10f6aef164efc2b231b6dcb8dbfefab",
+  "date": "2019-11-28T19:15:18-05:00",
+  "sha256": "0rz48fmy9jlwkdsiy1rdmhdkm03dlcy31hhmf54zz4c0czqvm1fc",
   "fetchSubmodules": false
 }
