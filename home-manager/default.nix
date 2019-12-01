@@ -86,7 +86,6 @@ in {
     tig
     tmate
     xsel
-    xpdf
     xorg.xbacklight
     zoom-us
   ];
