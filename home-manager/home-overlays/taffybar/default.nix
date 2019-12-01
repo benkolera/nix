@@ -10,8 +10,9 @@ let
     haskellPackages = pkgs.haskellPackages.override (old: {
       overrides = pkgs.lib.composeExtensions (old.overrides or (_: _: {})) (self: super: {
         taffybar = self.callCabal2nix "taffybar" taffybar-src { inherit (pkgs) gtk3; };
-        gi-xlib = self.callHackage "gi-xlib" "2.0.7" {};
+        # gi-xlib = self.callHackage "gi-xlib" "2.0.7" {};
       });
     });
   };
-in super.lib.composeExtensions taffybar-overlay (import "${taffybar-src}/environment.nix") self super
+in taffybar-overlay 
+# super.lib.composeExtensions taffybar-overlay (import "${taffybar-src}/environment.nix") self super
