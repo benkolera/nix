@@ -345,6 +345,9 @@ in {
     defaultCacheTtlSsh = 36000;
     maxCacheTtlSsh = 36000;
     enableSshSupport = true;
+    extraConfig = ''
+      pinentry-program ${pkgs.pinentry-gnome}/bin/pinentry-gnome3
+    '';
   };
 
   home.file."backgrounds" = {
