@@ -346,7 +346,7 @@ in {
     maxCacheTtlSsh = 36000;
     enableSshSupport = true;
     extraConfig = ''
-      pinentry-program ${pkgs.pinentry-gnome}/bin/pinentry-gnome3
+      pinentry-program ${pkgs.pinentry-qt}/bin/pinentry
     '';
   };
 
