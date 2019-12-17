@@ -45,7 +45,7 @@ in {
   };
   hardware.bluetooth = {
     enable = true;
-    extraConfig = "
+    config = "
       [General]
       Enable=Source,Sink,Media,Socket
     ";
