@@ -22,7 +22,6 @@ in {
   nixpkgs.overlays = [
     (import ./home-overlays/taffybar)
     (import ./home-overlays/direnv)
-    (import ./home-overlays/lorri)
     (import ./home-overlays/obelisk)
     (import ./home-overlays/spacemacs)
     (import ./home-overlays/stylish-haskell)
@@ -61,7 +60,6 @@ in {
     keepassx
     libreoffice
     #ledger-live-desktop
-    lorri
     libpqxx
     nixops
     nodejs
@@ -354,6 +352,7 @@ in {
     source = ./backgrounds;
     recursive = true;
   };
+  services.lorri.enable = true;
   services.random-background = {
     enable = true;
     imageDirectory = "%h/backgrounds";
