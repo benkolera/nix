@@ -45,10 +45,11 @@ in {
   };
   hardware.bluetooth = {
     enable = true;
-    config = "
-      [General]
-      Enable=Source,Sink,Media,Socket
-    ";
+    config = {
+      General = {
+        Enable="Source,Sink,Media,Socket";
+      };
+    };
   };
 
   hardware.pulseaudio = {
