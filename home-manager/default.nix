@@ -46,8 +46,8 @@ in {
     goimports
     gogetdoc
     epiphany
-    elmPackages.elm
-    elmPackages.elm-format
+    #elmPackages.elm
+    #elmPackages.elm-format
   ]++
   ( with haskellPackages; [
     Agda
