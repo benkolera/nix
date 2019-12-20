@@ -59,7 +59,7 @@ in {
     jq
     keepassx
     libreoffice
-    #ledger-live-desktop
+    ledger-live-desktop
     libpqxx
     nixops
     nodejs
