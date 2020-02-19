@@ -4,6 +4,7 @@
   # This depends on something presetup and checked out! 
   imports = [
     /etc/nixos/obsidian  
+    /etc/nixos/private
   ];
   boot.initrd.luks = {
     yubikeySupport = true;
