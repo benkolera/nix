@@ -347,6 +347,10 @@ in {
       pinentry-program ${pkgs.pinentry-qt}/bin/pinentry
     '';
   };
+  services.gnome-keyring = {
+    enable = true;
+    components = ["secrets"];
+  };
 
   home.file."backgrounds" = {
     source = ./backgrounds;
