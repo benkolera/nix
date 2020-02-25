@@ -245,9 +245,15 @@ in {
       declare-user-mode tig
       map global tig m ': repl "${pkgs.tig}/bin/tig"<ret>' -docstring 'show main view (with tig)'
 
-      map global user t ': enter-user-mode tig<ret>' -docstring 'tig commands'
+      declare-user-mode kaktree
+      map global kaktree t ': kaktree-toggle<ret>' -docstring 'Toggle kaktree'
+      map global kaktree f ': kaktree-focus<ret>' -docstring 'Focus kaktree'
+
+      map global user g ': enter-user-mode tig<ret>' -docstring 'tig commands'
 
       map global user r ': repl ranger<ret>' -docstring 'select files in ranger'
+      
+      map global user t ': kaktree-<ret>' -docstring 'select files in ranger'
 
     '';
   };
