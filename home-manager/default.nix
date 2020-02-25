@@ -28,6 +28,7 @@ in {
     (import ./home-overlays/tmux-themepack)
     (import ./home-overlays/kak-fzf)
     (import ./home-overlays/kak-powerline)
+    (import ./home-overlays/kaktree)
   ];
 
   nixpkgs.config.allowUnfree = true;
