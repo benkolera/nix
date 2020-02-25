@@ -253,7 +253,7 @@ in {
 
       map global user r ': repl ranger<ret>' -docstring 'select files in ranger'
       
-      map global user t ': kaktree-<ret>' -docstring 'select files in ranger'
+      map global user t ': enter-user-mode kaktree<ret>' -docstring 'kaktree commands'
 
     '';
   };
