@@ -4,8 +4,8 @@
 
 import System.IO
 import System.Exit
--- import System.Taffybar.Support.PagerHints (pagerHints)
 import XMonad
+import XMonad.Config.Xfce
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops (ewmh)
@@ -332,7 +332,7 @@ myStartupHook = return ()
 -- Run xmonad with all the defaults we set up.
 --
 main = do
-  xmonad . docks . ewmh $ defaults {
+  xmonad $ defaults {
     startupHook = setWMName "LG3D"
   }
 
@@ -344,7 +344,7 @@ main = do
 --
 -- No need to modify this.
 --
-defaults = defaultConfig {
+defaults = xfceConfig {
     -- simple stuff
     terminal           = myTerminal,
     focusFollowsMouse  = myFocusFollowsMouse,
