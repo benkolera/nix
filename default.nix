@@ -83,14 +83,12 @@ in {
   };
 
 
-  i18n = {
-    consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "us";
-    defaultLocale = "en_US.UTF-8";
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "us";
   };
-
+  i18n.defaultLocale = "en_US.UTF-8";
   time.timeZone = "Australia/Brisbane";
-
 
   environment.systemPackages = with pkgs; [
     aspell
@@ -141,24 +139,6 @@ in {
       '';
     };
     dbus.packages = [ pkgs.blueman ];
-    smokeping = {
-      enable = true;
-      targetConfig = ''
-          probe = FPing
-          menu = Top
-          title = Network Latency Grapher
-          remark = Welcome to the SmokePing website of xxx Company. \
-                   Here you will learn all about the latency of our network.
-          + FPing
-          menu = FPing
-          title = FPing
-          ++ Google
-          menu = Google
-          title = Google
-          host = google.com
-      '';
-    };
-
     udev.extraRules = ''
       SUBSYSTEMS=="usb", ATTRS{idVendor}=="2581", ATTRS{idProduct}=="1b7c", MODE="0660", GROUP="users"
       SUBSYSTEMS=="usb", ATTRS{idVendor}=="2581", ATTRS{idProduct}=="2b7c", MODE="0660", GROUP="users"
@@ -175,7 +155,7 @@ in {
       layout = "us";
       displayManager.lightdm.enable = true;
       desktopManager = {
-        default = "xfce";
+        defaultSession = "xfce";
         xterm.enable = false;
         xfce = {
           enable = true;
