@@ -206,15 +206,6 @@ in {
             remove-highlighter buffer/show-whitespaces
           '';
         }
-        { name = "ModuleLoaded"; option = "kaktree";
-          commands = ''
-            set-option global kaktree_double_click_duration '0.5'
-            set-option global kaktree_indentation 1
-            set-option global kaktree_dir_icon_open  '▾ 🗁 '
-            set-option global kaktree_dir_icon_close '▸ 🗀 '
-            set-option global kaktree_file_icon      '⠀⠀🖺'
-          '';
-        }
       ];
     };
     extraConfig = ''
@@ -223,6 +214,13 @@ in {
       ${allKakImports pkgs.kak-powerline}
       ${allKakImports pkgs.kaktree}
       kaktree-enable
+      hook global ModuleLoaded kaktree %{
+        set-option global kaktree_double_click_duration '0.5'
+        set-option global kaktree_indentation 1
+        set-option global kaktree_dir_icon_open  '▾ 🗁 '
+        set-option global kaktree_dir_icon_close '▸ 🗀 '
+        set-option global kaktree_file_icon      '⠀⠀🖺'
+      }
       define-command mkdir %{ nop %sh{ mkdir -p $(dirname $kak_buffile) } }
       set-option global grepcmd 'ag --column'
       add-highlighter global/ show-matching
