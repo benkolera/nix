@@ -29,6 +29,7 @@ in {
     (import ./home-overlays/kak-fzf)
     (import ./home-overlays/kak-powerline)
     (import ./home-overlays/kaktree)
+    (import ./home-overlays/kakoune)
   ];
 
   nixpkgs.config.allowUnfree = true;
