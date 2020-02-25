@@ -153,9 +153,11 @@ in {
     xserver = {
       enable = true;
       layout = "us";
-      displayManager.lightdm.enable = true;
-      desktopManager = {
+      displayManager = {
+        lightdm.enable = true;
         defaultSession = "xfce";
+      };
+      desktopManager = {
         xterm.enable = false;
         xfce = {
           enable = true;
