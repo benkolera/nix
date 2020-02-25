@@ -8,9 +8,8 @@
   ];
   boot.initrd.luks = {
     yubikeySupport = true;
-    devices = [
-      {
-        name = "linux";
+    devices = {
+      linux = {
         device = "/dev/nvme0n1p3";
         preLVM = true;
         allowDiscards = true;
@@ -22,7 +21,7 @@
           };
         };
       }
-    ];
+    };
   };
   
   fonts.fontconfig.dpi = 82;
