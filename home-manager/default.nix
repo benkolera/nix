@@ -20,7 +20,7 @@ let
   allKakImports = dir: builtins.concatStringsSep "\n" (map kakImport (allKakFiles dir));
 in {
   nixpkgs.overlays = [
-#    (import ./home-overlays/taffybar)
+    (import ./home-overlays/haskell-gtk.nix)
     (import ./home-overlays/direnv)
     (import ./home-overlays/obelisk)
     (import ./home-overlays/spacemacs)
