@@ -4,7 +4,7 @@
 
 import System.IO
 import System.Exit
-import System.Taffybar.Support.PagerHints (pagerHints)
+-- import System.Taffybar.Support.PagerHints (pagerHints)
 import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
@@ -28,7 +28,7 @@ import qualified Data.Map        as M
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
-myTerminal = "urxvt"
+myTerminal = "xfce4-terminal"
 
 -- The command to eock the screen or show the screensaver.
 myScreensaver = "xlock -mode blank"
@@ -332,7 +332,7 @@ myStartupHook = return ()
 -- Run xmonad with all the defaults we set up.
 --
 main = do
-  xmonad . docks . ewmh . pagerHints $ defaults {
+  xmonad . docks . ewmh $ defaults {
     startupHook = setWMName "LG3D"
   }
 
