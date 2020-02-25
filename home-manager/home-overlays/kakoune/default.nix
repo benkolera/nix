@@ -28,5 +28,5 @@ let
     '';
   };
 in {
-  kakoune = super.wrapKakoune kakoune-unwrapped;
+  kakoune = kakoune-unwrapped;
 }
