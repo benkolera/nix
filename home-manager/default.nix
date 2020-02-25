@@ -66,7 +66,8 @@ in {
     nodejs
     nodePackages.npm
     obelisk.command
-    openshot-qt
+    # Busted as of 2020-02-25
+    #openshot-qt
     p7zip
     pandoc
     pavucontrol
