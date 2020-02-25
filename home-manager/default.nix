@@ -20,7 +20,7 @@ let
   allKakImports = dir: builtins.concatStringsSep "\n" (map kakImport (allKakFiles dir));
 in {
   nixpkgs.overlays = [
-    (import ./home-overlays/taffybar)
+#    (import ./home-overlays/taffybar)
     (import ./home-overlays/direnv)
     (import ./home-overlays/obelisk)
     (import ./home-overlays/spacemacs)
@@ -115,10 +115,6 @@ in {
   '';
   home.file.".emacs.d" = {
     source = pkgs.spacemacs;
-    recursive = true;
-  };
-  home.file.".emacs.d/private/bkolera-org" = {
-    source = ./dotfiles/emacs/layers/bkolera-org;
     recursive = true;
   };
   programs.emacs = {
@@ -290,11 +286,6 @@ in {
       pinentry-program ${pkgs.pinentry-qt}/bin/pinentry
     '';
   };
-  services.gnome-keyring = {
-    enable = true;
-    components = ["secrets"];
-  };
-
   home.file."backgrounds" = {
     source = ./backgrounds;
     recursive = true;
@@ -310,19 +301,6 @@ in {
     inactiveInterval = 10;
   };
 
-  services.xembed-sni-proxy.enable = true;
-
-  services.pasystray.enable = true;
-  home.file.".config/taffybar/taffybar.hs" = {
-    source = ./dotfiles/taffybar/taffybar.hs;
-    onChange = restart-taffybar;
-  };
-  home.file.".config/taffybar/taffybar.css" = {
-    source = ./dotfiles/taffybar/taffybar.css;
-    onChange = restart-taffybar;
-  };
-  services.taffybar.enable = true;
-  services.status-notifier-watcher.enable = true;
   services.blueman-applet.enable = false;
   services.flameshot.enable = true;
   services.unclutter.enable = true;

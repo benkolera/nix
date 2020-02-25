@@ -174,6 +174,15 @@ in {
       enable = true;
       layout = "us";
       displayManager.lightdm.enable = true;
+      desktopManager = {
+        default = "xfce";
+        xterm.enable = false;
+        xfce = {
+          enable = true;
+          noDesktop = true;
+          enableXfwm = false;
+        };
+      };
       libinput = {
         enable = true;
         naturalScrolling = true;
