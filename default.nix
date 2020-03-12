@@ -129,6 +129,7 @@ in {
     upower.enable = true;
     openssh.enable = true;
     printing.enable = true;
+    memcached.enable = true;
     devmon.enable = true;
     postgresql = {
       enable = true;
