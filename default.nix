@@ -156,19 +156,10 @@ in {
       layout = "us";
       displayManager = {
         lightdm.enable = true;
-        defaultSession = "xfce";
-      };
-      desktopManager = {
-        xterm.enable = false;
-        xfce = {
-          enable = true;
-          noDesktop = false;
-          enableXfwm = false;
-        };
       };
       libinput = {
         enable = true;
-        naturalScrolling = true;
+        naturalScrolling = false;
       };
     };
   };

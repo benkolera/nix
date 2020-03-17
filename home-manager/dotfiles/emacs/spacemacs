@@ -43,7 +43,7 @@ This function should only modify configuration layer settings."
      elm
      emacs-lisp
      git
-     (haskell :variables haskell-completion-backend 'lsp)
+     haskell
      helm
      html
      javascript
@@ -75,7 +75,7 @@ This function should only modify configuration layer settings."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(nix-sandbox direnv)
+   dotspacemacs-additional-packages '()
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
@@ -360,7 +360,7 @@ It should only modify the values of Spacemacs settings."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers t
 
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
@@ -485,7 +485,6 @@ you should place your code here."
   (setq org-display-inline-images t)
   (setq org-directory "~/org")
   (direnv-mode)
-  (add-hook 'haskell-mode-hook #'lsp)
   (when (file-exists-p custom-file)
     (load-file custom-file))
 
