@@ -93,8 +93,8 @@ in {
 
   home.file."bin" = { source = ./bin; recursive = true; };
   home.sessionVariables = {
-    EDITOR = "kak";
-    VISUAL = "kak";
+    EDITOR = "vim";
+    VISUAL = "vim";
     BROWSER = "brave";
   };
 
@@ -326,6 +326,7 @@ in {
 
   services.blueman-applet.enable = false;
   services.flameshot.enable = true;
+  services.polybar.enable = true;
   services.unclutter.enable = true;
   services.network-manager-applet.enable = true;
 
@@ -392,7 +393,6 @@ in {
       enableContribAndExtras = true;
       extraPackages = hpkgs: [
         hpkgs.xmonad-contrib
-        #hpkgs.taffybar
       ];
       config = ./dotfiles/xmonad/xmonad.hs;
     };
