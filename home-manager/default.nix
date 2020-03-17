@@ -86,6 +86,7 @@ in {
     xlockmore
     tig
     tmate
+    xfce4-terminal
     xsel
     xorg.xbacklight
     zoom-us
@@ -326,7 +327,6 @@ in {
 
   services.blueman-applet.enable = false;
   services.flameshot.enable = true;
-  services.polybar.enable = true;
   services.unclutter.enable = true;
   services.network-manager-applet.enable = true;
 

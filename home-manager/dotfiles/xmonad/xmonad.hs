@@ -5,7 +5,6 @@
 import System.IO
 import System.Exit
 import XMonad
-import XMonad.Config.Xfce
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops (ewmh)
@@ -332,9 +331,16 @@ myStartupHook = return ()
 -- Run xmonad with all the defaults we set up.
 --
 main = do
-  xmonad $ defaults {
-    startupHook = setWMName "LG3D"
-  }
+  xmproc <- spawnPipe ("xmobar " ++ myXmobarrc)
+  xmonad . docks . ewmh $ defaults
+    { startupHook = setWMName "LG3D"
+    , logHook = dynamicLogWithPP $ xmobarPP
+      { ppOutput = hPutStrLn xmproc
+      , ppTitle = xmobarColor xmobarTitleColor "" . shorten 100
+      , ppCurrent = xmobarColor xmobarCurrentWorkspaceColor ""
+      , ppSep = "   "
+      }
+    }
 
 ------------------------------------------------------------------------
 -- Combine it all together
@@ -344,7 +350,7 @@ main = do
 --
 -- No need to modify this.
 --
-defaults = xfceConfig {
+defaults = defaultConfig {
     -- simple stuff
     terminal           = myTerminal,
     focusFollowsMouse  = myFocusFollowsMouse,
