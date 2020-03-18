@@ -47,7 +47,6 @@ This function should only modify configuration layer settings."
      helm
      html
      javascript
-     lsp
      markdown
      multiple-cursors
      nixos
@@ -484,7 +483,6 @@ you should place your code here."
   (setq fci-rule-column 110)
   (setq org-display-inline-images t)
   (setq org-directory "~/org")
-  (direnv-mode)
   (when (file-exists-p custom-file)
     (load-file custom-file))
 
