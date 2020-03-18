@@ -86,7 +86,6 @@ in {
     xlockmore
     tig
     tmate
-    xfce4-terminal
     xsel
     xorg.xbacklight
     zoom-us
@@ -103,6 +102,51 @@ in {
     enable = true;
   };
 
+  programs.alacritty = {
+    enable = true;
+    settings = {
+      window = {
+        padding = {
+          x = 2;
+          y = 2;
+        };
+        startup_mode = Fullscreen;
+      };
+      font = {
+        normal = {
+          family = "Source Code Pro";
+          size = 11.0;
+        };
+      };
+      colors = {
+        primary = {
+          background = "0x282a36";
+          foreground = "0xf8f8f2";
+        };
+        normal = {
+          black = "0x000000";
+          red = "0xff5555";
+          green = "0x50fa7b";
+          yellow = "0xf1fa8c";
+          blue = "0xcaa9fa";
+          magenta = "0xff79c6";
+          cyan = "0x8be9fd";
+          white = "0xbfbfbf";
+        };
+      
+        bright = {
+          black = "0x282a35";
+          red = "0xff6e67";
+          green = "0x5af78e";
+          yellow = "0xf4f99d";
+          blue = "0xcaa9fa";
+          magenta = "0xff92d0";
+          cyan = "0x9aedfe";
+          white = "0xe6e6e6";
+        };
+      };
+    };
+  };
   programs.direnv.enable = true;
   programs.chromium.enable = true;
   programs.firefox.enable = true;
