@@ -63,7 +63,7 @@ This function should only modify configuration layer settings."
              shell-default-position 'bottom)
      sql
      spell-checking
-     scala
+     (scala :variables scala-backend 'scala-metals)
      treemacs
      typescript
      version-control
