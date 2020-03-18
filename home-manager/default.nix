@@ -110,7 +110,7 @@ in {
           x = 2;
           y = 2;
         };
-        startup_mode = Fullscreen;
+        startup_mode = "Fullscreen";
       };
       font = {
         normal = {
