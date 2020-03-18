@@ -430,6 +430,7 @@ in {
     };
   };
 
+  home.file.".xmonad/xmobar.hs".source = ./dotfiles/xmonad/xmobar.hs;
   xsession = {
     enable = true;
     windowManager.xmonad = {
