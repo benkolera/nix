@@ -27,7 +27,7 @@ import qualified Data.Map        as M
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
-myTerminal = "xfce4-terminal"
+myTerminal = "alacritty"
 
 -- The command to eock the screen or show the screensaver.
 myScreensaver = "xlock -mode blank"
