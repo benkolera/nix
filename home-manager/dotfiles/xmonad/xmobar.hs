@@ -1,6 +1,6 @@
 Config {
     position = Top,
-    font = "xft:Source Code Pro:size=10:antialias=true",
+    font = "xft:Source Code Pro:size=11:antialias=true",
     bgColor = "#111111",
     fgColor = "#ffffff",
     lowerOnStart = True,
@@ -16,9 +16,9 @@ Config {
         , Run Battery [ "--template" , "Batt: <acstatus>"
                       , "--Low"      , "10"        -- units: %
                       , "--High"     , "80"        -- units: %
-                      , "--low"      , "darkred"
-                      , "--normal"   , "darkorange"
-                      , "--high"     , "darkgreen"
+                      , "--low"      , "red"
+                      , "--normal"   , "orange"
+                      , "--high"     , "green"
 
                       , "--" -- battery specific options
                             -- discharging status
