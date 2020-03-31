@@ -51,7 +51,6 @@ in {
     #elmPackages.elm-format
   ]++
   ( with haskellPackages; [
-    Agda
     ghcid
     xmobar
     yeganesh
