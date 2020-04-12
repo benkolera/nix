@@ -368,9 +368,12 @@ in {
   services.flameshot.enable = true;
   services.unclutter.enable = true;
   services.network-manager-applet.enable = true;
+  services.rsibreak.enable = true;
+  services.stalonetray.enable = true;
+
 
   services.redshift = {
-    enable = false;
+    enable = true;
     brightness.day = "1.0";
     brightness.night = "0.7";
     longitude  = "153.0251";
