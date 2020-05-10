@@ -86,8 +86,8 @@ in {
       };
       font = {
         normal = {
-          family = "Source Code Pro";
-          size = 11.0;
+          family = "Inconsolata";
+          size = 12.0;
         };
       };
       colors = {
