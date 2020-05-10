@@ -87,8 +87,8 @@ in {
       font = {
         normal = {
           family = "Inconsolata";
-          size = 12.0;
         };
+        size = 14;
       };
       colors = {
         primary = {
@@ -289,14 +289,14 @@ in {
     enable = true;
     settings = {
       global = {
-        font = "Source Code Pro";
+        font = "Inconsolata";
         markup = "full";
         format = "<b>%s</b>\\n%b";
         icon_position = "left";
         sort = true;
         alignment = "center";
         geometry = "500x60-15+49";
-        browser = "/usr/bin/firefox -new-tab";
+        browser = "firefox -new-tab";
         transparency = 10;
         word_wrap = true;
         show_indicators = false;
