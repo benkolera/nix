@@ -290,8 +290,12 @@
 (use-package treemacs
   :defer 0.1
   :config
+  (defun treemacs-ignore-flymake (file _)
+    (string-match-p (regexp-quote "_flymake\..+") file))
+  (push #'treemacs-ignore-flymake treemacs-ignored-file-predicates)
   (treemacs-follow-mode)
   )
+
 (use-package treemacs-evil
   :after (treemacs evil)
   )
