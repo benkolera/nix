@@ -1,45 +1,24 @@
 { config, pkgs, lib, ... }:
 let
-  restart-taffybar = ''
-    echo "Restarting taffybar..."
-    $DRY_RUN_CMD rm -fr $HOME/.cache/taffybar/
-    $DRY_RUN_CMD systemctl --user restart taffybar.service && true
-    echo "Taffybar restart done"
-  '';
-  isKakFile = name: type: type == "regular" && lib.hasSuffix ".kak" name;
-  isDir     = name: type: type == "directory";
-  allKakFiles = (dir: 
-    let fullPath = p: "${dir}/${p}";
-        files = builtins.readDir dir;
-        subdirs  = lib.concatMap (p: allKakFiles (fullPath p)) (lib.attrNames (lib.filterAttrs isDir files));
-        subfiles = builtins.map fullPath (lib.attrNames (lib.filterAttrs isKakFile files));
-    # This makes sure the most shallow files are loaded first
-    in (subfiles ++ subdirs)
-  );
-  kakImport = name: ''source "${name}"'';
-  allKakImports = dir: builtins.concatStringsSep "\n" (map kakImport (allKakFiles dir));
 in {
   nixpkgs.overlays = [
     (import ./home-overlays/haskell-gtk.nix)
     (import ./home-overlays/direnv)
     (import ./home-overlays/obelisk)
-    (import ./home-overlays/spacemacs)
     (import ./home-overlays/tmux-themepack)
-    (import ./home-overlays/kak-fzf)
-    (import ./home-overlays/kak-powerline)
-    (import ./home-overlays/kaktree)
-    (import ./home-overlays/kakoune)
   ];
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowBroken = true;
 
   home.packages = with pkgs; [
+    aws-okta
+    aws-vault
     awscli
     brave
     cabal2nix
-    #cachix Cachix is busted for now
     dmenu
+    glances
     gitAndTools.gitflow
     gimp
     ghostscript
@@ -47,8 +26,7 @@ in {
     goimports
     gogetdoc
     epiphany
-    #elmPackages.elm
-    #elmPackages.elm-format
+    feh
   ]++
   ( with haskellPackages; [
     ghcid
@@ -57,23 +35,20 @@ in {
   ]) ++ [
     inkscape
     jq
-    keepassx
     libreoffice
-    # ledger-live-desktop
-    libpqxx
+    metals
     nixops
+    niv
     nodejs
     nodePackages.npm
     obelisk.command
-    # Busted as of 2020-02-25
-    #openshot-qt
     p7zip
-    pandoc
     pavucontrol
     python3
-    python3Packages.grip
     ranger
+    rescuetime
     rfkill
+    ripgrep
     sbt
     signal-desktop
     silver-searcher
@@ -81,10 +56,10 @@ in {
     slack
     thunderbird
     xlockmore
-    tig
     tmate
     xsel
     xorg.xbacklight
+    xorg.xkill
     zoom-us
   ];
 
@@ -92,7 +67,7 @@ in {
   home.sessionVariables = {
     EDITOR = "vim";
     VISUAL = "vim";
-    BROWSER = "brave";
+    BROWSER = "firefox";
   };
 
   programs.home-manager = {
@@ -130,7 +105,7 @@ in {
           cyan = "0x8be9fd";
           white = "0xbfbfbf";
         };
-      
+
         bright = {
           black = "0x282a35";
           red = "0xff6e67";
@@ -148,36 +123,64 @@ in {
   programs.chromium.enable = true;
   programs.firefox.enable = true;
 
-  home.file.".spacemacs".source = ./dotfiles/emacs/spacemacs;
-  home.activation.checkoutOrg = config.lib.dag.entryAfter [ "writeBoundary" ] ''
-    FOLDER="$HOME/org";
-    if [ ! -d "$FOLDER" ] ; then
-      git clone "git@github.com:benkolera/org" "$FOLDER"
-    fi
-  '';
-  home.file.".emacs.d" = {
-    source = pkgs.spacemacs;
-    recursive = true;
-  };
   programs.emacs = {
     enable  = true;
     package = pkgs.emacs.override { inherit (pkgs) imagemagick; };
-    extraPackages = epkgs: with epkgs; [pdf-tools];
+    extraPackages = epkgs: with epkgs; [ 
+      adaptive-wrap
+      all-the-icons-ivy
+      avy
+      company
+      counsel
+      counsel-projectile
+      dashboard
+      deadgrep
+      direnv
+      doom-modeline
+      doom-themes
+      eglot
+      evil
+      evil-collection
+      evil-leader
+      evil-exchange
+      evil-magit
+      evil-matchit
+      evil-numbers
+      evil-surround
+      evil-visualstar
+      fill-column-indicator
+      git-gutter
+      git-gutter-fringe
+      golden-ratio
+      haskell-mode
+      ivy
+      ivy-rich
+      magit
+      nix-mode
+      pdf-tools 
+      projectile
+      rainbow-delimiters
+      ranger
+      swiper
+      scala-mode
+      treemacs
+      treemacs-projectile
+      treemacs-evil
+      undo-tree
+      use-package
+      use-package-ensure-system-package
+      visual-fill-column
+      which-key
+      ];
   };
+  services.emacs.enable = true;
+  home.file.".emacs.d" = { source = ./dotfiles/emacs.d; recursive = true;};
+
   programs.fzf = {
     enable = true;
   };
 
   programs.htop.enable = true;
-  programs.urxvt = {
-    enable = true;
-    fonts = ["xft:Source Code Pro:size=11"];
-    keybindings = {
-    };
-    transparent = false;
-    shading = 90;
-  };
-
   programs.zsh = {
     enable = true;
     oh-my-zsh = {
@@ -201,103 +204,6 @@ in {
       };
     };
   };
-  programs.kakoune = {
-    enable = true; 
-    config = {
-      colorScheme = "zenburn";
-      tabStop = 4;
-      indentWidth = 2;
-      ui = {
-        enableMouse = true;
-        setTitle = false;
-      };
-      numberLines.enable = true;
-      showWhitespace.enable = true;
-      keyMappings = [
-        { mode = "normal"; key = "'#'"; effect = ":comment-line<ret>"; }
-        { mode = "normal"; key = "'<c-p>'"; effect = ":fzf-mode<ret>"; }
-        { mode = "normal"; key = "'<space>'"; effect = ","; docstring = "leader"; }
-        { mode = "normal"; key = "'<backspace>'"; effect = "<space>"; docstring = "remove all sels except main"; }
-        { mode = "normal"; key = "'<a-backspace>'"; effect = "<a-space>"; docstring = "remove main sel"; }
-        { mode = "user"; key = "'p'"; effect = "!xclip -o -selection clipboard<ret>"; docstring = "paste (after) from clipboard"; }
-        { mode = "user"; key = "'P'"; effect = "<a-!>xclip -o -selection clipboard<ret>"; docstring = "paste (before) from clipboard"; }
-        { mode = "user"; key = "'y'"; effect = "<a-|>xclip -i -selection clipboard<ret>:echo copied selection to x11 clipboard<ret>"; docstring = "Yank to clipboard"; }
-        { mode = "user"; key = "'R'"; effect = "|xclip -o -selection<ret>"; docstring = "Replace from clipboard"; }
-        { mode = "normal"; key = "'x'"; effect = ":extend-line-down %val{count}<ret>"; }
-        { mode = "normal"; key = "'X'"; effect = ":extend-line-up %val{count}<ret>"; }
-      ];
-      hooks = [
-        { name = "WinSetOption"; option = "filetype=elm"; 
-          commands = ''
-            set window formatcmd 'elm-format --stdin'
-            hook buffer BufWritePre .* %{format}
-          '';
-        }
-        { name = "WinSetOption"; option = "filetype=haskell"; 
-          commands = ''
-            set window formatcmd 'stylish-haskell'
-            hook buffer BufWritePre .* %{format}
-          '';
-        }
-        { name = "WinSetOption"; option = "filetype=kaktree";
-          commands = ''
-            remove-highlighter buffer/numbers
-            remove-highlighter buffer/matching
-            remove-highlighter buffer/wrap
-            remove-highlighter buffer/show-whitespaces
-          '';
-        }
-      ];
-    };
-    extraConfig = ''
-     
-      ${allKakImports pkgs.kak-fzf}
-      ${allKakImports pkgs.kak-powerline}
-      ${allKakImports pkgs.kaktree}
-      kaktree-enable
-      hook global ModuleLoaded kaktree %{
-        set-option global kaktree_double_click_duration '0.5'
-        set-option global kaktree_indentation 1
-        set-option global kaktree_dir_icon_open  '▾ 🗁 '
-        set-option global kaktree_dir_icon_close '▸ 🗀 '
-        set-option global kaktree_file_icon      '⠀⠀🖺'
-      }
-      define-command mkdir %{ nop %sh{ mkdir -p $(dirname $kak_buffile) } }
-      set-option global grepcmd 'ag --column'
-      add-highlighter global/ show-matching
-      add-highlighter global/ show-whitespaces
- 
-      declare-option -hidden regex curword
-      set-face global CurWord default,rgb:4a4a4a
- 
-      add-highlighter global/ dynregex '%opt{curword}' 0:CurWord
-      def -params 1 extend-line-down %{
-        exec "<a-:>%arg{1}X"
-      }
-      def -params 1 extend-line-up %{
-        exec "<a-:><a-;>%arg{1}K<a-;>"
-        try %{
-          exec -draft ';<a-K>\n<ret>'
-          exec X
-        }
-        exec '<a-;><a-X>'
-      }
-      declare-user-mode tig
-      map global tig m ': repl "${pkgs.tig}/bin/tig"<ret>' -docstring 'show main view (with tig)'
-
-      declare-user-mode kaktree
-      map global kaktree t ': kaktree-toggle<ret>' -docstring 'Toggle kaktree'
-      map global kaktree f ': kaktree-focus<ret>' -docstring 'Focus kaktree'
-
-      map global user g ': enter-user-mode tig<ret>' -docstring 'tig commands'
-
-      map global user r ': repl ranger<ret>' -docstring 'select files in ranger'
-      
-      map global user t ': enter-user-mode kaktree<ret>' -docstring 'kaktree commands'
-
-    '';
-  };
-
   programs.tmux = {
     enable = true;
     clock24 = true;
@@ -313,8 +219,8 @@ in {
       set -gq status-utf8 on
       setw -g mouse on
       set-option -s set-clipboard off
-      bind-key -T copy-mode MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "xclip -selection -i" 
-      bind-key -T copy-mode Enter send-keys -X copy-pipe-and-cancel "xclip -i" 
+      bind-key -T copy-mode MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "xclip -selection -i"
+      bind-key -T copy-mode Enter send-keys -X copy-pipe-and-cancel "xclip -i"
       set -sg escape-time 0
       source-file "${pkgs.tmux-themepack}/powerline/default/orange.tmuxtheme"
     '';
@@ -363,14 +269,13 @@ in {
     lockCmd = "xlock -mode blank";
     inactiveInterval = 10;
   };
-
-  services.blueman-applet.enable = false;
+  services.blueman-applet.enable = true;
   services.flameshot.enable = true;
   services.unclutter.enable = true;
   services.network-manager-applet.enable = true;
   services.rsibreak.enable = true;
   services.stalonetray.enable = true;
-
+  services.pasystray.enable = true;
 
   services.redshift = {
     enable = true;
@@ -425,6 +330,21 @@ in {
         background = "#191311";
         timeout = 8;
       };
+    };
+  };
+
+  systemd.user.services.rescuetime = {
+    Unit = {
+        Description = "Rescuetime daemon";
+        Requires = "graphical-session.target";
+        After = "stalonetray.service";
+    };
+
+    Service = {
+        Environment =
+          let toolPaths = lib.makeBinPath [ pkgs.firefox pkgs.gnugrep ];
+          in [ "PATH=${toolPaths}" "BROWSER=firefox" ];
+        ExecStart = "${pkgs.rescuetime}/bin/rescuetime";
     };
   };
 

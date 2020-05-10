@@ -1,8 +1,8 @@
 {
   "url": "https://github.com/mawww/kakoune.git",
-  "rev": "93a889bd44ceb5d3d4656d251ddbbd4a88b3fe1b",
-  "date": "2020-02-22T08:39:35+11:00",
-  "sha256": "0a7yz5j4bsr1dk20r7ik06dcial02vwkn5jz099xp8b6w0f6z3rn",
+  "rev": "2fca4e564304ee69b33711084ceeefae397619cd",
+  "date": "2020-05-02T13:02:10+10:00",
+  "sha256": "1hmyvqrm3hny83f0rr6ql2sj1jc25a5crvs5k3x2h448ck4zc975",
   "fetchSubmodules": false,
   "deepClone": false,
   "leaveDotGit": false

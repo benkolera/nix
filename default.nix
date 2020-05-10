@@ -1,6 +1,6 @@
 machineName:
 { config, pkgs, ... }:
-let 
+let
   thisPath = ./.;
   home-manager-src = import "${thisPath}/deps/home-manager";
 in {
@@ -77,6 +77,8 @@ in {
        nerdfonts
        emojione
        source-code-pro
+       emacs-all-the-icons-fonts
+       inconsolata
      ];
   };
 
@@ -97,6 +99,7 @@ in {
     blueman
     file
     gcc6
+    git
     gnumake
     gparted
     htop
@@ -106,6 +109,7 @@ in {
     ncdu
     openssl
     parted
+    pciutils
     psmisc
     sudo
     traceroute
@@ -132,7 +136,7 @@ in {
     postgresql = {
       enable = true;
       extraConfig = ''
-        log_directory = '/tmp/pg_log'                    
+        log_directory = '/tmp/pg_log'
         log_filename = 'postgresql-%Y-%m-%d_%H%M%S.log'
         log_statement = 'all'
       '';

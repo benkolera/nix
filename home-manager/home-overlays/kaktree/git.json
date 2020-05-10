@@ -1,8 +1,8 @@
 {
   "url": "https://github.com/andreyorst/kaktree.git",
-  "rev": "e64c02816ae14a44754d2ba62c23a1149fa4ce72",
-  "date": "2020-02-21T21:56:50+03:00",
-  "sha256": "1vdmnsx1dph3g141w3nrc3262pf5xrqzvx1kpw0ygvsmsgjfsm2b",
+  "rev": "6399e575d33a288503fee4a816956d5dc83514aa",
+  "date": "2020-05-06T21:33:43+03:00",
+  "sha256": "03f71sqnyx9v8ipz7i39arncmk4wxznykxvzd2s5kqja27awp8a4",
   "fetchSubmodules": false,
   "deepClone": false,
   "leaveDotGit": false
