@@ -1,6 +1,6 @@
 Config {
     position = Top,
-    font = "xft:Source Code Pro:size=11:antialias=true",
+    font = "xft:Inconsolata:size=12:antialias=true",
     bgColor = "#111111",
     fgColor = "#ffffff",
     lowerOnStart = True,

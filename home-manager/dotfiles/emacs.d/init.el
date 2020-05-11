@@ -13,7 +13,8 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (menu-bar-mode -1)
-(set-frame-font "Inconsolata 12" nil t)
+(add-to-list 'default-frame-alist
+  '(font . "Inconsolata-12"))
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
@@ -141,7 +142,8 @@
   (evil-leader/set-key
     "<SPC>" 'counsel-M-x
     "bd" 'kill-buffer
-    "qq" 'kill-emacs
+    "br" 'revert-buffer
+    "qq" 'kill-buffers-kill-terminal
     "qs" 'save-buffers-kill-emacs
     "sa" 'counsel-ag
     )
