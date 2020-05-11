@@ -1,12 +1,12 @@
 ;; Turn off some crufty defaults
 (setq
-  inhibit-startup-message t inhibit-startup-echo-area-message (user-login-name)
-  initial-major-mode 'fundamental-mode initial-scratch-message nil
-  indent-tabs-mode nil
-  tab-width 2
-  fill-column 120
-  locale-coding-system 'utf-8
-  )
+ inhibit-startup-message t inhibit-startup-echo-area-message (user-login-name)
+ initial-major-mode 'fundamental-mode initial-scratch-message nil
+ indent-tabs-mode nil
+ tab-width 2
+ fill-column 120
+ locale-coding-system 'utf-8
+ )
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -30,7 +30,7 @@
 ;; Setup our custom file for local state
 (setq custom-file "~/.emacs.d/custom.el")
 (unless (file-exists-p custom-file)
-    (write-region "" nil custom-file))
+  (write-region "" nil custom-file))
 (load-file custom-file)
 
 (use-package all-the-icons-ivy)
@@ -38,14 +38,16 @@
 (use-package doom-themes
   :after all-the-icons-ivy
   :config
-  (setq doom-themes-enable-bold t  
-        doom-themes-enable-italic t)
+  (setq
+   doom-themes-enable-bold t
+   doom-themes-enable-italic t
+   )
   (load-theme 'doom-vibrant t)
   (doom-themes-visual-bell-config)
-  
+
   (setq doom-themes-treemacs-theme "doom-colors")
   (doom-themes-treemacs-config)
-  
+
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
 
@@ -55,11 +57,11 @@
 (use-package evil
   :init ;; tweak evil's configuration before loading it
   (setq
-    evil-search-module 'evil-search
-    evil-vsplit-window-right t
-    evil-split-window-below t
-    evil-want-integration t
-    evil-want-keybinding nil)
+   evil-search-module 'evil-search
+   evil-vsplit-window-right t
+   evil-split-window-below t
+   evil-want-integration t
+   evil-want-keybinding nil)
   :config ;; tweak evil after loading it
   (evil-mode)
   )
@@ -67,13 +69,13 @@
 (use-package dashboard
   :init
   (setq
-    initial-buffer-choice (lambda () (get-buffer "*dashboard*"))
-    dashboard-center-content t
-    dashboard-set-heading-icons t
-    dashboard-set-file-icons t
-    dashboard-items '((recents  . 5) (projects . 5))
-    dashboard-startup-banner 'logo
-    )
+   initial-buffer-choice (lambda () (get-buffer "*dashboard*"))
+   dashboard-center-content t
+   dashboard-set-heading-icons t
+   dashboard-set-file-icons t
+   dashboard-items '((recents  . 5) (projects . 5))
+   dashboard-startup-banner 'logo
+   )
 
   :config
   (dashboard-setup-startup-hook)
@@ -88,7 +90,6 @@
     (interactive)
     (funcall (local-key-binding "p"))
     )
-	     
 
   (evil-define-key 'normal dashboard-mode-map
     "g" 'dashboard-refresh-buffer
@@ -100,11 +101,11 @@
   )
 
 ;; Stop creating annoying files
-(setq 
-  make-backup-files nil             
-  auto-save-default nil
-  create-lockfiles nil
-  )
+(setq
+ make-backup-files nil
+ auto-save-default nil
+ create-lockfiles nil
+ )
 
 ;; Improved handling of clipboard in GNU/Linux and otherwise.
 (setq
@@ -121,12 +122,14 @@
   (declare-function which-key-prefix-then-key-order "which-key")
   (declare-function which-key-mode "which-key")
 
-  (setq which-key-sort-order #'which-key-prefix-then-key-order
-        which-key-sort-uppercase-first nil
-        which-key-add-column-padding 1
-        which-key-max-display-columns nil
-        which-key-min-display-lines 6
-        which-key-side-window-slot -10)
+  (setq
+   which-key-sort-order #'which-key-prefix-then-key-order
+   which-key-sort-uppercase-first nil
+   which-key-add-column-padding 1
+   which-key-max-display-columns nil
+   which-key-min-display-lines 6
+   which-key-side-window-slot -10
+   )
   :config
   (which-key-mode +1)
   )
@@ -137,7 +140,7 @@
   (global-evil-leader-mode)
   (evil-leader/set-key
     "<SPC>" 'counsel-M-x
-    "bd" 'kill-buffer 
+    "bd" 'kill-buffer
     "qq" 'kill-emacs
     "qs" 'save-buffers-kill-emacs
     "sa" 'counsel-ag
@@ -147,7 +150,7 @@
 (use-package ivy
   :init
   (setq ivy-use-virtual-buffers t)
-  (setq enable-recursive-minibuffers t) 
+  (setq enable-recursive-minibuffers t)
   (evil-leader/set-key
     "\t" 'ivy-resume
     "bb" 'ivy-switch-buffer
@@ -164,7 +167,7 @@
     "<SPC>" 'counsel-M-x
     "ff" 'counsel-find-file
     "fr" 'counsel-recentf
-    "bd" 'kill-buffer 
+    "bd" 'kill-buffer
     "qq" 'kill-emacs
     "sa" 'counsel-ag
     )
@@ -174,7 +177,7 @@
   :defer 0.1
   :after (ivy evil-leader)
   :init
-  (evil-leader/set-key  
+  (evil-leader/set-key
     "s/" 'swiper
     )
   )
@@ -185,55 +188,58 @@
   :commands (golden-ratio golden-ratio-mode)
   :config
   ;; extra golden ratio commands
-  (dolist (cs '(avy-pop-mark
-                evil-avy-goto-word-or-subword-1
-                evil-avy-goto-line
-                evil-window-delete
-                evil-window-split
-                evil-window-vsplit
-                evil-window-left
-                evil-window-right
-                evil-window-up
-                evil-window-down
-                evil-window-bottom-right
-                evil-window-top-left
-                evil-window-mru
-                evil-window-next
-                evil-window-prev
-                evil-window-new
-                evil-window-vnew
-                evil-window-rotate-upwards
-                evil-window-rotate-downwards
-                evil-window-move-very-top
-                evil-window-move-far-left
-                evil-window-move-far-right
-                evil-window-move-very-bottom
-                next-multiframe-window
-                previous-multiframe-window
-		treemacs-add-and-display-current-project
-                windmove-left
-                windmove-right
-                windmove-up
-                windmove-down
-                quit-window))
+  (dolist
+      (cs
+       '(avy-pop-mark
+        evil-avy-goto-word-or-subword-1
+        evil-avy-goto-line
+        evil-window-delete
+        evil-window-split
+        evil-window-vsplit
+        evil-window-left
+        evil-window-right
+        evil-window-up
+        evil-window-down
+        evil-window-bottom-right
+        evil-window-top-left
+        evil-window-mru
+        evil-window-next
+        evil-window-prev
+        evil-window-new
+        evil-window-vnew
+        evil-window-rotate-upwards
+        evil-window-rotate-downwards
+        evil-window-move-very-top
+        evil-window-move-far-left
+        evil-window-move-far-right
+        evil-window-move-very-bottom
+        next-multiframe-window
+        previous-multiframe-window
+        treemacs-add-and-display-current-project
+        windmove-left
+        windmove-right
+        windmove-up
+        windmove-down
+        quit-window))
 
     (add-to-list 'golden-ratio-extra-commands cs))
 
   ;; modes for golden-ratio to exclude
-  (dolist (ms '("bs-mode"
-                "calc-mode"
-                "ediff-mode"
-                "eshell-mode"
-                "gud-mode"
-                "gdb-locals-mode"
-                "gdb-registers-mode"
-                "gdb-breakpoints-mode"
-                "gdb-threads-mode"
-                "gdb-frames-mode"
-                "gdb-inferior-io-mode"
-                "gdb-disassembly-mode"
-                "gdb-memory-mode"
-                "speedbar-mode"))
+  (dolist (ms
+       '("bs-mode"
+        "calc-mode"
+        "ediff-mode"
+        "eshell-mode"
+        "gud-mode"
+        "gdb-locals-mode"
+        "gdb-registers-mode"
+        "gdb-breakpoints-mode"
+        "gdb-threads-mode"
+        "gdb-frames-mode"
+        "gdb-inferior-io-mode"
+        "gdb-disassembly-mode"
+        "gdb-memory-mode"
+        "speedbar-mode"))
 
     (add-to-list 'golden-ratio-exclude-modes ms)))
 
@@ -313,9 +319,9 @@
   (defun display-line-numbers--turn-on ()
     "turn on line numbers but excempting certain majore modes defined in `display-line-numbers-exempt-modes'"
     (if (and
-	(not (member major-mode '(treemacs)))
-	(not (minibufferp)))
-	(display-line-numbers-mode)))
+         (not (member major-mode '(treemacs)))
+         (not (minibufferp)))
+        (display-line-numbers-mode)))
   (global-display-line-numbers-mode)
   )
 
@@ -334,21 +340,21 @@
    '( (haskell-mode . ("ghcide" "--lsp"))
       (scala-mode . "metals-emacs")
       )
-    )
+   )
   )
 
 (use-package direnv
- :config
- (direnv-mode))
+  :config
+  (direnv-mode))
 
 (use-package haskell-mode
   :interpreter
-    ("hs" . haskell-mode)
+  ("hs" . haskell-mode)
   )
 
 (use-package scala-mode
   :interpreter
-    ("scala" . scala-mode)
+  ("scala" . scala-mode)
   )
 
 (use-package evil-collection
@@ -359,10 +365,31 @@
 
 (use-package company
   :bind
-    (:map company-active-map
-      ("C-n" . company-select-next)
-      ("C-p" . company-select-previous))
+  (:map company-active-map
+        ("C-n" . company-select-next)
+        ("C-p" . company-select-previous))
   :config
-    (setq company-idle-delay 0.1)
-    (global-company-mode t)
+  (setq company-idle-delay 0.1)
+  (global-company-mode t)
+  )
+
+(use-package whitespace
+  :init
+  (setq
+   whitespace-line-column 120
+   whitespace-global-modes
+   '(haskell-mode scala-mode fundamental emacs-lisp-mode nix-mode)
+   )
+  (evil-leader/set-key
+    "bw" 'whitespace-cleanup
+    )
+  :config
+  (global-whitespace-mode))
+
+(use-package rainbow-delimeters
+  :config
+  (add-hook 'haskell-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'scala-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'nix-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'elisp-mode-hook 'rainbow-delimiters-mode)
   )

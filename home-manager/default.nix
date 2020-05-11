@@ -158,7 +158,7 @@ in {
       ivy-rich
       magit
       nix-mode
-      pdf-tools 
+      pdf-tools
       projectile
       rainbow-delimiters
       ranger
