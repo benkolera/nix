@@ -386,8 +386,8 @@
   :config
   (global-whitespace-mode))
 
-(use-package rainbow-delimeters
-  :config
+(use-package rainbow-delimiters
+  :init
   (add-hook 'haskell-mode-hook 'rainbow-delimiters-mode)
   (add-hook 'scala-mode-hook 'rainbow-delimiters-mode)
   (add-hook 'nix-mode-hook 'rainbow-delimiters-mode)

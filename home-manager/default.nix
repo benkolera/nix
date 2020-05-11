@@ -1,16 +1,15 @@
 { config, pkgs, lib, ... }:
 let
   scripts = import ./scripts pkgs;
+  niv-sources = import ./nix/sources.nix;
+  niv-obelisk = import niv-sources.obelisk {};
 in {
   nixpkgs.overlays = [
-    (import ./home-overlays/haskell-gtk.nix)
-    (import ./home-overlays/direnv)
-    (import ./home-overlays/obelisk)
-    (import ./home-overlays/tmux-themepack)
+    (import niv-sources.emacs-overlay)
   ];
 
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.allowBroken = true;
+  nixpkgs.config.allowBroken = false;
 
   home.packages = with pkgs; [
     aws-okta
@@ -42,7 +41,7 @@ in {
     niv
     nodejs
     nodePackages.npm
-    obelisk.command
+    niv-obelisk.command
     p7zip
     pavucontrol
     python3
@@ -223,7 +222,7 @@ in {
       bind-key -T copy-mode MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "xclip -selection -i"
       bind-key -T copy-mode Enter send-keys -X copy-pipe-and-cancel "xclip -i"
       set -sg escape-time 0
-      source-file "${pkgs.tmux-themepack}/powerline/default/orange.tmuxtheme"
+      source-file "${niv-sources.tmux-themepack}/powerline/default/orange.tmuxtheme"
     '';
   };
   home.file.".gitmessage".source = ./dotfiles/git/gitmessage;

@@ -1,0 +1,62 @@
+{
+    "emacs-overlay": {
+        "branch": "master",
+        "description": "Bleeding edge emacs overlay [maintainer=@adisbladis] ",
+        "homepage": "",
+        "owner": "nix-community",
+        "repo": "emacs-overlay",
+        "rev": "a24d3eaefcbfde3f5e6f80f9cdba0f7829767095",
+        "sha256": "04pabwyd8wnl7qjy6xs3bjql72skwn57yikrzyz6q6sibkaxaysw",
+        "type": "tarball",
+        "url": "https://github.com/nix-community/emacs-overlay/archive/a24d3eaefcbfde3f5e6f80f9cdba0f7829767095.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "niv": {
+        "branch": "master",
+        "description": "Easy dependency management for Nix projects",
+        "homepage": "https://github.com/nmattia/niv",
+        "owner": "nmattia",
+        "repo": "niv",
+        "rev": "f73bf8d584148677b01859677a63191c31911eae",
+        "sha256": "0jlmrx633jvqrqlyhlzpvdrnim128gc81q5psz2lpp2af8p8q9qs",
+        "type": "tarball",
+        "url": "https://github.com/nmattia/niv/archive/f73bf8d584148677b01859677a63191c31911eae.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nixpkgs": {
+        "branch": "nixos-19.09",
+        "description": "A read-only mirror of NixOS/nixpkgs tracking the released channels. Send issues and PRs to",
+        "homepage": "https://github.com/NixOS/nixpkgs",
+        "owner": "NixOS",
+        "repo": "nixpkgs-channels",
+        "rev": "596739026bbe0c693708119e5cd3e1b3aa88fd2d",
+        "sha256": "1wqkxfb2i4xsi5pwvis66i2b4411bdaxz5g3wiip1s8b69nk3qhd",
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs-channels/archive/596739026bbe0c693708119e5cd3e1b3aa88fd2d.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "obelisk": {
+        "branch": "master",
+        "description": "Obelisk provides an easy way to develop and deploy your Reflex project for web and mobile",
+        "homepage": "",
+        "owner": "obsidiansystems",
+        "repo": "obelisk",
+        "rev": "3db33c4cf101999c7affb9c7b57f5e602cef4850",
+        "sha256": "1shk8yy5pbakcw8aq6b8s3g2xblzf24l78mq0ca0asnvifnp83yb",
+        "type": "tarball",
+        "url": "https://github.com/obsidiansystems/obelisk/archive/3db33c4cf101999c7affb9c7b57f5e602cef4850.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "tmux-themepack": {
+        "branch": "master",
+        "description": "A pack of various Tmux themes.",
+        "homepage": null,
+        "owner": "jimeh",
+        "repo": "tmux-themepack",
+        "rev": "7c59902f64dcd7ea356e891274b21144d1ea5948",
+        "sha256": "1kl93d0b28f4gn1knvbb248xw4vzb0f14hma9kba3blwn830d4bk",
+        "type": "tarball",
+        "url": "https://github.com/jimeh/tmux-themepack/archive/7c59902f64dcd7ea356e891274b21144d1ea5948.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    }
+}

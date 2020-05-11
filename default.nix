@@ -2,13 +2,13 @@ machineName:
 { config, pkgs, ... }:
 let
   thisPath = ./.;
-  home-manager-src = import "${thisPath}/deps/home-manager";
+  niv-sources = import "${thisPath}/nix/sources.nix";
 in {
   imports =
     [ # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
       "${thisPath}/machine.${machineName}.nix"
-      "${home-manager-src}/nixos"
+      "${niv-sources.home-manager}/nixos"
     ];
 
   boot = {

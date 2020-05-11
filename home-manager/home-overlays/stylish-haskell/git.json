@@ -1,9 +1,0 @@
-{
-  "url": "https://github.com/jaspervdj/stylish-haskell.git",
-  "rev": "3621bf3aa5312fef61220e1760d9988307209c6a",
-  "date": "2020-02-24T15:18:27+01:00",
-  "sha256": "0rnzghsk3r28j3lcjb0s2mx1kdjrad0ynmsbx9b91158bq3vq09q",
-  "fetchSubmodules": false,
-  "deepClone": false,
-  "leaveDotGit": false
-}
