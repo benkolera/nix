@@ -1,4 +1,4 @@
-{ writeScriptBin, upower, procps, xorg, ... }:
+{ writeScriptBin, upower, procps, xorg, emacs, ... }:
 rec {
   batman = writeScriptBin "batman" ''
     ${upower}/bin/upower -i /org/freedesktop/UPower/devices/battery_BAT0
@@ -34,5 +34,7 @@ rec {
       --output DP-5 --off \
       --output DP-6 --off
   '';
-  all = [ batman dunst-pause dunst-resume screen-laptop screen-home ];
+  emcf = writeScriptBin "emcf" ''${emacs}/bin/emacsclient -c $@'';
+  emct = writeScriptBin "emct" ''${emacs}/bin/emacsclient -t $@'';
+  all = [ batman dunst-pause dunst-resume screen-laptop screen-home emcf emct ];
 }

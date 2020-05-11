@@ -65,8 +65,8 @@ in {
   ];
 
   home.sessionVariables = {
-    EDITOR = "vim";
-    VISUAL = "vim";
+    EDITOR = "emct";
+    VISUAL = "emcf";
     BROWSER = "firefox";
   };
 

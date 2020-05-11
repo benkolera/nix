@@ -74,7 +74,7 @@
    dashboard-center-content t
    dashboard-set-heading-icons t
    dashboard-set-file-icons t
-   dashboard-items '((recents  . 5) (projects . 5))
+   dashboard-items '((recents  . 10) (projects . 10))
    dashboard-startup-banner 'logo
    )
 
