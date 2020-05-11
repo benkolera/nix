@@ -139,6 +139,7 @@
     "<SPC>" 'counsel-M-x
     "bd" 'kill-buffer 
     "qq" 'kill-emacs
+    "qs" 'save-buffers-kill-emacs
     "sa" 'counsel-ag
     )
   )

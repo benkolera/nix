@@ -1,5 +1,6 @@
 { config, pkgs, lib, ... }:
 let
+  scripts = import ./scripts pkgs;
 in {
   nixpkgs.overlays = [
     (import ./home-overlays/haskell-gtk.nix)
@@ -49,6 +50,7 @@ in {
     rescuetime
     rfkill
     ripgrep
+  ] ++ scripts.all ++ [
     sbt
     signal-desktop
     silver-searcher
@@ -63,7 +65,6 @@ in {
     zoom-us
   ];
 
-  home.file."bin" = { source = ./bin; recursive = true; };
   home.sessionVariables = {
     EDITOR = "vim";
     VISUAL = "vim";
