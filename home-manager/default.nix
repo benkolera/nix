@@ -17,6 +17,7 @@ in {
     awscli
     brave
     cabal2nix
+    cabal-install
     dmenu
     glances
     gitAndTools.gitflow
