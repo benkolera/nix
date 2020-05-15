@@ -345,7 +345,14 @@ in {
 
     Service = {
         Environment =
-          let toolPaths = lib.makeBinPath [ pkgs.firefox pkgs.gnugrep ];
+          let toolPaths = lib.makeBinPath [
+                pkgs.firefox
+                pkgs.gnugrep
+                pkgs.xorg.xprop
+                pkgs.coreutils  # cut
+                pkgs.gawk # awk
+                pkgs.hostname
+              ];
           in [ "PATH=${toolPaths}" "BROWSER=firefox" ];
         ExecStart = "${pkgs.rescuetime}/bin/rescuetime";
     };
