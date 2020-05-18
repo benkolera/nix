@@ -160,6 +160,7 @@ in {
       ivy-rich
       magit
       nix-mode
+      org-pomodoro
       pdf-tools
       projectile
       rainbow-delimiters

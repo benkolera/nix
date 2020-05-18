@@ -395,3 +395,9 @@
   (add-hook 'nix-mode-hook 'rainbow-delimiters-mode)
   (add-hook 'elisp-mode-hook 'rainbow-delimiters-mode)
   )
+
+(use-package org-pomodoro
+  :commands (org-pomodoro)
+  :config
+  (setq alert-user-configuration (quote ((((:category . "org-pomodoro")) libnotify nil))))
+  )
