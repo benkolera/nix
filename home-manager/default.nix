@@ -61,6 +61,7 @@ in {
     thunderbird
     xlockmore
     tmate
+    vlc
     xsel
     xorg.xbacklight
     xorg.xkill
