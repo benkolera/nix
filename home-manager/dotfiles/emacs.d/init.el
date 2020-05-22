@@ -2,11 +2,14 @@
 (setq
  inhibit-startup-message t inhibit-startup-echo-area-message (user-login-name)
  initial-major-mode 'fundamental-mode initial-scratch-message nil
- indent-tabs-mode nil
- tab-width 2
  fill-column 120
  locale-coding-system 'utf-8
  )
+
+(setq-default
+  tab-width 2
+  indent-tabs-mode nil
+  )
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
