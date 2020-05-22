@@ -45,7 +45,6 @@ in {
     nodejs
     nodePackages.npm
     niv-obelisk.command
-    p7zip
     pavucontrol
     python3
     ranger
