@@ -1,4 +1,4 @@
-{ writeScriptBin, upower, procps, xorg, emacs, ... }:
+{ writeScriptBin, upower, procps, xorg, emacs, pulseaudio, ... }:
 rec {
   batman = writeScriptBin "batman" ''
     ${upower}/bin/upower -i /org/freedesktop/UPower/devices/battery_BAT0
@@ -36,5 +36,6 @@ rec {
   '';
   emcf = writeScriptBin "emcf" ''${emacs}/bin/emacsclient -c $@'';
   emct = writeScriptBin "emct" ''${emacs}/bin/emacsclient -t $@'';
-  all = [ batman dunst-pause dunst-resume screen-laptop screen-home emcf emct ];
+  pa-speakers-toggle-mute = writeScriptBin "pa-mute" ''${pulseaudio}/bin/pactl set-sink-mute 0 toggle'';
+  all = [ batman dunst-pause dunst-resume screen-laptop screen-home emcf emct pa-speakers-toggle-mute ];
 }
