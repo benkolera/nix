@@ -134,8 +134,6 @@ in {
       all-the-icons-ivy
       avy
       company
-      counsel
-      counsel-projectile
       dashboard
       deadgrep
       direnv
@@ -156,8 +154,9 @@ in {
       git-gutter-fringe
       golden-ratio
       haskell-mode
-      ivy
-      ivy-rich
+      helm
+      helm-rg
+      helm-projectile
       magit
       nix-mode
       org-pomodoro

@@ -37,10 +37,10 @@
   (write-region "" nil custom-file))
 (load-file custom-file)
 
-(use-package all-the-icons-ivy)
+(use-package all-the-icons)
 
 (use-package doom-themes
-  :after all-the-icons-ivy
+  :after all-the-icons
   :config
   (setq
    doom-themes-enable-bold t
@@ -109,7 +109,8 @@
  make-backup-files nil
  auto-save-default nil
  create-lockfiles nil
- )
+ ) 
+
 
 ;; Improved handling of clipboard in GNU/Linux and otherwise.
 (setq
@@ -149,43 +150,33 @@
     "qq" 'kill-buffers-kill-terminal
     "qs" 'save-buffers-kill-emacs
     "sa" 'counsel-ag
+    "w" evil-window-map
     )
   )
-
-(use-package ivy
-  :init
-  (setq ivy-use-virtual-buffers t)
-  (setq enable-recursive-minibuffers t)
-  (evil-leader/set-key
-    "\t" 'ivy-resume
-    "bb" 'ivy-switch-buffer
-    )
-  (evil-leader/set-key "w" evil-window-map)
+(use-package helm
   :config
-  (ivy-mode 1)
-  )
-
-(use-package counsel
-  :defer 0.1
-  :init
+  (helm-mode 1)
+  (require 'helm-config)
   (evil-leader/set-key
-    "<SPC>" 'counsel-M-x
-    "ff" 'counsel-find-file
-    "fr" 'counsel-recentf
-    "bd" 'kill-buffer
+    "<SPC>" 'helm-M-x
+    "ff" 'helm-find-files
+    "fr" 'helm-recentf
+    "bb" 'helm-buffers-list
     "qq" 'kill-emacs
-    "sa" 'counsel-ag
     )
   )
 
-(use-package swiper
-  :defer 0.1
-  :after (ivy evil-leader)
-  :init
+(use-package helm-projectile
+  :after (helm projectile)
+  :config
   (evil-leader/set-key
-    "s/" 'swiper
-    )
-  )
+    "pp" 'helm-projectile
+    "pr" 'helm-projectile-recentf
+    "pd" 'helm-projectile-find-dir
+    "pf" 'helm-projectile-find-files
+    "pb" 'helm-projectile-switch-to-buffer
+    "ps" 'helm-projectile-rg
+    ))
 
 (use-package golden-ratio
   :after (evil)
@@ -263,27 +254,12 @@
   )
 
 (use-package projectile
-  :after (ivy)
+  :after (helm)
   :init
-  (setq projectile-completion-system 'ivy)
+  (setq projectile-completion-system 'helm)
   :config
   (projectile-mode +1)
   )
-
-(use-package counsel-projectile
-  :defer 0.1
-  :after (counsel projectile)
-  :init
-  (evil-leader/set-key
-    "pp" 'counsel-projectile-switch-project
-    "pf" 'counsel-projectile
-    "pb" 'counsel-projectile-switch-to-buffer
-    "pd" 'counsel-projectile-find-dir
-    "pss" 'counsel-projectile-ag
-    "psg" 'counsel-projectile-grep
-    )
-  )
-
 
 (use-package magit
   :after evil-leader
@@ -328,14 +304,6 @@
          (not (minibufferp)))
         (display-line-numbers-mode)))
   (global-display-line-numbers-mode)
-  )
-
-(use-package deadgrep
-  :after (evil-leader)
-  :init
-  (evil-leader/set-key
-    "psr" 'deadgrep
-    )
   )
 
 (use-package eglot
