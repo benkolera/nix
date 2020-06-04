@@ -173,9 +173,10 @@
     "pp" 'helm-projectile
     "pr" 'helm-projectile-recentf
     "pd" 'helm-projectile-find-dir
-    "pf" 'helm-projectile-find-files
+    "pf" 'helm-projectile-find-file
+    "po" 'helm-projectile-find-file-other
     "pb" 'helm-projectile-switch-to-buffer
-    "ps" 'helm-projectile-rg
+    "pg" 'helm-projectile-rg
     ))
 
 (use-package golden-ratio
@@ -258,6 +259,9 @@
   :init
   (setq projectile-completion-system 'helm)
   :config
+  (evil-leader/set-key
+    "ps" 'projectile-run-shell
+    )
   (projectile-mode +1)
   )
 
