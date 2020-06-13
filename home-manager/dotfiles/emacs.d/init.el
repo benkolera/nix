@@ -311,6 +311,7 @@
   )
 
 (use-package eglot
+  :after (company)
   :init
   (setq
    eglot-server-programs

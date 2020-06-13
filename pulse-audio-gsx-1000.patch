@@ -1,0 +1,59 @@
+diff --git a/src/modules/alsa/90-pulseaudio.rules b/src/modules/alsa/90-pulseaudio.rules
+index fa43cb802a8e268694d232e0da125bb9259b55c8..2d0ea3803e5374b24994b3ee609ab1496004b534 100644
+--- a/src/modules/alsa/90-pulseaudio.rules
++++ b/src/modules/alsa/90-pulseaudio.rules
+@@ -129,6 +129,11 @@ ATTRS{idVendor}=="1038", ATTRS{idProduct}=="1252", ENV{PULSE_PROFILE_SET}="steel
+ 
+ ATTRS{idVendor}=="147a", ATTRS{idProduct}=="e055", ENV{PULSE_PROFILE_SET}="cmedia-high-speed-true-hdaudio.conf"
+ 
++# Sennheiser GSX 1000
++ATTRS{idVendor}=="1395", ATTRS{idProduct}=="005e", ENV{PULSE_PROFILE_SET}="sennheiser-gsx.conf", ATTR{id}="GSX1000"
++# Sennheiser GSX 1200
++ATTRS{idVendor}=="1395", ATTRS{idProduct}=="005f", ENV{PULSE_PROFILE_SET}="sennheiser-gsx.conf", ATTR{id}="GSX1200"
++
+ GOTO="pulseaudio_end"
+ 
+ LABEL="pulseaudio_firewire_quirk"
+diff --git a/src/modules/alsa/mixer/profile-sets/sennheiser-gsx.conf b/src/modules/alsa/mixer/profile-sets/sennheiser-gsx.conf
+new file mode 100644
+index 0000000000000000000000000000000000000000..34e5f93135a5b58bd0bd6234cb3b9a4aa3392bb0
+--- /dev/null
++++ b/src/modules/alsa/mixer/profile-sets/sennheiser-gsx.conf
+@@ -0,0 +1,37 @@
++# This file is part of PulseAudio.
++#
++# PulseAudio is free software; you can redistribute it and/or modify
++# it under the terms of the GNU Lesser General Public License as
++# published by the Free Software Foundation; either version 2.1 of the
++# License, or (at your option) any later version.
++#
++# PulseAudio is distributed in the hope that it will be useful, but
++# WITHOUT ANY WARRANTY; without even the implied warranty of
++# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
++# General Public License for more details.
++#
++# You should have received a copy of the GNU Lesser General Public License
++# along with PulseAudio; if not, see <http://www.gnu.org/licenses/>.
++#
++# The Sennheiser GSX 1000 and 1200 expose multiple output sinks: A 7.1
++# channel surround output, controlled by the main audio knob on the
++# device, and a mono output controlled by the smaller knob on the
++# side. The intention is to direct chat audio to the mono channel so
++# that it can be controlled separately from the main game audio.
++[General]
++auto-profiles = yes
++
++[Mapping analog-mono]
++device-strings = hw:%f,0,0
++channel-map = mono
++
++[Mapping analog-surround-71]
++device-strings = hw:%f,1,0
++channel-map = front-left,front-right,front-center,lfe,rear-left,rear-right,side-left,side-right
++direction = output
++
++[Profile output:analog-surround-71+output:analog-mono+input:analog-mono]
++output-mappings = analog-mono analog-surround-71
++input-mappings = analog-mono
++priority = 5100
++skip-probe = yes

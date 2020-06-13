@@ -52,7 +52,9 @@ in {
 
   hardware.pulseaudio = {
     enable = true;
-    package = pkgs.pulseaudioFull;
+    package = pkgs.pulseaudioFull.overrideAttrs (oldAttrs: {
+      patches = (oldAttrs.patches or []) ++ [ ./pulse-audio-gsx-1000.patch ];
+    });
     daemon.config = {
       # Allow app volumes to be set independently of master
       flat-volumes = "no";
