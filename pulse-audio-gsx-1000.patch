@@ -1,22 +1,33 @@
+diff --git a/src/Makefile.am b/src/Makefile.am
+index 437311de6..ffa42634f 100644
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -1345,6 +1345,7 @@
+ 		modules/alsa/mixer/profile-sets/native-instruments-korecontroller.conf \
+ 		modules/alsa/mixer/profile-sets/kinect-audio.conf \
+ 		modules/alsa/mixer/profile-sets/sb-omni-surround-5.1.conf \
++		modules/alsa/mixer/profile-sets/sennheiser-gsx.conf \
+ 		modules/alsa/mixer/profile-sets/steelseries-arctis-5-usb-audio.conf \
+ 		modules/alsa/mixer/profile-sets/steelseries-arctis-7-usb-audio.conf \
+ 		modules/alsa/mixer/profile-sets/dell-dock-tb16-usb-audio.conf \
 diff --git a/src/modules/alsa/90-pulseaudio.rules b/src/modules/alsa/90-pulseaudio.rules
-index fa43cb802a8e268694d232e0da125bb9259b55c8..2d0ea3803e5374b24994b3ee609ab1496004b534 100644
+index d85763917..b979e1a8e 100644
 --- a/src/modules/alsa/90-pulseaudio.rules
 +++ b/src/modules/alsa/90-pulseaudio.rules
-@@ -129,6 +129,11 @@ ATTRS{idVendor}=="1038", ATTRS{idProduct}=="1252", ENV{PULSE_PROFILE_SET}="steel
- 
+@@ -120,6 +120,10 @@ ATTRS{idVendor}=="1038", ATTRS{idProduct}=="1294", ENV{PULSE_PROFILE_SET}="steel
+ ATTRS{idVendor}=="1038", ATTRS{idProduct}=="1730", ENV{PULSE_PROFILE_SET}="steelseries-arctis-7-usb-audio.conf"
+
  ATTRS{idVendor}=="147a", ATTRS{idProduct}=="e055", ENV{PULSE_PROFILE_SET}="cmedia-high-speed-true-hdaudio.conf"
- 
 +# Sennheiser GSX 1000
 +ATTRS{idVendor}=="1395", ATTRS{idProduct}=="005e", ENV{PULSE_PROFILE_SET}="sennheiser-gsx.conf", ATTR{id}="GSX1000"
 +# Sennheiser GSX 1200
 +ATTRS{idVendor}=="1395", ATTRS{idProduct}=="005f", ENV{PULSE_PROFILE_SET}="sennheiser-gsx.conf", ATTR{id}="GSX1200"
-+
+
  GOTO="pulseaudio_end"
- 
- LABEL="pulseaudio_firewire_quirk"
+
 diff --git a/src/modules/alsa/mixer/profile-sets/sennheiser-gsx.conf b/src/modules/alsa/mixer/profile-sets/sennheiser-gsx.conf
 new file mode 100644
-index 0000000000000000000000000000000000000000..34e5f93135a5b58bd0bd6234cb3b9a4aa3392bb0
+index 000000000..c07fc1b86
 --- /dev/null
 +++ b/src/modules/alsa/mixer/profile-sets/sennheiser-gsx.conf
 @@ -0,0 +1,37 @@
