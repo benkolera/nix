@@ -140,6 +140,7 @@ in {
       doom-modeline
       doom-themes
       eglot
+      elixir-mode
       evil
       evil-collection
       evil-leader
