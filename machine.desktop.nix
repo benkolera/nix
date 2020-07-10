@@ -2,6 +2,7 @@
 
 {
   imports = [
+    /etc/nixos/private
   ];
 
   boot.initrd.luks.devices = {
