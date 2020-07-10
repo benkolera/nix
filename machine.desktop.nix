@@ -2,6 +2,7 @@
 
 {
   imports = [
+    /etc/nixos/obsidian
     /etc/nixos/private
   ];
 
