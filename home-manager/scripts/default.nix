@@ -24,9 +24,9 @@ rec {
 
   screen-desktop = writeScriptBin "screen-desktop" ''
     ${xorg.xrandr}/bin/xrandr \
-      --output HDMI-1 --mode 1920x1080 --pos 0x394 --rotate normal \
-      --output DP-1 --primary --mode 1920x1080 --pos 1920x394 --rotate normal \
-      --output DP-2 --mode 1920x1080 --pos 3840x0 --rotate right \
+      --output HDMI-0 --mode 1920x1080 --pos 0x394 --rotate normal \
+      --output DP-0 --primary --mode 1920x1080 --pos 1920x394 --rotate normal \
+      --output DP-4 --mode 1920x1080 --pos 3840x0 --rotate right \
   '';
 
   screen-laptop = writeScriptBin "screen-laptop" ''
