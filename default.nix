@@ -159,7 +159,7 @@ in {
       enable = true;
       layout = "us";
       displayManager = {
-        lightdm.enable = true;
+        sddm.enable = true;
       };
       libinput = {
         enable = true;
