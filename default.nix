@@ -24,20 +24,14 @@ in {
     binaryCaches = [
       "https://cache.nixos.org/"
       "https://cachix.cachix.org"
-      "http://nixcache.kadena.io"
       "https://nixcache.reflex-frp.org"
       "https://hydra.iohk.io"
-      "https://hie-nix.cachix.org"
-      "https://s3.eu-west-3.amazonaws.com/tezos-nix-cache"
     ];
     binaryCachePublicKeys = [
       "ryantrinkle.com-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI="
-      "hie-nix.cachix.org-1:EjBSHzF6VmDnzqlldGXbi0RM3HdjfTU3yDRi9Pd0jTY="
       "cachix.cachix.org-1:eWNHQldwUO7G2VkjpnjDbWwy4KQ/HNxht7H4SSoMckM="
       "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "obsidian-tezos-kiln:WlSLNxlnEAdYvrwzxmNMTMrheSniCg6O4EhqCHsMvvo="
-      "kadena-cache.local-1:8wj8JW8V9tmc5bgNNyPM18DYNA1ws3X/MChXh1AQy/Q="
     ];
     trustedUsers = [ "root" "bkolera" ];
   };
