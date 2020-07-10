@@ -20,7 +20,6 @@ in {
     cabal2nix
     cabal-install
     dmenu
-    glances
     gitAndTools.gitflow
     gimp
     ghostscript
@@ -48,7 +47,7 @@ in {
     pavucontrol
     python3
     ranger
-    rescuetime
+    #rescuetime
     rfkill
     ripgrep
   ] ++ scripts.all ++ [
@@ -337,27 +336,27 @@ in {
     };
   };
 
-  systemd.user.services.rescuetime = {
-    Unit = {
-        Description = "Rescuetime daemon";
-        Requires = "graphical-session.target";
-        After = "stalonetray.service";
-    };
+  #systemd.user.services.rescuetime = {
+  #  Unit = {
+  #      Description = "Rescuetime daemon";
+  #      Requires = "graphical-session.target";
+  #      After = "stalonetray.service";
+  #  };
 
-    Service = {
-        Environment =
-          let toolPaths = lib.makeBinPath [
-                pkgs.firefox
-                pkgs.gnugrep
-                pkgs.xorg.xprop
-                pkgs.coreutils  # cut
-                pkgs.gawk # awk
-                pkgs.hostname
-              ];
-          in [ "PATH=${toolPaths}" "BROWSER=firefox" ];
-        ExecStart = "${pkgs.rescuetime}/bin/rescuetime";
-    };
-  };
+  #  Service = {
+  #      Environment =
+  #        let toolPaths = lib.makeBinPath [
+  #              pkgs.firefox
+  #              pkgs.gnugrep
+  #              pkgs.xorg.xprop
+  #              pkgs.coreutils  # cut
+  #              pkgs.gawk # awk
+  #              pkgs.hostname
+  #            ];
+  #        in [ "PATH=${toolPaths}" "BROWSER=firefox" ];
+  #      ExecStart = "${pkgs.rescuetime}/bin/rescuetime";
+  #  };
+  #};
 
   home.file.".xmonad/xmobar.hs".source = ./dotfiles/xmonad/xmobar.hs;
   xsession = {
