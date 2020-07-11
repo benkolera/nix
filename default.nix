@@ -24,20 +24,14 @@ in {
     binaryCaches = [
       "https://cache.nixos.org/"
       "https://cachix.cachix.org"
-      "http://nixcache.kadena.io"
       "https://nixcache.reflex-frp.org"
       "https://hydra.iohk.io"
-      "https://hie-nix.cachix.org"
-      "https://s3.eu-west-3.amazonaws.com/tezos-nix-cache"
     ];
     binaryCachePublicKeys = [
       "ryantrinkle.com-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI="
-      "hie-nix.cachix.org-1:EjBSHzF6VmDnzqlldGXbi0RM3HdjfTU3yDRi9Pd0jTY="
       "cachix.cachix.org-1:eWNHQldwUO7G2VkjpnjDbWwy4KQ/HNxht7H4SSoMckM="
       "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "obsidian-tezos-kiln:WlSLNxlnEAdYvrwzxmNMTMrheSniCg6O4EhqCHsMvvo="
-      "kadena-cache.local-1:8wj8JW8V9tmc5bgNNyPM18DYNA1ws3X/MChXh1AQy/Q="
     ];
     trustedUsers = [ "root" "bkolera" ];
   };
@@ -65,7 +59,7 @@ in {
     networkmanager.enable = true;
     firewall = {
       enable = true;
-      allowedTCPPorts = [];
+      allowedTCPPorts = [22];
     };
   };
   nixpkgs.config = {
@@ -159,7 +153,7 @@ in {
       enable = true;
       layout = "us";
       displayManager = {
-        lightdm.enable = true;
+        sddm.enable = true;
       };
       libinput = {
         enable = true;
@@ -184,7 +178,9 @@ in {
   };
 
   home-manager.users.bkolera = import ./home-manager;
+  users.mutableUsers = false;
   users.users.bkolera = {
+    hashedPassword = "$6$ime8RtSc$eTZd4V07pOJmBkOPAR0acR7NTaLjv1dzvsetq3dFJARXvNKrEcH1kSyILTplQ2mXRdHHbAu7I3OWUG.GWle8G0";
     isNormalUser = true;
     createHome = true;
     home = "/home/bkolera";
