@@ -180,6 +180,7 @@ in {
   home-manager.users.bkolera = import ./home-manager;
   users.mutableUsers = false;
   users.users.bkolera = {
+    hashedPassword = "$6$ime8RtSc$eTZd4V07pOJmBkOPAR0acR7NTaLjv1dzvsetq3dFJARXvNKrEcH1kSyILTplQ2mXRdHHbAu7I3OWUG.GWle8G0";
     isNormalUser = true;
     createHome = true;
     home = "/home/bkolera";
