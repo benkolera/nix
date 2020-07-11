@@ -59,7 +59,7 @@ in {
     networkmanager.enable = true;
     firewall = {
       enable = true;
-      allowedTCPPorts = [];
+      allowedTCPPorts = [22];
     };
   };
   nixpkgs.config = {
@@ -178,6 +178,7 @@ in {
   };
 
   home-manager.users.bkolera = import ./home-manager;
+  users.mutableUsers = false;
   users.users.bkolera = {
     isNormalUser = true;
     createHome = true;
