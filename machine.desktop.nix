@@ -8,7 +8,7 @@
 
   boot.initrd.luks.devices = {
     root = { 
-      device = "/dev/sda2";
+      device = "/dev/sdb6";
       preLVM = true;
     };
   };
