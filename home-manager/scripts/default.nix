@@ -22,11 +22,17 @@ rec {
       --output DP-6 --off
   '';
 
+  reset-desktop = writeScriptBin "reset-desktop" ''
+    systemctl restart --user stalonetray random-background
+  '';
+
   screen-desktop = writeScriptBin "screen-desktop" ''
     ${xorg.xrandr}/bin/xrandr \
       --output HDMI-0 --mode 1920x1080 --pos 0x394 --rotate normal \
       --output DP-0 --primary --mode 1920x1080 --pos 1920x394 --rotate normal \
-      --output DP-4 --mode 1920x1080 --pos 3840x0 --rotate right \
+      --output DP-4 --mode 1920x1080 --pos 3840x0 --rotate right 
+
+    ${reset-desktop}/bin/reset-desktop
   '';
 
   screen-laptop = writeScriptBin "screen-laptop" ''
