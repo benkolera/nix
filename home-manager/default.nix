@@ -150,6 +150,7 @@ in {
       evil-surround
       evil-visualstar
       fill-column-indicator
+      forge
       git-gutter
       git-gutter-fringe
       golden-ratio
@@ -241,6 +242,9 @@ in {
     extraConfig = {
       commit = {
         template = "${config.home.homeDirectory}/.gitmessage";
+      };
+      github = {
+        user = "benkolera";
       };
     };
   };

@@ -275,6 +275,9 @@
     )
   )
 
+(use-package forge
+  :after magit)
+
 (use-package evil-magit
   :after (evil magit)
   )
