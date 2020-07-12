@@ -3,7 +3,6 @@ let
   scripts = import ./scripts pkgs;
   niv-sources = import ./nix/sources.nix;
   niv-obelisk = import niv-sources.obelisk {};
-  ferdi = pkgs.callPackage ./ferdi.nix {};
 in {
   nixpkgs.overlays = [
     (import niv-sources.emacs-overlay)
@@ -26,9 +25,9 @@ in {
     gocode
     goimports
     gogetdoc
+    elixir
     epiphany
     feh
-    ferdi
   ]++
   ( with haskellPackages; [
     ghcid
@@ -44,6 +43,7 @@ in {
     nodejs
     nodePackages.npm
     niv-obelisk.command
+    obs-studio
     pavucontrol
     python3
     ranger
