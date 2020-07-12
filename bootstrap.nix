@@ -31,15 +31,22 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.luks.devices = {
     root = {
-      device = "/dev/sda6";
+      device = "/dev/sdb6";
       preLVM = true;
     };
   };
 
   nixpkgs.config.allowUnfree = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "bkolera-desktop"; # Define your hostname.
   networking.networkmanager.enable = true;
+
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "us";
+  };
+  i18n.defaultLocale = "en_US.UTF-8";
+  time.timeZone = "Australia/Brisbane";
 
   environment.systemPackages = with pkgs; [
     wget vim firefox git pciutils
@@ -52,19 +59,35 @@
     pinentryFlavor = "gnome3";
   };
 
+  fonts = {
+    enableFontDir = true;
+     fonts = with pkgs; [
+       noto-fonts-emoji
+       nerdfonts
+       emojione
+       source-code-pro
+       emacs-all-the-icons-fonts
+       inconsolata
+     ];
+  };
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.xserver.layout = "us";
-  services.xserver.xkbOptions = "eurosign:e";
 
   # Enable the KDE Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.mutableUsers = false;
   users.users.bkolera = {
+    hashedPassword = "$6$ime8RtSc$eTZd4V07pOJmBkOPAR0acR7NTaLjv1dzvsetq3dFJARXvNKrEcH1kSyILTplQ2mXRdHHbAu7I3OWUG.GWle8G0";
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    createHome = true;
+    home = "/home/bkolera";
+    extraGroups = ["wheel" "networkmanager" "docker" "audio" "dialout"];
+    isSystemUser = false;
+    shell = pkgs.zsh;
+    uid = 1000;
   };
 
   system.stateVersion = "20.03"; # Did you read the comment?
