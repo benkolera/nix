@@ -31,7 +31,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.luks.devices = {
     root = {
-      device = "/dev/sdb6";
+      device = "/dev/disk/by-uuid/b08a2a42-8211-4167-b66d-673fee085676";
       preLVM = true;
     };
   };
