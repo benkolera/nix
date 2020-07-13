@@ -155,7 +155,6 @@ in {
       displayManager = {
         lightdm = {
           enable = true;
-          greeters.mini.enable = true;
         };
       };
       libinput = {
