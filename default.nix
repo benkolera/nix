@@ -153,7 +153,10 @@ in {
       enable = true;
       layout = "us";
       displayManager = {
-        sddm.enable = true;
+        lightdm = {
+          enable = true;
+          greeters.mini.enable = true;
+        };
       };
       libinput = {
         enable = true;
