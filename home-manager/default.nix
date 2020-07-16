@@ -376,6 +376,10 @@ in {
       ExecStart = "${pkgs.rescuetime}/bin/rescuetime";
     };
   };
+  home.activation.setXDG = lib.hm.dag.entryBefore [ "linkGeneration" ] ''
+    xdg-settings set default-web-browser firefox.desktop
+    xdg-mime default zathura.desktop application/pdf
+  '';
 
   home.file.".xmonad/xmobar.hs".source = ./dotfiles/xmonad/xmobar.hs;
   xsession = {
