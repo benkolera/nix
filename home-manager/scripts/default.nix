@@ -22,6 +22,13 @@ rec {
       --output DP-6 --off
   '';
 
+  git-clone-gh = writeScriptBin "git-clone-gh" ''
+    dir="$HOME/src/gh/$1"
+    mkdir -p $dir
+    cd $dir
+    git clone --recurse-submodules git@github.com:$1/$2 $2
+  '';
+
   reset-desktop = writeScriptBin "reset-desktop" ''
     systemctl restart --user stalonetray random-background
   '';
@@ -50,5 +57,5 @@ rec {
   emcf = writeScriptBin "emcf" ''${emacs}/bin/emacsclient -c $@'';
   emct = writeScriptBin "emct" ''${emacs}/bin/emacsclient -t $@'';
   pa-speakers-toggle-mute = writeScriptBin "pa-mute" ''${pulseaudio}/bin/pactl set-sink-mute 0 toggle'';
-  all = [ batman dunst-pause dunst-resume screen-laptop screen-home screen-desktop emcf emct pa-speakers-toggle-mute ];
+  all = [ batman dunst-pause dunst-resume screen-laptop screen-home screen-desktop emcf emct pa-speakers-toggle-mute git-clone-gh ];
 }
