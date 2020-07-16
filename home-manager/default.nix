@@ -124,7 +124,20 @@ in {
   };
   programs.direnv.enable = true;
   programs.chromium.enable = true;
-  programs.firefox.enable = true;
+  programs.firefox = {
+    enable = true;
+    profiles = {
+      treetabs = {
+        id = 0;
+        settings = {
+          "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+        };
+        userChrome = ''
+          #TabsToolbar, #sidebar-header { display: none; }
+        '';
+      };
+    };
+  };
 
   programs.emacs = {
     enable  = true;
