@@ -15,6 +15,7 @@ in {
     aws-okta
     aws-vault
     awscli
+    bitwarden
     brave
     cabal2nix
     cabal-install
@@ -47,7 +48,7 @@ in {
     pavucontrol
     python3
     ranger
-    #rescuetime
+    rescuetime
     rfkill
     ripgrep
   ] ++ scripts.all ++ [
@@ -340,27 +341,26 @@ in {
     };
   };
 
-  #systemd.user.services.rescuetime = {
-  #  Unit = {
-  #      Description = "Rescuetime daemon";
-  #      Requires = "graphical-session.target";
-  #      After = "stalonetray.service";
-  #  };
-
-  #  Service = {
-  #      Environment =
-  #        let toolPaths = lib.makeBinPath [
-  #              pkgs.firefox
-  #              pkgs.gnugrep
-  #              pkgs.xorg.xprop
-  #              pkgs.coreutils  # cut
-  #              pkgs.gawk # awk
-  #              pkgs.hostname
-  #            ];
-  #        in [ "PATH=${toolPaths}" "BROWSER=firefox" ];
-  #      ExecStart = "${pkgs.rescuetime}/bin/rescuetime";
-  #  };
-  #};
+  systemd.user.services.rescuetime = {
+    Unit = {
+        Description = "Rescuetime daemon";
+        Requires = "graphical-session.target";
+        After = "stalonetray.service";
+    };
+    Service = {
+      Environment =
+        let toolPaths = lib.makeBinPath [
+              pkgs.firefox
+              pkgs.gnugrep
+              pkgs.xorg.xprop
+              pkgs.coreutils  # cut
+              pkgs.gawk # awk
+              pkgs.hostname
+            ];
+        in [ "PATH=${toolPaths}" "BROWSER=firefox" ];
+      ExecStart = "${pkgs.rescuetime}/bin/rescuetime";
+    };
+  };
 
   home.file.".xmonad/xmobar.hs".source = ./dotfiles/xmonad/xmobar.hs;
   xsession = {
