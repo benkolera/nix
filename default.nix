@@ -129,6 +129,7 @@ in {
     printing.enable = true;
     memcached.enable = true;
     devmon.enable = true;
+    gnome3.gnome-keyring.enable = true;
     postgresql = {
       enable = true;
       extraConfig = ''

@@ -38,6 +38,7 @@ in {
     inkscape
     jq
     libreoffice
+    mailspring
     metals
     nixops
     niv
