@@ -282,6 +282,7 @@ in {
   services.unclutter.enable = true;
   services.network-manager-applet.enable = true;
   services.rsibreak.enable = true;
+  home.file.".stalonetrayrc".source = ./dotfiles/stalonetrayrc;
   services.stalonetray.enable = true;
   services.pasystray.enable = true;
 
