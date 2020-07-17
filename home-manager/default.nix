@@ -261,6 +261,9 @@ in {
       github = {
         user = "benkolera";
       };
+      pull = {
+        rebase = true;
+      };
     };
   };
 

@@ -170,13 +170,14 @@
   :after (helm projectile)
   :config
   (evil-leader/set-key
-    "pp" 'helm-projectile
+    "pp" 'helm-projectile-switch-project
     "pr" 'helm-projectile-recentf
     "pd" 'helm-projectile-find-dir
     "pf" 'helm-projectile-find-file
     "po" 'helm-projectile-find-file-other
     "pb" 'helm-projectile-switch-to-buffer
     "pg" 'helm-projectile-rg
+    "pq" 'projectile-kill-buffers
     ))
 
 (use-package golden-ratio

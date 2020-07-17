@@ -5,10 +5,10 @@
         "homepage": "",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "58a602dfc87a6ca08bdde2001a4b5731aa134d4d",
-        "sha256": "0y1qnanqiybay7zwmvpsam36dj8xfckg5zg6612y0z9gdr9ka2d0",
+        "rev": "41023f4d1a7c1476531f66f4bf2f61f831c1537f",
+        "sha256": "1w730qx5d2sj95yslxbfc7v479pgrcvs9m7kd9w7rhlmlfzb01qb",
         "type": "tarball",
-        "url": "https://github.com/nix-community/emacs-overlay/archive/58a602dfc87a6ca08bdde2001a4b5731aa134d4d.tar.gz",
+        "url": "https://github.com/nix-community/emacs-overlay/archive/41023f4d1a7c1476531f66f4bf2f61f831c1537f.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "niv": {
@@ -17,10 +17,10 @@
         "homepage": "https://github.com/nmattia/niv",
         "owner": "nmattia",
         "repo": "niv",
-        "rev": "c27f5a6c57de4495045450b6587d4a2c489851c8",
-        "sha256": "064lyr1661pk7hh7npgxsmk4cni9bc34hb2d6r76qp4cs2hcazim",
+        "rev": "febd3530f0c2f2fb74752ee4d9dd2518d302f618",
+        "sha256": "1gifi50k4h6wk9ix0yvp66p7jk8rrqgr39r5rf4lyha6pbs7dbk6",
         "type": "tarball",
-        "url": "https://github.com/nmattia/niv/archive/c27f5a6c57de4495045450b6587d4a2c489851c8.tar.gz",
+        "url": "https://github.com/nmattia/niv/archive/febd3530f0c2f2fb74752ee4d9dd2518d302f618.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs": {
