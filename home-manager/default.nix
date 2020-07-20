@@ -209,6 +209,7 @@ in {
   };
   programs.vscode = {
     enable = true;
+    extensions = with pkgs.vscode-extensions; [ vscodevim.vim ];
     userSettings = {
       editor = {
         formatOnSave = true;
@@ -220,6 +221,9 @@ in {
       window = {
         menuBarVisibility = "toggle";
         zoomLevel = -1;
+      };
+      vim = {
+        useSystemClipboard = true;
       };
     };
   };
