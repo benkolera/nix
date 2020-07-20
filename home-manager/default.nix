@@ -211,7 +211,8 @@ in {
     enable = true;
     extensions = with pkgs.vscode-extensions; [
       vscodevim.vim
-      jakebecker.elixir-ls
+      ms-vscode.Go
+      redhat.vscode-yaml
     ];
     userSettings = {
       editor = {
