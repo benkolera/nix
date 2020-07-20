@@ -207,12 +207,22 @@ in {
       theme = "steeef";
     };
   };
+  
   programs.vscode = {
     enable = true;
-    extensions = with pkgs.vscode-extensions; [
+    extensions = let
+      elixirLS = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
+        mktplcRef = {
+          name = "elixir-ls";
+          publisher = "jakebecker";
+          version = "0.5.0";
+          sha256 = "0wyxkq0ra17s6jhsx70i46d62lqgvpdfrh6wkya8l0dng2xi0idk";
+        };
+      };
+    in with pkgs.vscode-extensions; [
       vscodevim.vim
-      ms-vscode.Go
       redhat.vscode-yaml
+      elixirLS
     ];
     userSettings = {
       editor = {
