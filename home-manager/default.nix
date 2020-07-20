@@ -209,7 +209,10 @@ in {
   };
   programs.vscode = {
     enable = true;
-    extensions = with pkgs.vscode-extensions; [ vscodevim.vim ];
+    extensions = with pkgs.vscode-extensions; [
+      vscodevim.vim
+      jakebecker.elixir-ls
+    ];
     userSettings = {
       editor = {
         formatOnSave = true;
