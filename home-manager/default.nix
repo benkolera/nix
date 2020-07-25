@@ -219,10 +219,19 @@ in {
           sha256 = "0wyxkq0ra17s6jhsx70i46d62lqgvpdfrh6wkya8l0dng2xi0idk";
         };
       };
+      indent-rainbow = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
+        mktplcRef = {
+          name = "indent-rainbow";
+          publisher = "oderwat";
+          version = "7.4.0";
+          sha256 = "1xnsdwrcx24vlbpd2igjaqlk3ck5d6jzcfmxaisrgk7sac1aa81p";
+        };
+      };
     in with pkgs.vscode-extensions; [
       vscodevim.vim
       redhat.vscode-yaml
       elixirLS
+      indent-rainbow
     ];
     userSettings = {
       editor = {
@@ -232,6 +241,7 @@ in {
         tabSize = 2;
         insertSpaces = true;
       };
+      explorer.confirmDelete = false;
       window = {
         menuBarVisibility = "toggle";
         zoomLevel = -1;
