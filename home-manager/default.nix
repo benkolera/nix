@@ -90,7 +90,7 @@ in {
       };
       font = {
         normal = {
-          family = "Inconsolata";
+          family = "Hack Nerd Font Mono";
         };
         size = 14;
       };
@@ -240,6 +240,8 @@ in {
         minimap.enabled = false;
         tabSize = 2;
         insertSpaces = true;
+        fontFamily = "'Hack Nerd Font Mono', 'monospace', monospace";
+
       };
       explorer.confirmDelete = false;
       window = {

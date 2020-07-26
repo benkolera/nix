@@ -17,7 +17,7 @@
 (scroll-bar-mode -1)
 (menu-bar-mode -1)
 (add-to-list 'default-frame-alist
-  '(font . "Inconsolata-12"))
+  '(font . "Hack Nerd Font Mono-12"))
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
