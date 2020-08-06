@@ -1,6 +1,6 @@
 Config {
     position = Top,
-    font = "xft:Inconsolata:size=12:antialias=true",
+    font = "xft:Nerd Font Mono:size=12:antialias=true",
     bgColor = "#111111",
     fgColor = "#ffffff",
     lowerOnStart = True,
@@ -12,7 +12,6 @@ Config {
         , Run Memory ["-t","Mem: <usedratio>%","-H","8192","-L","4096","-h","#FFB6B0","-l","#CEFFAC","-n","#FFFFCC"] 10
         , Run Swap ["-t","Swap: <usedratio>%","-H","1024","-L","512","-h","#FFB6B0","-l","#CEFFAC","-n","#FFFFCC"] 10
         , Run Date "%a %b %_d %H:%M" "date" 10
-        , Run Com "tray-pad-icon" [] "trayerpad" 10
         , Run Battery [ "--template" , "Batt: <acstatus>"
                       , "--Low"      , "10"        -- units: %
                       , "--High"     , "80"        -- units: %
