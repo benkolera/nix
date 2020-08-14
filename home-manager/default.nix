@@ -205,6 +205,9 @@ in {
     oh-my-zsh = {
       enable = true;
       theme = "steeef";
+      extraConfig = ''
+        zstyle :omz:plugins:ssh-agent identities id_rsa
+      '';
     };
   };
   
@@ -305,7 +308,6 @@ in {
     maxCacheTtl = 36000;
     defaultCacheTtlSsh = 36000;
     maxCacheTtlSsh = 36000;
-    enableSshSupport = true;
     extraConfig = ''
       pinentry-program ${pkgs.pinentry-qt}/bin/pinentry
     '';
