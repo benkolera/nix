@@ -173,6 +173,7 @@ in {
   programs = {
     java.enable = true;
     mtr.enable = true;
+    ssh.startAgent = true;
   };
 
   virtualisation.virtualbox.host = {

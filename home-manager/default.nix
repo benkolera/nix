@@ -72,6 +72,7 @@ in {
     EDITOR = "emct";
     VISUAL = "emcf";
     BROWSER = "firefox";
+    WS_OKTA_BACKEND = "file";
   };
 
   programs.home-manager = {
