@@ -209,7 +209,7 @@ in {
       plugins = [ "git" "sudo" "ssh-agent" "emoji" ];
       extraConfig = ''
         zstyle :omz:plugins:ssh-agent agent-forwarding on
-        zstyle :omz:plugins:ssh-agent identities id_rsa
+        zstyle :omz:plugins:ssh-agent identities id_ed25519
         zstyle :omz:plugins:ssh-agent lifetime 12h
       '';
     };
