@@ -40,6 +40,7 @@ in {
     libreoffice
     mailspring
     metals
+    mvn
     nixops
     niv
     nodejs
