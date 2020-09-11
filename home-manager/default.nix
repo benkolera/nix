@@ -60,7 +60,6 @@ in {
     thunderbird
     xlockmore
     tmate
-    util-linux
     vlc
     xsel
     xorg.xbacklight
