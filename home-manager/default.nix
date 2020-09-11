@@ -49,7 +49,7 @@ in {
     nodePackages.npm
     niv-obelisk.command
     obs-studio
-    openjdk14
+    openjdk11
     pavucontrol
     python3
     ranger
@@ -76,6 +76,7 @@ in {
     VISUAL = "emcf";
     BROWSER = "firefox";
     WS_OKTA_BACKEND = "file";
+    JAVA_HOME = pkgs.openjdk11;
   };
 
   programs.home-manager = {
