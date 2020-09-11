@@ -12,6 +12,7 @@ in {
   nixpkgs.config.allowBroken = false;
 
   home.packages = with pkgs; [
+    apache-maven
     aws-okta
     aws-vault
     awscli
@@ -40,7 +41,6 @@ in {
     libreoffice
     mailspring
     metals
-    mvn
     nixops
     niv
     nodejs
