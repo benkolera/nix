@@ -35,7 +35,6 @@ in {
     xmobar
     yeganesh
   ]) ++ [
-    jetbrains.jdk
     (jetbrains.idea-ultimate.override {
       jdk = jetbrains.jdk;
     })
@@ -50,6 +49,7 @@ in {
     nodePackages.npm
     niv-obelisk.command
     obs-studio
+    openjdk14
     pavucontrol
     python3
     ranger
