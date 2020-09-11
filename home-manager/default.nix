@@ -12,7 +12,6 @@ in {
   nixpkgs.config.allowBroken = false;
 
   home.packages = with pkgs; [
-    apache-maven
     aws-okta
     aws-vault
     awscli
@@ -36,6 +35,10 @@ in {
     xmobar
     yeganesh
   ]) ++ [
+    jetbrains.jdk
+    (jetbrains.idea-ultimate.override {
+      jdk = jetbrains.jdk;
+    })
     inkscape
     jq
     libreoffice
