@@ -50,7 +50,6 @@ in {
     python3
     ranger
     rescuetime
-    rfkill
     ripgrep
   ] ++ scripts.all ++ [
     sbt
@@ -61,6 +60,7 @@ in {
     thunderbird
     xlockmore
     tmate
+    util-linux
     vlc
     xsel
     xorg.xbacklight
