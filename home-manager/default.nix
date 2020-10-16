@@ -35,6 +35,7 @@ in {
     xmobar
     yeganesh
   ]) ++ [
+    jetbrains.goland
     (jetbrains.idea-ultimate.override {
       jdk = jetbrains.jdk;
     })
@@ -78,6 +79,8 @@ in {
     WS_OKTA_BACKEND = "file";
     JAVA_HOME = pkgs.openjdk11;
   };
+
+  programs.go.enable = true;
 
   programs.home-manager = {
     enable = true;
